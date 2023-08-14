@@ -6,7 +6,7 @@
 #    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/08/12 17:21:36 by juduval          ###   ########.fr        #
+#    Updated: 2023/08/14 17:28:12 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_DIR = libft/
 LIB_FLAGS = -Llibft -lft
 READLINE_FLAGS = -lreadline -lncurses
 
-SRC = main.c prompt.c
+SRC = main.c prompt.c signals.c
 
 all: $(NAME) ${LIBFT}
 

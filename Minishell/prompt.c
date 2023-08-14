@@ -6,12 +6,23 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/12 18:03:27 by juduval          ###   ########.fr       */
+/*   Updated: 2023/08/14 14:08:28 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char	**get_split(void)
+{
+	char	**tab;
+	int		i;
+
+	i = -1;
+	tab = ft_split(ft_readline(), ' ');
+	while (tab[++i])
+		printf("%s\n", tab[i]);
+	return (tab);
+}
 
 char	*ft_readline(void)
 {
