@@ -28,9 +28,9 @@
 # include "libft/libft.h"
 
 // signals
-void    sigint_handler(void);
-void    sigterm_handler(void);
-void    sigquit_handler(void);
+void    sigint_handler(int signum);
+void    sigterm_handler(int signum);
+void    sigquit_handler(int signum);
 void    redir(void);
 
 // other

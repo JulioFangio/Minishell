@@ -12,22 +12,25 @@
 
 #include "minishell.h"
 
-void    sigint_handler()
+void    sigint_handler(int signum)
 {
-    printf("\n");
+    (void)signum;
+    printf("lol\n");
     rl_on_new_line();
     rl_redisplay();
     get_prompt();
 }
 
-void    sigquit_handler()
+void    sigquit_handler(int signum)
 {
+    (void)signum;
     rl_on_new_line();
     rl_redisplay();
 }
 
-void    sigterm_handler()
+void    sigterm_handler(int signum)
 {
+    (void)signum;
     exit(0);
 }
 
@@ -45,7 +48,7 @@ void    redir()
     sq.sa_handler = sigquit_handler;
     sigemptyset(&sq.sa_mask);
     sq.sa_flags = 0;
-    sigaction(EOF, &sq, NULL);
+    sigaction(SIGQUIT, &sq, NULL);
 
     st.sa_handler = sigterm_handler;
     sigemptyset(&st.sa_mask);
