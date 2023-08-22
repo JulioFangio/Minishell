@@ -62,5 +62,5 @@ void run_shell_loop()
 
     while (1)
         get_split();
-    clear_history();
+    rl_clear_history();
 }

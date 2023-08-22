@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/14 18:10:31 by juduval          ###   ########.fr       */
+/*   Updated: 2023/08/22 15:00:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "libft/libft.h"
+
+typedef struct          s_list
+{
+    char             *type;
+    char             *elem;
+    struct s_list    *next;
+}                       t_list;
 
 // signals
 void    sigint_handler(int signum);
