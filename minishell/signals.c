@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/29 19:27:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/08/31 17:14:26 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 void	sigint_handler(int signum)
 {
 	(void)signum;
-	write(STDOUT_FILENO, "\033[2K", 4);
+	printf("\n");
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
-	get_prompt();
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
-	get_prompt();
 }
 
 void	sigquit_handler(int signum)
@@ -34,49 +30,42 @@ void	sigquit_handler(int signum)
 	get_prompt();
 }
 
-void	sigterm_handler(int signum)
+int	redir(void)
 {
-	(void)signum;
-	//potentiel free a placer
-	exit(0);
-}
-
-void	redir(void)
-{
+	char				*input;
 	struct sigaction	si;
 	struct sigaction	sq;
-	struct sigaction	st;
 
 	si.sa_handler = sigint_handler;
 	sigemptyset(&si.sa_mask);
 	si.sa_flags = 0;
 	sigaction(SIGINT, &si, NULL);
-
 	sq.sa_handler = sigquit_handler;
 	sigemptyset(&sq.sa_mask);
 	sq.sa_flags = 0;
 	sigaction(SIGQUIT, &sq, NULL);
-
-	st.sa_handler = sigterm_handler;
-	sigemptyset(&st.sa_mask);
-	st.sa_flags = 0;
-	sigaction(SIGTERM, &st, NULL);
+	input = readline("/mnt/nfs/homes/juduval/Tronc commun/minishell$ ");
+	if (input == NULL)
+	{
+		printf("exit");
+		free(input);
+		return (0);
+	}
+	free(input);
+	return (1);
 }
 
 void	run_shell_loop(void)
 {
-	t_cmd	*cmd;
 	using_history();
-
-	while (1)
+	while (42)
 	{
-		redir();
-		cmd = get_cmd(get_split());
-		while (cmd->next)
-		{
-			//---------------------------lstclear
-			
-		}
+		if (!redir())
+			break ;
+		get_cmd(get_split());
 	}
 	rl_clear_history();
 }
+
+//ca bugue une fois sur deux. une fois ca me le fait bien une autre fois ca me le fait juste pas.
+//sans doute lie a l ordre de redir et get cmd ou si il faut en mettre un dans l autre 

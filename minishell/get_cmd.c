@@ -12,27 +12,29 @@
 
 #include "minishell.h"
 
-int	parse_split(t_cmd *cmd, char *tab, int check)
+void	parse_split(t_cmd *cmd, char *tab)
 {
-	if (check == 0 && is_cmd(cmd, tab))
-		return (1);
-	else if (check == 1 && is_option(cmd, tab))
-		return (1);
-	else if (check == 1 && is_arg(cmd, tab))
-		return (0);
+	if (is_builtin(cmd, tab))
+		return ;
+	if (is_cmd(cmd, tab))
+		return ;
+	else if (is_option(cmd, tab))
+		return ;
+	else if (is_arg(cmd, tab))
+		return ;
 	else if (is_redir(cmd, tab))
-		return (0);
+		return ;
 	else if (is_pipe(cmd, tab))
-		return (0);
+		return ;
 	else if (is_char(cmd, tab, "string"))
-		return (0);
+		return ;
 	else
 	{
 		cmd->type = "arg";
 		cmd->elem = tab;
-		return (0);
+		return ;
 	}
-	return (0);
+	return ;
 }
 
 t_cmd	*get_cmd(char **tab)
@@ -40,22 +42,24 @@ t_cmd	*get_cmd(char **tab)
 	t_cmd	*cmd;
 	t_cmd	*tmp;
 	int		i;
-	int		check;
 
 	cmd = make_cmd(tab);
 	tmp = cmd;
+	i = -1;
+	while (tab[++i])
+		printf("tab = %s\n", tab[i]);
 	i = 0;
-	check = 0;
-	while (cmd->next && tab[i])
+	while (tab[i])
 	{
-		check = parse_split(cmd, tab[i], check);
+		parse_split(cmd, tab[i]);
 		i++;
 		cmd = cmd->next;
 	}
-	while (tmp->next)
+	while (i > 0)
 	{
 		printf("type = %s et elem = %s\n", tmp->type, tmp->elem);
 		tmp = tmp->next;
+		i--;
 	}
 	return (tmp);
 }

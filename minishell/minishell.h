@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/29 17:37:18 by juduval          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:14:39 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ typedef struct			s_cmd
 
 //	signals
 void	sigint_handler(int signum);
-void	sigterm_handler(int signum);
 void	sigquit_handler(int signum);
-void	redir(void);
+int		redir(void);
 
 //	other
 void	run_shell_loop(void);
@@ -63,10 +62,10 @@ int		is_redir(t_cmd *cmd, char *tab);
 int		is_pipe(t_cmd *cmd, char *tab);
 int		is_char(t_cmd *cmd, char *tab, char *str);
 int		is_arg(t_cmd *cmd, char *tab);
+int		is_builtin(t_cmd*cmd, char *tab);
 
 // cmd
 t_cmd	*get_cmd(char **tab);
-int		parse_split(t_cmd *cmd, char *tab, int check);
-
+void	parse_split(t_cmd *cmd, char *tab);
 
 #endif

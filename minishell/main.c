@@ -6,17 +6,16 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:15:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/29 14:50:48 by juduval          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:45:58 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	(void)env;
 
 	run_shell_loop();
 
