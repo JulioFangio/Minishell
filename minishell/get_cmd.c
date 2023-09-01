@@ -12,29 +12,58 @@
 
 #include "minishell.h"
 
-void	parse_split(t_cmd *cmd, char *tab)
+// int	how_lomg(char *line)
+// {
+	
+// }
+
+// char	**parse_tab(char **tab)
+// {
+// 	char	**nt;
+// 	int		count;
+// 	int		i;
+// 	int		j;
+// 	int		lt;
+
+// 	i = 0;
+// 	j = 0;
+// 	lt = ft_lentab(tab);
+// 	count = how_long(tab);
+// 	while (tab[j])
+// 	{
+// 		while (tab[j][i])
+// 		{
+
+// 		}
+// 	}
+
+// }
+
+int	parse_split(t_cmd *cmd, char *tab, int check)
 {
 	if (is_builtin(cmd, tab))
-		return ;
+		return (1);
 	if (is_cmd(cmd, tab))
-		return ;
+		return (1);
 	else if (is_option(cmd, tab))
-		return ;
-	else if (is_arg(cmd, tab))
-		return ;
+		return (1);
+	else if (check == 1 && is_arg(cmd, tab))
+		return (0);
 	else if (is_redir(cmd, tab))
-		return ;
+		return (0);
 	else if (is_pipe(cmd, tab))
-		return ;
+		return (0);
+	else if (is_esper(cmd, tab))
+			return (0);
 	else if (is_char(cmd, tab, "string"))
-		return ;
+		return (0);
 	else
 	{
 		cmd->type = "arg";
-		cmd->elem = tab;
-		return ;
+		cmd->elem = tronc_optn(tab);
+		return (0);
 	}
-	return ;
+	return (0);
 }
 
 t_cmd	*get_cmd(char **tab)
@@ -42,16 +71,15 @@ t_cmd	*get_cmd(char **tab)
 	t_cmd	*cmd;
 	t_cmd	*tmp;
 	int		i;
+	int		check;
 
+	check = 0;
 	cmd = make_cmd(tab);
 	tmp = cmd;
-	i = -1;
-	while (tab[++i])
-		printf("tab = %s\n", tab[i]);
 	i = 0;
 	while (tab[i])
 	{
-		parse_split(cmd, tab[i]);
+		check = parse_split(cmd, tab[i], check);
 		i++;
 		cmd = cmd->next;
 	}

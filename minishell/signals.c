@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/31 17:14:26 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/01 16:49:54 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	redir(void)
 	struct sigaction	si;
 	struct sigaction	sq;
 
+	get_cmd(get_split());
 	si.sa_handler = sigint_handler;
 	sigemptyset(&si.sa_mask);
 	si.sa_flags = 0;
@@ -62,7 +63,6 @@ void	run_shell_loop(void)
 	{
 		if (!redir())
 			break ;
-		get_cmd(get_split());
 	}
 	rl_clear_history();
 }

@@ -65,16 +65,20 @@ int	is_char(t_cmd *cmd, char *tab, char *str)
 	if (tab[0] == 34)
 	{
 		if (tab[ft_strlen(tab) - 1] == 34)
-		cmd->type = str;
-		cmd->elem = tab;
-		return (1);
+		{
+			cmd->type = str;
+			cmd->elem = tronc_optn(tab);
+			return (1);
+		}
 	}
 	else if (tab[0] == 39)
 	{
 		if (tab[ft_strlen(tab) - 1] == 39)
-		cmd->type = str;
-		cmd->elem = tab;
-		return (1);
+		{
+			cmd->type = str;
+			cmd->elem = tronc_optn(tab);
+			return (1);
+		}
 	}
 	return (0);
 }

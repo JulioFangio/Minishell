@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/31 14:44:56 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/01 17:29:47 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ int	is_builtin(t_cmd *cmd, char *tab)
 	if (built_cmp(tab))
 	{
 		cmd->type = "builtin";
+		cmd->elem = tab;
+		return (1);
+	}
+	return (0);
+}
+
+int	is_esper(t_cmd *cmd, char *tab)
+{
+	if (tab[0] == '&')
+	{
+		cmd->type = "esper";
 		cmd->elem = tab;
 		return (1);
 	}

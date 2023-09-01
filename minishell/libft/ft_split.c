@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:20:27 by juduval           #+#    #+#             */
-/*   Updated: 2023/08/31 17:12:28 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/01 18:02:32 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 static	int	ft_isseparator(char c, char sep)
 {
-	if (c == sep)
+	if (c == sep || c == 9 || c == 10 || c == 11 || c == 12 || c == 13)
 		return (1);
 	return (0);
 }
@@ -54,7 +54,7 @@ static	char	*ft_strdupbis(const char *s, char sep)
 	size = 0;
 	while (s[size] != sep && s[size])
 		size++;
-	copy = ft_calloc(size +1, sizeof(char));
+	copy = ft_calloc(size + 1, sizeof(char));
 	if (!(s))
 		return (NULL);
 	size = 0;
