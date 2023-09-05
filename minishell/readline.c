@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/01 16:51:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:35:43 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@ char	**get_split(void)
 {
 	char	**tab;
 	char	*line;
+	char	*nline;
+	int		n;
+	int		l;
 
 	line = ft_readline();
+	l = ft_strlen(line);
+	n = whole_count(line);
+	nline = remake_line(line, n, l);
 	if (!check_line(line))
+	{
 		printf("%s: command not found\n", line);
-	tab = ft_split(line, ' ');
+		free (line);
+		return (NULL);
+	}
+	printf("la liiiiiiiiigne est = %s\n", nline);
+	tab = ft_split(nline, ' ');
+	free (line);
 	return (tab);
 }
 

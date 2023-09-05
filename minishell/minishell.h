@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/01 17:30:04 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:12:59 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*tronc_optn(char *tab);
 int		check_dquotes(char *line);
 int		check_quotes(char *line);
 int		check_line(char *line);
+int		how_long(char *line, char c);
 
 //	elems
 int		is_cmd(t_cmd *cmd, char *tab);
@@ -68,6 +69,8 @@ int		is_char(t_cmd *cmd, char *tab, char *str);
 int		is_arg(t_cmd *cmd, char *tab);
 int		is_builtin(t_cmd*cmd, char *tab);
 int		is_esper(t_cmd *cmd, char *tab);
+int		whole_count(char *line);
+char	*remake_line(char *line, int n, int l);
 
 // cmd
 t_cmd	*get_cmd(char **tab);

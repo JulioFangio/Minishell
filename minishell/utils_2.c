@@ -6,11 +6,29 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/01 16:41:53 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/05 18:09:19 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	how_long(char *line, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == c && line[i - 1] != 32 && line[i - 1] != c)
+			count++;
+		if (line[i] == c && line[i + 1] != 32 && line[i + 1] != c)
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 char	*tronc_optn(char *tab)
 {
@@ -53,6 +71,9 @@ int	check_dquotes(char *line)
 				i++;
 			if (line[i] == '\0')
 				return (0);
+			else
+				while (line[i] && line[i] == 34)
+					i++;
 		}
 		i++;
 	}
@@ -74,6 +95,9 @@ int	check_quotes(char *line)
 				i++;
 			if (line[i] == '\0')
 				return (0);
+			else
+				while (line[i] && line[i] == 39)
+					i++;
 		}
 		i++;
 	}

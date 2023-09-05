@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/01 16:49:54 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:28:48 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	redir(void)
 	struct sigaction	si;
 	struct sigaction	sq;
 
-	get_cmd(get_split());
+	if (get_cmd(get_split()) == 0)
+		return (1);
 	si.sa_handler = sigint_handler;
 	sigemptyset(&si.sa_mask);
 	si.sa_flags = 0;
@@ -48,7 +49,7 @@ int	redir(void)
 	input = readline("/mnt/nfs/homes/juduval/Tronc commun/minishell$ ");
 	if (input == NULL)
 	{
-		printf("exit");
+		printf("exit\n");
 		free(input);
 		return (0);
 	}
@@ -61,11 +62,8 @@ void	run_shell_loop(void)
 	using_history();
 	while (42)
 	{
-		if (!redir())
+		if (redir() == 0)
 			break ;
 	}
 	rl_clear_history();
 }
-
-//ca bugue une fois sur deux. une fois ca me le fait bien une autre fois ca me le fait juste pas.
-//sans doute lie a l ordre de redir et get cmd ou si il faut en mettre un dans l autre 

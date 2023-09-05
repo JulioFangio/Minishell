@@ -12,10 +12,6 @@
 
 #include "minishell.h"
 
-// int	how_lomg(char *line)
-// {
-	
-// }
 
 // char	**parse_tab(char **tab)
 // {
@@ -54,12 +50,12 @@ int	parse_split(t_cmd *cmd, char *tab, int check)
 	else if (is_pipe(cmd, tab))
 		return (0);
 	else if (is_esper(cmd, tab))
-			return (0);
+		return (0);
 	else if (is_char(cmd, tab, "string"))
 		return (0);
 	else
 	{
-		cmd->type = "arg";
+		cmd->type = "other";
 		cmd->elem = tronc_optn(tab);
 		return (0);
 	}
