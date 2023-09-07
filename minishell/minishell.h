@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/05 19:12:59 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/07 18:21:09 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	run_shell_loop(void);
 char	**get_split(void);
 char	*ft_readline(void);
 char	*get_prompt(void);
+char	*remake_line(char *line, int n, int l);
 
 //	utils
 t_cmd	*ft_cmdnew(void);
@@ -69,8 +70,8 @@ int		is_char(t_cmd *cmd, char *tab, char *str);
 int		is_arg(t_cmd *cmd, char *tab);
 int		is_builtin(t_cmd*cmd, char *tab);
 int		is_esper(t_cmd *cmd, char *tab);
+int		is_var(t_cmd *cmd, char *tab);
 int		whole_count(char *line);
-char	*remake_line(char *line, int n, int l);
 
 // cmd
 t_cmd	*get_cmd(char **tab);

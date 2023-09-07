@@ -47,6 +47,8 @@ int	parse_split(t_cmd *cmd, char *tab, int check)
 		return (0);
 	else if (is_redir(cmd, tab))
 		return (0);
+	else if (is_var(cmd, tab))
+		return (0);
 	else if (is_pipe(cmd, tab))
 		return (0);
 	else if (is_esper(cmd, tab))

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/05 19:28:48 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/07 18:32:02 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ void	sigquit_handler(int signum)
 
 int	redir(void)
 {
-	char				*input;
 	struct sigaction	si;
 	struct sigaction	sq;
+	char				**tab;
 
-	if (get_cmd(get_split()) == 0)
-		return (1);
 	si.sa_handler = sigint_handler;
 	sigemptyset(&si.sa_mask);
 	si.sa_flags = 0;
@@ -46,14 +44,12 @@ int	redir(void)
 	sigemptyset(&sq.sa_mask);
 	sq.sa_flags = 0;
 	sigaction(SIGQUIT, &sq, NULL);
-	input = readline("/mnt/nfs/homes/juduval/Tronc commun/minishell$ ");
-	if (input == NULL)
-	{
-		printf("exit\n");
-		free(input);
+	tab = get_split();
+	if (tab == NULL)
 		return (0);
-	}
-	free(input);
+	if (tab == (char **)1)
+		return (1);
+	get_cmd(tab);
 	return (1);
 }
 

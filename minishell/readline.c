@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/05 19:35:43 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/07 18:32:35 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	**get_split(void)
 	int		l;
 
 	line = ft_readline();
+	if (line == NULL)
+		return (NULL);
 	l = ft_strlen(line);
 	n = whole_count(line);
 	nline = remake_line(line, n, l);
@@ -28,9 +30,10 @@ char	**get_split(void)
 	{
 		printf("%s: command not found\n", line);
 		free (line);
-		return (NULL);
+		return ((char **)1);
 	}
-	printf("la liiiiiiiiigne est = %s\n", nline);
+	// parse_nline(nline);
+	// printf("la liiiiiiiiigne est = %s\n", nline);
 	tab = ft_split(nline, ' ');
 	free (line);
 	return (tab);
@@ -44,13 +47,13 @@ char	*ft_readline(void)
 	prompt = get_prompt();
 	line = readline(prompt);
 	free(prompt);
-	if (line)
+	if (line == NULL)
 	{
-		add_history(line);
-		return (line);
-	}
-	else
+		printf("exit\n");
 		return (NULL);
+	}
+	add_history(line);
+	return (line);
 }
 
 char	*get_prompt(void)

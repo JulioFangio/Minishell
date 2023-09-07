@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/05 19:37:53 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/07 18:23:03 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ int	is_arg(t_cmd *cmd, char *tab)
 	i += is_pipe(cmd, tab);
 	i += is_redir(cmd, tab);
 	i += is_esper(cmd, tab);
+	i += is_var(cmd, tab);
 	if (i == 0)
 	{
-		cmd->type = "arg";
+		cmd->type = "other";
 		cmd->elem = tab;
 		return (1);
 	}
