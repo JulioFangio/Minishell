@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/10 18:37:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:41:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int		is_char(t_cmd *cmd, char *tab, char *str);
 int		is_arg(t_cmd *cmd, char *tab);
 int		is_builtin(t_cmd*cmd, char *tab);
 int		is_esper(t_cmd *cmd, char *tab);
-int		is_var(t_cmd *cmd, char *tab);
 int		whole_count(char *line);
 int		ext_filename(t_cmd *cmd, char *tab);
 int		dollar(t_cmd *cmd, char *tab);
