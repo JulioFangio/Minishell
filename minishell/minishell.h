@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/07 18:21:09 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/10 18:37:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		check_quotes(char *line);
 int		check_line(char *line);
 int		how_long(char *line, char c);
 
-//	elems
+//	elems + ext
 int		is_cmd(t_cmd *cmd, char *tab);
 int		is_option(t_cmd *cmd, char *tab);
 int		is_redir(t_cmd *cmd, char *tab);
@@ -72,9 +72,14 @@ int		is_builtin(t_cmd*cmd, char *tab);
 int		is_esper(t_cmd *cmd, char *tab);
 int		is_var(t_cmd *cmd, char *tab);
 int		whole_count(char *line);
+int		ext_filename(t_cmd *cmd, char *tab);
+int		dollar(t_cmd *cmd, char *tab);
+int		ext_tilde(t_cmd *cmd, char *tab);
+int		ext_bracers(t_cmd *cmd, char *tab);
 
 // cmd
 t_cmd	*get_cmd(char **tab);
 int		parse_split(t_cmd *cmd, char *tab, int check);
+int		parse_split_2(t_cmd *cmd, char *tab);
 
 #endif

@@ -35,6 +35,19 @@
 
 // }
 
+int	parse_split_2(t_cmd *cmd, char *tab)
+{
+	if (ext_bracers(cmd, tab))
+		return (1);
+	else if (ext_tilde(cmd, tab))
+		return (1);
+	else if (dollar(cmd, tab))
+		return (1);
+	else if (ext_filename(cmd, tab))
+		return (1);
+	return (0);
+}
+
 int	parse_split(t_cmd *cmd, char *tab, int check)
 {
 	if (is_builtin(cmd, tab))
@@ -47,7 +60,7 @@ int	parse_split(t_cmd *cmd, char *tab, int check)
 		return (0);
 	else if (is_redir(cmd, tab))
 		return (0);
-	else if (is_var(cmd, tab))
+	else if (parse_split_2(cmd, tab))
 		return (0);
 	else if (is_pipe(cmd, tab))
 		return (0);

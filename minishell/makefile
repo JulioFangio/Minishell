@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/09/07 18:18:04 by juduval          ###   ########.fr        #
+#    Updated: 2023/09/10 18:37:50 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_DIR = libft/
 LIB_FLAGS = -Llibft -lft
 READLINE_FLAGS = -lreadline -lncurses
 
-SRC = main.c readline.c signals.c get_cmd.c elems.c elems_2.c elems_3.c utils.c utils_2.c utils_3.c
+SRC = main.c readline.c signals.c get_cmd.c elems.c elems_2.c elems_3.c expansions.c utils.c utils_2.c utils_3.c
 
 all: $(NAME) ${LIBFT}
 
