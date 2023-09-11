@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:53:31 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/05 19:31:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:16:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ static int	is_sep(char c)
 	return (0);
 }
 
-char	*remake_line(char *line, int n, int l)
+char	*make_spaces(char *line, char *res)
 {
-	char	*res;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	res = ft_calloc(l + n + 1, sizeof(char));
-	if (!res)
-		return (NULL);
 	while (line[i])
 	{
 		if (is_sep(line[i]) && !is_sep(line[i - 1]) && line[i - 1] != 32)
@@ -60,3 +56,54 @@ char	*remake_line(char *line, int n, int l)
 	}
 	return (res);
 }
+
+int	shorten(char *line)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == '$' && line[i + 1] == '(')
+		{
+			while (line[i] && line[i] != ')')
+			{
+				if (line[i] == 32 || (line[i] >= 9 && line[i] <= 13))
+					count++;
+				i++;
+			}
+		}
+		i++;
+	}
+	return (count);
+}
+
+char	*remove_spaces(char *line, int i, int j)
+{
+	char	*res;
+	int		check;
+
+	check = 0;
+	res = ft_calloc((ft_strlen(line) - shorten(line)) + 1, sizeof(char));
+	if (!res)
+		return (NULL);
+	while (line[i])
+	{
+		if (line[i] == '$' && line[i + 1] == '(')
+			check = 1;
+		else if (line[i] == ')')
+			check = 0;
+		if ((line[i] == 32 || (line[i] >= 9 && line[i] <= 13)) && check == 1)
+		{
+			i++;
+			continue ;
+		}
+		res[j] = line[i];
+		i++;
+		j++;
+	}
+	return (res);
+}
+

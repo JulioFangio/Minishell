@@ -12,29 +12,6 @@
 
 #include "minishell.h"
 
-
-// char	**parse_tab(char **tab)
-// {
-// 	char	**nt;
-// 	int		count;
-// 	int		i;
-// 	int		j;
-// 	int		lt;
-
-// 	i = 0;
-// 	j = 0;
-// 	lt = ft_lentab(tab);
-// 	count = how_long(tab);
-// 	while (tab[j])
-// 	{
-// 		while (tab[j][i])
-// 		{
-
-// 		}
-// 	}
-
-// }
-
 int	parse_split_2(t_cmd *cmd, char *tab)
 {
 	if (ext_bracers(cmd, tab))

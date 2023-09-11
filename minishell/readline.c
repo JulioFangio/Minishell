@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/07 18:32:35 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:01:19 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	**get_split(void)
 		free (line);
 		return ((char **)1);
 	}
-	// parse_nline(nline);
 	// printf("la liiiiiiiiigne est = %s\n", nline);
 	tab = ft_split(nline, ' ');
-	free (line);
+	free(line);
+	free (nline);
 	return (tab);
 }
 

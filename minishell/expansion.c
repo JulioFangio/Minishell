@@ -42,18 +42,18 @@ int	dollar(t_cmd *cmd, char *tab)
 		cmd->elem = tab;
 		return (1);
 	}
-    else if (tab[0] == '$' && tab[1] == '(')
+	else if (tab[0] == '$' && tab[1] == '(')
 	{
 		cmd->type = "substitution cmd";
 		cmd->elem = tab;
 		return (1);
 	}
-    else if (tab[0] == '$')
-    {
-        cmd->type = "variable";
+	else if (tab[0] == '$')
+	{
+		cmd->type = "variable";
 		cmd->elem = tab;
 		return (1);
-    }
+	}
 	return (0);
 }
 

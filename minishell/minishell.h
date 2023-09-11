@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/10 18:41:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/11 15:09:55 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	run_shell_loop(void);
 char	**get_split(void);
 char	*ft_readline(void);
 char	*get_prompt(void);
-char	*remake_line(char *line, int n, int l);
 
 //	utils
 t_cmd	*ft_cmdnew(void);
@@ -60,6 +59,10 @@ int		check_dquotes(char *line);
 int		check_quotes(char *line);
 int		check_line(char *line);
 int		how_long(char *line, char c);
+char	*remake_line(char *line, int n, int l);
+char	*remove_spaces(char *line, int i, int j);
+int		shorten(char *line);
+char	*make_spaces(char *line, char *res);
 
 //	elems + ext
 int		is_cmd(t_cmd *cmd, char *tab);
