@@ -6,17 +6,11 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:20:27 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/01 18:02:32 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:24:06 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-//	1 ft_separator
-//	2 ft_countwords
-//	3 ft_strdup // dupliauer les strings dans le tableau de tableau
-//+ parametre // ft_strle
-//	4 ft_split
 
 static	int	ft_isseparator(char c, char sep)
 {
@@ -27,8 +21,9 @@ static	int	ft_isseparator(char c, char sep)
 
 static	int	ft_countwords(const char *str, char sep)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	char	c;
 
 	i = 0;
 	count = 0;

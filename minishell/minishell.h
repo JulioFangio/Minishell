@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/11 15:09:55 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:33:25 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ int		check_line(char *line);
 int		how_long(char *line, char c);
 char	*remake_line(char *line, int n, int l);
 char	*remove_spaces(char *line, int i, int j);
+char	*keep_spaces(char *line);
 int		shorten(char *line);
 char	*make_spaces(char *line, char *res);
+int		check_end(char *line, int i, char c);
 
 //	elems + ext
 int		is_cmd(t_cmd *cmd, char *tab);
@@ -81,7 +83,9 @@ int		ext_bracers(t_cmd *cmd, char *tab);
 
 // cmd
 t_cmd	*get_cmd(char **tab);
-int		parse_split(t_cmd *cmd, char *tab, int check);
-int		parse_split_2(t_cmd *cmd, char *tab);
+int		is_exp(t_cmd *cmd, char *tab);
+int		is_corb(t_cmd *cmd, char *tab);
+int		is_elem(t_cmd *cmd, char *tab);
+t_cmd	*fill_list(t_cmd *cmd, char **tab);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/11 16:01:19 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/12 10:55:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,8 @@ char	*get_prompt(void)
 	else
 		return (NULL);
 }
+
+// apres redir c est un mot
+// tjrs comandes puis options puis args
+// au pipe on recomence le process
+// extern char **env;

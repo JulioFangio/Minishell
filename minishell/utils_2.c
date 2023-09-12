@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/05 18:09:19 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:52:28 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,19 @@ char	*tronc_optn(char *tab)
 	i = 0;
 	j = 0;
 	len = ft_strlen(tab) - 1;
-	tronc = ft_calloc(len, sizeof(char));
-	if (!tronc)
-		return (NULL);
 	while (tab[i] == 34 || tab[i] == 39)
 		i++;
 	while (tab[len] == 34 || tab[len] == 39)
 		len--;
+	tronc = ft_calloc((len - i) + 2, sizeof(char));
+	if (!tronc)
+		return (NULL);
 	while (i < len + 1)
 	{
-		tronc[j] = tab[i];
+		if (tab[i] == '`')
+			tronc[j] = 32;
+		else
+			tronc[j] = tab[i];
 		i++;
 		j++;
 	}
