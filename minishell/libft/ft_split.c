@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:20:27 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/12 14:24:06 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:59:39 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static	int	ft_countwords(const char *str, char sep)
 {
 	int		i;
 	int		count;
-	char	c;
 
 	i = 0;
 	count = 0;

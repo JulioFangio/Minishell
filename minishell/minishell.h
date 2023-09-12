@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/12 16:33:25 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/12 18:09:53 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
-typedef struct			s_cmd
+typedef struct s_cmd
 {
 	char			*type;
 	char			*elem;
 	struct s_cmd	*next;
-}						t_cmd;
+}					t_cmd;
 
 //	signals
 void	sigint_handler(int signum);
