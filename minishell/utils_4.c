@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/12 16:52:50 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/18 16:54:51 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,52 @@ int	check_end(char *line, int i, char c)
 	return (i);
 }
 
+
+// char	*keep_spaces(char *line)
+// {
+// 	char	*res;
+// 	int		i;
+// 	int		b;
+
+// 	i = 0;
+// 	res = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+// 	while (line[i])
+// 	{
+// 		if (line[i] == 34 || line[i] == 39)
+// 		{
+// 			b = check_end(line, i, line[i]);
+// 			while (i < b)
+// 			{
+// 				if (line[i] == 32 || (line[i] >= 9 && line[i] <= 13))
+// 					res[i] = '`';
+// 				else
+// 					res[i] = line[i];
+// 				i++;
+// 			}
+// 			continue ;
+// 		}
+// 		res[i] = line[i];
+// 		i++;
+// 	}
+// 	return (res);
+// }
+
 char	*keep_spaces(char *line)
 {
 	char	*res;
 	int		i;
-	int		b;
+	char	b;
 
-	i = 0;
+	i = -1;
 	res = ft_calloc(ft_strlen(line) + 1, sizeof(char));
-	while (line[i])
+	while (line[++i])
 	{
 		if (line[i] == 34 || line[i] == 39)
 		{
-			b = check_end(line, i, line[i]);
-			while (i < b)
+			b = line[i];
+			res[i] = line[i];
+			i++;
+			while (line[i] != b)
 			{
 				if (line[i] == 32 || (line[i] >= 9 && line[i] <= 13))
 					res[i] = '`';
@@ -44,10 +76,8 @@ char	*keep_spaces(char *line)
 					res[i] = line[i];
 				i++;
 			}
-			continue ;
 		}
 		res[i] = line[i];
-		i++;
 	}
 	return (res);
 }
@@ -65,9 +95,41 @@ char	*remake_line(char *line, int n, int l)
 	res = ft_calloc(l + n + 1, sizeof(char));
 	if (!res)
 		return (NULL);
-	res2 = remove_spaces(make_spaces(line, res), i, j);
+	res = make_spaces(line, res);
+	res2 = remove_spaces(res, i, j);
 	res3 = keep_spaces(res2);
 	free(res);
 	free(res2);
 	return (res3);
+}
+
+void	free_lst(t_cmd *cmd)
+{
+	t_cmd	*tmp;
+	int		i;
+
+	i = 0;
+	while (cmd)
+	{
+		tmp = cmd;
+		cmd = cmd->next;
+		free(tmp->elem);
+		free(tmp->type);
+		free(tmp);
+		i++;
+	}
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab[i]);
+	free(tab);
 }

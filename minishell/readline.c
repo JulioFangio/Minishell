@@ -6,23 +6,19 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/12 10:55:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/18 10:48:59 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_split(void)
+char	**get_split(char *line)
 {
 	char	**tab;
-	char	*line;
 	char	*nline;
 	int		n;
 	int		l;
 
-	line = ft_readline();
-	if (line == NULL)
-		return (NULL);
 	l = ft_strlen(line);
 	n = whole_count(line);
 	nline = remake_line(line, n, l);
@@ -30,9 +26,9 @@ char	**get_split(void)
 	{
 		printf("%s: command not found\n", line);
 		free (line);
+		free (nline);
 		return ((char **)1);
 	}
-	// printf("la liiiiiiiiigne est = %s\n", nline);
 	tab = ft_split(nline, ' ');
 	free(line);
 	free (nline);
@@ -75,4 +71,4 @@ char	*get_prompt(void)
 // apres redir c est un mot
 // tjrs comandes puis options puis args
 // au pipe on recomence le process
-// extern char **env;
+// extern char **env; pour chopper les valeur de env sans getenv

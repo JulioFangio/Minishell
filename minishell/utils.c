@@ -65,10 +65,50 @@ t_cmd	*make_cmd(char **tab)
 
 	cmd = NULL;
 	i = ft_lentab(tab);
-	while (i >= 0)
+	while (i > 0)
 	{
 		ft_cmdadd_back(&cmd, ft_cmdnew());
 		i--;
 	}
 	return (cmd);
 }
+
+// void	is_name(t_cmd *cmd, char *tab)
+// {
+// 	cmd->type = ft_strdup("name");
+// 	cmd->elem = ft_strdup(tab);
+// 	return ;
+// }
+
+// t_cmd	*make_cmd(char **tab)
+// {
+// 	t_cmd	*cmd;
+// 	int		i;
+// 	int		check;
+// 	int		opt;
+
+// 	cmd = NULL;
+// 	i = 0;
+// 	check = 0;
+// 	opt = 0;
+// 	while (tab[i])
+// 	{
+// 		ft_cmdadd_back(&cmd, ft_cmdnew());
+// 		if (check == 3)
+// 			is_name(cmd, tab[i]);
+
+// 		check = (is_exp(cmd, tab[i]) + is_elem(cmd, tab[i])
+// 				+ is_corb(cmd, tab[i]));
+// 		if (check == 0)
+// 		{
+
+// 		}
+// 		i++;
+// 	}
+// 	return (cmd);
+// }
+
+
+// refaire les fonctions is_smthing pour qu ils ne deviennent que des boulen, puis creer
+// une fonction pour renplir l elem de la liste chainee en fonctions de la str passee
+// en param ex "name", "pipe" etc.

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/11 14:11:37 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:19:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,45 +46,10 @@ int	is_builtin(t_cmd *cmd, char *tab)
 {
 	if (built_cmp(tab))
 	{
-		cmd->type = "builtin";
-		cmd->elem = tab;
+		cmd->type = ft_strdup("builtin");
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	return (0);
 }
 
-int	is_esper(t_cmd *cmd, char *tab)
-{
-	if (tab[0] == '&')
-	{
-		cmd->type = "esper";
-		cmd->elem = tab;
-		return (1);
-	}
-	return (0);
-}
-
-int	is_arg(t_cmd *cmd, char *tab)
-{
-	int	i;
-
-	i = 0;
-	if (is_char(cmd, tab, "arg"))
-		return (1);
-	i += is_cmd(cmd, tab);
-	i += is_option(cmd, tab);
-	i += is_pipe(cmd, tab);
-	i += is_redir(cmd, tab);
-	i += is_esper(cmd, tab);
-	i += ext_bracers(cmd, tab);
-	i += ext_tilde(cmd, tab);
-	i += dollar(cmd, tab);
-	i += ext_filename(cmd, tab);
-	if (i == 0)
-	{
-		cmd->type = "other";
-		cmd->elem = tab;
-		return (1);
-	}
-	return (0);
-}

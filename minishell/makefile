@@ -6,13 +6,13 @@
 #    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/09/11 15:11:10 by juduval          ###   ########.fr        #
+#    Updated: 2023/09/14 12:14:32 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 OBJ_DIR = objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 LIBFT = libft/libft.a

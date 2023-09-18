@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:52:51 by juduval           #+#    #+#             */
-/*   Updated: 2022/11/18 15:40:42 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/14 10:45:57 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 		{
 			while (tmp)
 			{
-				tmp2 = tmp2 -> next;
+				tmp2 = tmp2->next;
 				ft_lstdelone(tmp, del);
 				tmp = tmp2;
 			}

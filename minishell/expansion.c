@@ -17,7 +17,7 @@ int	ext_bracers(t_cmd *cmd, char *tab)
 	if (tab[0] == '{')
 	{
 		cmd->type = "list";
-		cmd->elem = tab;
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	return (0);
@@ -28,7 +28,7 @@ int	ext_tilde(t_cmd *cmd, char *tab)
 	if (tab[0] == '~')
 	{
 		cmd->type = "exp tilde";
-		cmd->elem = tab;
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	return (0);
@@ -39,19 +39,19 @@ int	dollar(t_cmd *cmd, char *tab)
 	if (tab[0] == '$' && tab[1] == '(' && tab[2] == '(')
 	{
 		cmd->type = "arithmetic op";
-		cmd->elem = tab;
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	else if (tab[0] == '$' && tab[1] == '(')
 	{
 		cmd->type = "substitution cmd";
-		cmd->elem = tab;
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	else if (tab[0] == '$')
 	{
 		cmd->type = "variable";
-		cmd->elem = tab;
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	return (0);
@@ -62,7 +62,7 @@ int	ext_filename(t_cmd *cmd, char *tab)
 	if (tab[0] == '*' || tab[0] == '?')
 	{
 		cmd->type = "filename";
-		cmd->elem = tab;
+		cmd->elem = ft_strdup(tab);
 		return (1);
 	}
 	return (0);
