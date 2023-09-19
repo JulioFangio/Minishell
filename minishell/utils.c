@@ -73,6 +73,21 @@ t_cmd	*make_cmd(char **tab)
 	return (cmd);
 }
 
+// t_cmd	*make_cmd(char **tab)
+// {
+// 	t_cmd	*cmd;
+// 	int		i;
+
+// 	cmd = NULL;
+// 	i = -1;
+// 	while (tab[++i])
+// 	{
+// 		ft_cmdadd_back(&cmd, ft_cmdnew());
+// 	}
+// 	return (cmd);
+// }
+
+
 // void	is_name(t_cmd *cmd, char *tab)
 // {
 // 	cmd->type = ft_strdup("name");

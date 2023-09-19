@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/18 14:12:57 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:15:46 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	check_quotes(char *line)
 	char	c;
 
 	i = 0;
+	c = '\0';
 	while (line[i])
 	{
 		if (line[i] == '"' || line[i] == '\'')

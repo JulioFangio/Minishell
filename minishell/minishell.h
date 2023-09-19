@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/15 18:32:11 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:27:42 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ typedef struct s_cmd
 //	signals
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
-int		start(char *line);
+void	redir(void);
 
 //	other
+int		start(char *line);
 void	run_shell_loop(void);
 char	**get_split(char *line);
 char	*ft_readline(void);
 char	*get_prompt(void);
-void	redir(void);
 
 //	utils
 t_cmd	*ft_cmdnew(void);
@@ -69,22 +69,26 @@ void	free_lst(t_cmd *cmd);
 void	free_tab(char **tab);
 
 //	elems + ext
-int		is_cmd(t_cmd *cmd, char *tab);
-int		is_redir(t_cmd *cmd, char *tab);
-int		is_pipe(t_cmd *cmd, char *tab);
-int		is_char(t_cmd *cmd, char *tab, char *str);
-int		is_builtin(t_cmd*cmd, char *tab);
+int		is_redir(char *tab);
+int		is_pipe(char *tab);
+int		is_char(char *tab);
+int		is_builtin(char *tab);
+int		is_heredoc(char *tab);
 int		whole_count(char *line);
-int		ext_filename(t_cmd *cmd, char *tab);
-int		dollar(t_cmd *cmd, char *tab);
-int		ext_tilde(t_cmd *cmd, char *tab);
-int		ext_bracers(t_cmd *cmd, char *tab);
+int		ext_filename(char *tab);
+int		ext_dollar(char *tab);
+int		ext_tilde(char *tab);
+int		ext_bracers(char *tab);
 
 // cmd
 t_cmd	*get_cmd(char **tab);
-int		is_exp(t_cmd *cmd, char *tab);
-int		is_corb(t_cmd *cmd, char *tab);
-int		is_elem(t_cmd *cmd, char *tab);
-t_cmd	*fill_list(t_cmd *cmd, char **tab);
-
+t_cmd	*fill_list(t_cmd *cmd, char **tab, int i, int check);
+void	fill_elem(t_cmd *cmd, char *tab, char *str);
+void	fill_elem_tronc(t_cmd *cmd, char *tab, char *str);
+int		scenario(char *tab, int check);
+void	exec_scenario(t_cmd *cmd, char *tab, int nb);
+void	exec_scenario_2(t_cmd *cmd, char *tab, int nb);
+int		ft_optn(t_cmd *cmd, char *tab, int optn);
+int		check_built(char *s1, const char *s2);
+int		built_cmp(char *tab);
 #endif
