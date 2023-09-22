@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 15:08:49 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:55:03 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ int	main(int ac, char **av, char **env)
 	data.export = export_env(NULL);
 	if (ac != 1)
 		return (FAILURE);
-	while (data.exit == 0)
-	{
-		//parsing + signal
-		if (data.token && data.exit == 0)
-			// launch_minishell(&data);
-		data.token = free_token(data.token);
-	}
+	run_shell_loop();
+	// while (data.exit == 0)
+	// {
+	// 	//parsing + signal
+	// 	if (data.token && data.exit == 0)
+	// 		// launch_minishell(&data);
+	// 	data.token = free_token(data.token);
+	// }
 	// free_all(&data);
 	return (data.result);
 }
