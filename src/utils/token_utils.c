@@ -32,7 +32,7 @@ char	**token_cmd_to_tab(t_token *token)
 		token_ptr = token_ptr->next;
 		i++;
 	}
-	tab = malloc(sizeof(char *) * (i);
+	tab = malloc(sizeof(char *) * (i));
 	if (tab == NULL)
 		return (ft_exit(ERR_MALLOC), NULL); // do i have to return?
 	token_ptr = token->next;

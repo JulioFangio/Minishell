@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 17:23:11 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:44:47 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,9 @@ int		exec_builtin(t_data *data, char **cmd, t_token *token);
 void	exec_command(t_data *data, t_token *token);
 char	**token_cmd_to_tab(t_token *token);
 
+// start_exec.c
+void	launch_minishell(t_data *data);
+
 // exec_utils.c
 char	**token_to_tab(t_token *token, char **tab);
 
@@ -134,7 +137,7 @@ char	**token_to_tab(t_token *token, char **tab);
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
-void	*free_token(t_token *token);
+//void	*free_token(t_token *token);
 
 // error.c
 void	ft_exit(char *error);

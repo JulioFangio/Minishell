@@ -46,6 +46,7 @@ t_token	*ft_tokennew(void)
 	elem->elem = NULL;
 	elem->code = 0;
 	elem->next = (NULL);
+	elem->prev = (NULL);
 	return (elem);
 }
 
@@ -74,6 +75,21 @@ t_token	*make_cmd(char **tab)
 	return (cmd);
 }
 
+/* void	init_prev(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	res = token;
+	if (token)
+		token = token->next;
+	while (token && token->code < PIPE)
+	{
+		token = token->prev;
+	}
+	return (token);
+}
+ */
 // t_token	*make_cmd(char **tab)
 // {
 // 	t_token	*cmd;

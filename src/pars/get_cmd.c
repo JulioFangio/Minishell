@@ -43,7 +43,7 @@ t_token	*get_token(char **tab)
 {
 	t_token	*cmd;
 	t_token	*tmp;
-
+lse if (is_type(prev_tok, PIPE))
 	cmd = make_cmd(tab);
 	cmd = fill_list(cmd, tab, -1, 0);
 	tmp = cmd;

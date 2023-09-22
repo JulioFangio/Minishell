@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 16:16:51 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:21:20 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ typedef struct s_env
 
 typedef struct s_token
 {
-	char			*type;
-	char			*elem;
-	int				code;
+	char			*type; // a sauter
+	char			*elem; //str
+	int				code; /// type
 	struct s_token	*next;
+	struct s_token	*prev;
 }					t_token;
 
 typedef struct s_data

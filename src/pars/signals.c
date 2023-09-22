@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 17:21:50 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:20:16 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	start(char *line, t_data *data)
 		return (1);
 	res = get_token(tab);
 	data->token = res;
-	launch_mini(res, data);
 	if (!parse_line(res))
 	{
 		free_tab(tab);
 		free_lst(res);
 		return (1);
 	}
+	launch_minishell(data);
 	free_tab(tab);
 	free_lst(res);
 	return (1);
@@ -84,7 +84,6 @@ void	run_shell_loop(t_data *data)
 	}
 	rl_clear_history();
 }
-
 
 // 1 === convertir les t_token en t_token pour compatibilite avec la struct de juv
 // 2 === creer une fonction qui lis la liste chainee avec pour limite les pipes 

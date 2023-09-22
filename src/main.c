@@ -6,19 +6,11 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 16:26:25 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:30:06 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/*
-Il faut creer des fonctions pour gerer et interagir avec mon env cad sotcker,
-manipuler et afficher les var d'env :
-- fonction pour trier les var d'environnement dans ordre du shell
-- fonction pour afficher les var d'env
-- fonction pour copier les var d'env d'une t_list dans une string
-*/
 
 int	main(int ac, char **av, char **env)
 {

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/08 15:04:24 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:44:37 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_env(t_env *env)
 	}
 }
 
-void	*free_token(t_token *token)
+/* void	*free_token(t_token *token)
 {
 	t_token	*tmp;
 
@@ -54,3 +54,4 @@ void	*free_token(t_token *token)
 	}
 	return (NULL);
 }
+ */
