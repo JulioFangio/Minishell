@@ -3,39 +3,62 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
+#    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/09/22 16:02:54 by juduval          ###   ########.fr        #
+#    Updated: 2023/09/22 17:22:44 by jaristil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 OBJ_DIR = objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 LIBFT = libft/libft.a
 LIBFT_DIR = libft/
 LIB_FLAGS = -Llibft -lft
 READLINE_FLAGS = -lreadline -lncurses
+OBJ_DIRS = builtin env exec pars utils
+OBJ_DIRS := $(addprefix $(OBJ_DIR), $(OBJ_DIRS))
 
-SRC = main.c readline.c signals.c get_cmd.c elems.c elems_2.c elems_3.c \
-		expansion.c utils.c utils_2.c utils_3.c utils_4.c parse_line.c split_mini.c
+SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/elems_2.c pars/elems_3.c \
+		\
+		pars/expansion.c pars/utils.c pars/utils_2.c pars/utils_3.c pars/utils_4.c pars/parse_line.c pars/split_mini.c \
+		\
+		utils/error.c utils/free.c utils/token_utils.c utils/utils.c \
+		\
+		env/getenv.c env/getenv_bis.c env/setenv.c env/doenv.c \
+		\
+		builtin/cd.c builtin/cd_utils.c \
+		builtin/echo.c \
+		builtin/exit.c \
+		builtin/export.c \
+		builtin/pwd.c \
+		builtin/env.c \
+		builtin/unset.c \
+		\
+		exec/builtin.c \
+		exec/exec.c exec/start_exec.c \
+		\
+		utils/free.c utils/error.c utils/utils.c \
+		
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) $(LIB_FLAGS) $(LIBFT) $(READLINE_FLAGS) -o $(NAME)
 
-all: $(NAME) ${LIBFT}
+all: $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIB_FLAGS) $(LIBFT) $(READLINE_FLAGS) -o $(NAME)
-
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: src/%.c | $(OBJ_DIR) $(OBJ_DIRS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
 
 clean:
 	rm -rf $(OBJ_DIR)
