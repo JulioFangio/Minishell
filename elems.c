@@ -48,14 +48,14 @@ int	is_builtin(char *tab)
 }
 
 
-// int	is_cmd(t_cmd *cmd, char *tab)
+// int	is_cmd(t_token *cmd, char *tab)
 // {
 // 	cmd->type = ft_strdup("cmd");
 // 	cmd->elem = ft_strdup(tab);
 // 	return (1);
 // }
 
-// int	is_heredoc(t_cmd *cmd, char *tab)
+// int	is_heredoc(t_token *cmd, char *tab)
 // {
 // 	if (tab[0] == '<' && tab[1] == '<')
 // 	{
@@ -66,7 +66,7 @@ int	is_builtin(char *tab)
 // 	return (0);
 // }
 
-// int	is_redir(t_cmd *cmd, char *tab)
+// int	is_redir(t_token *cmd, char *tab)
 // {
 // 	if ((tab[0] == '<' && tab[1] != '<') || tab[0] == '>')
 // 	{
@@ -77,7 +77,7 @@ int	is_builtin(char *tab)
 // 	return (0);
 // }
 
-// int	is_pipe(t_cmd *cmd, char *tab)
+// int	is_pipe(t_token *cmd, char *tab)
 // {
 // 	if (tab[0] == '|')
 // 	{
@@ -88,7 +88,7 @@ int	is_builtin(char *tab)
 // 	return (0);
 // }
 
-// int	is_char(t_cmd *cmd, char *tab, char *str)
+// int	is_char(t_token *cmd, char *tab, char *str)
 // {
 // 	char	*res;
 

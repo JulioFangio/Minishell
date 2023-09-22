@@ -12,22 +12,22 @@
 
 #include "minishell.h"
 
-t_cmd	*ft_cmdlast(t_cmd *cmd)
+t_token	*ft_tokenlast(t_token *cmd)
 {
 	while (cmd && cmd->next)
 		cmd = cmd->next;
 	return (cmd);
 }
 
-void	ft_cmdadd_back(t_cmd **cmd, t_cmd *new)
+void	ft_tokenadd_back(t_token **cmd, t_token *new)
 {
-	t_cmd	*last;
+	t_token	*last;
 
 	if (cmd)
 	{
 		if (*cmd)
 		{
-			last = ft_cmdlast(*cmd);
+			last = ft_tokenlast(*cmd);
 			last->next = new;
 		}
 		else
@@ -35,15 +35,16 @@ void	ft_cmdadd_back(t_cmd **cmd, t_cmd *new)
 	}
 }
 
-t_cmd	*ft_cmdnew(void)
+t_token	*ft_tokennew(void)
 {
-	t_cmd	*elem;
+	t_token	*elem;
 
-	elem = malloc(sizeof(t_cmd));
+	elem = malloc(sizeof(t_token));
 	if (!(elem))
 		return (NULL);
 	elem->type = NULL;
 	elem->elem = NULL;
+	elem->code = 0;
 	elem->next = (NULL);
 	return (elem);
 }
@@ -58,46 +59,46 @@ int	ft_lentab(char **tab)
 	return (i);
 }
 
-t_cmd	*make_cmd(char **tab)
+t_token	*make_cmd(char **tab)
 {
-	t_cmd	*cmd;
+	t_token	*cmd;
 	int		i;
 
 	cmd = NULL;
 	i = ft_lentab(tab);
 	while (i > 0)
 	{
-		ft_cmdadd_back(&cmd, ft_cmdnew());
+		ft_tokenadd_back(&cmd, ft_tokennew());
 		i--;
 	}
 	return (cmd);
 }
 
-// t_cmd	*make_cmd(char **tab)
+// t_token	*make_cmd(char **tab)
 // {
-// 	t_cmd	*cmd;
+// 	t_token	*cmd;
 // 	int		i;
 
 // 	cmd = NULL;
 // 	i = -1;
 // 	while (tab[++i])
 // 	{
-// 		ft_cmdadd_back(&cmd, ft_cmdnew());
+// 		ft_tokenadd_back(&cmd, ft_tokennew());
 // 	}
 // 	return (cmd);
 // }
 
 
-// void	is_name(t_cmd *cmd, char *tab)
+// void	is_name(t_token *cmd, char *tab)
 // {
 // 	cmd->type = ft_strdup("name");
 // 	cmd->elem = ft_strdup(tab);
 // 	return ;
 // }
 
-// t_cmd	*make_cmd(char **tab)
+// t_token	*make_cmd(char **tab)
 // {
-// 	t_cmd	*cmd;
+// 	t_token	*cmd;
 // 	int		i;
 // 	int		check;
 // 	int		opt;
@@ -108,7 +109,7 @@ t_cmd	*make_cmd(char **tab)
 // 	opt = 0;
 // 	while (tab[i])
 // 	{
-// 		ft_cmdadd_back(&cmd, ft_cmdnew());
+// 		ft_tokenadd_back(&cmd, ft_tokennew());
 // 		if (check == 3)
 // 			is_name(cmd, tab[i]);
 
@@ -122,8 +123,3 @@ t_cmd	*make_cmd(char **tab)
 // 	}
 // 	return (cmd);
 // }
-
-
-// refaire les fonctions is_smthing pour qu ils ne deviennent que des boulen, puis creer
-// une fonction pour renplir l elem de la liste chainee en fonctions de la str passee
-// en param ex "name", "pipe" etc.

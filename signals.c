@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/15 17:59:32 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:04:31 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,19 @@ void	redir(void)
 int	start(char *line)
 {
 	char				**tab;
-	t_cmd				*res;
+	t_token				*res;
 
 	redir();
 	tab = get_split(line);
 	if (tab == (char **)1)
 		return (1);
-	res = get_cmd(tab);
+	res = get_token(tab);
+	if (!parse_line(res))
+	{
+		free_tab(tab);
+		free_lst(res);
+		return (1);
+	}
 	free_tab(tab);
 	free_lst(res);
 	return (1);
@@ -77,6 +83,8 @@ void	run_shell_loop(void)
 }
 
 
-//ca leak psk au moment ou je fais ctrl + d ca free pas la lst et/ou le tab
-//sauf que le ctrl + d est gere avec le readline et je n ai pas acces a ces elements 
-//du coup je ne peux pas reutiliser le readline ailleur pour gerer le ctrl + d
+// 1 === convertir les t_token en t_token pour compatibilite avec la struct de juv
+// 2 === creer une fonction qui lis la liste chainee avec pour limite les pipes 
+// et qui cree un tableau de tableau comportant cmd/builtin + les options et les args
+// 3 === reflechir au fait de creer une nouvelle structure en tableau pour y stocker
+// le tableau en question et les redirections avec leurs fd

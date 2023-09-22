@@ -45,7 +45,7 @@ int	ext_filename(char *tab)
 	return (0);
 }
 
-// int	ext_bracers(t_cmd *cmd, char *tab)
+// int	ext_bracers(t_token *cmd, char *tab)
 // {
 // 	if (tab[0] == '{')
 // 	{
@@ -56,7 +56,7 @@ int	ext_filename(char *tab)
 // 	return (0);
 // }
 
-// int	ext_tilde(t_cmd *cmd, char *tab)
+// int	ext_tilde(t_token *cmd, char *tab)
 // {
 // 	if (tab[0] == '~')
 // 	{
@@ -67,7 +67,7 @@ int	ext_filename(char *tab)
 // 	return (0);
 // }
 
-// int	dollar(t_cmd *cmd, char *tab)
+// int	dollar(t_token *cmd, char *tab)
 // {
 // 	if (tab[0] == '$' && tab[1] == '(' && tab[2] == '(')
 // 	{
@@ -90,7 +90,7 @@ int	ext_filename(char *tab)
 // 	return (0);
 // }
 
-// int	ext_filename(t_cmd *cmd, char *tab)
+// int	ext_filename(t_token *cmd, char *tab)
 // {
 // 	if (tab[0] == '*' || tab[0] == '?')
 // 	{

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/19 16:15:46 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:43:50 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 int	how_long(char *line, char c)
 {
-	int	i;
-	int	count;
+	size_t	i;
+	int		count;
 
 	i = 0;
 	count = 0;
 	while (line[i])
 	{
-		if (line[i] == c && line[i - 1] != 32 && line[i - 1] != c)
+		if (i > 0 && line[i] == c && line[i - 1] != 32 && line[i - 1] != c)
 			count++;
-		if (line[i] == c && line[i + 1] != 32 && line[i + 1] != c)
+		if (i < ft_strlen(line) && line[i] == c
+			&& line[i + 1] != 32 && line[i + 1] != c)
 			count++;
 		i++;
 	}
@@ -73,6 +74,9 @@ int	check_quotes(char *line)
 			while (line[i] && line[i] != c)
 				i++;
 			if (line[i] == '\0')
+				return (0);
+			else if (line[i + 1] != '\0' && (line[i + 1] != 32 ||
+					(line[i + 1] < 9 && line[i + 1] > 13)))
 				return (0);
 			c = '\0';
 		}

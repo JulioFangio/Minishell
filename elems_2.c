@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/19 16:22:24 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/22 13:26:22 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,22 @@ int	built_cmp(char *tab)
 	return (0);
 }
 
-void	fill_elem(t_cmd *cmd, char *tab, char *str)
+void	fill_elem(t_token *cmd, char *tab, char *str, int nb)
 {
 	cmd->type = ft_strdup(str);
 	cmd->elem = ft_strdup(tab);
+	cmd->code = nb;
 	return ;
 }
 
-void	fill_elem_tronc(t_cmd *cmd, char *tab, char *str)
+void	fill_elem_tronc(t_token *cmd, char *tab, char *str)
 {
 	char	*res;
 
 	cmd->type = ft_strdup(str);
 	res = tronc_optn(tab);
 	cmd->elem = ft_strdup(res);
+	cmd->code = 2;
 	free(res);
 	return ;
 }
@@ -85,7 +87,7 @@ int	scenario(char *tab, int check)
 	return (13);
 }
 
-// int	is_builtin(t_cmd *cmd, char *tab)
+// int	is_builtin(t_token *cmd, char *tab)
 // {
 // 	if (built_cmp(tab))
 // 	{

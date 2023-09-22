@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:53:31 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/14 15:48:34 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/22 12:22:10 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,19 @@ static int	is_sep(char c)
 	return (0);
 }
 
-char	*make_spaces(char *line, char *res)
+char	*make_spaces(char *line, char *res, size_t i, int j)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
 	while (line[i])
 	{
-		if (is_sep(line[i]) && !is_sep(line[i - 1]) && line[i - 1] != 32)
+		if (i > 0 && is_sep(line[i])
+			&& !is_sep(line[i - 1]) && line[i - 1] != 32)
 		{
 			res[j] = ' ';
 			j++;
 			res[j] = line[i];
 		}
-		if (is_sep(line[i]) && !is_sep(line[i + 1]) && line[i + 1] != 32)
+		if (i < ft_strlen(line) && is_sep(line[i])
+			&& !is_sep(line[i + 1]) && line[i + 1] != 32)
 		{
 			res[j] = line[i];
 			j++;
@@ -51,8 +48,8 @@ char	*make_spaces(char *line, char *res)
 		}
 		else
 			res[j] = line[i];
-		i++;
 		j++;
+		i++;
 	}
 	return (res);
 }

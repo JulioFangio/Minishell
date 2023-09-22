@@ -6,7 +6,7 @@
 #    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/09/19 15:30:07 by juduval          ###   ########.fr        #
+#    Updated: 2023/09/22 16:02:54 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB_FLAGS = -Llibft -lft
 READLINE_FLAGS = -lreadline -lncurses
 
 SRC = main.c readline.c signals.c get_cmd.c elems.c elems_2.c elems_3.c \
-		expansion.c utils.c utils_2.c utils_3.c utils_4.c
+		expansion.c utils.c utils_2.c utils_3.c utils_4.c parse_line.c split_mini.c
 
 all: $(NAME) ${LIBFT}
 

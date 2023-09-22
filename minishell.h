@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:14:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/19 16:27:42 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:02:34 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
-typedef struct s_cmd
+typedef struct s_token
 {
 	char			*type;
 	char			*elem;
-	struct s_cmd	*next;
-}					t_cmd;
+	int				code;
+	struct s_token	*next;
+}					t_token;
 
 //	signals
 void	sigint_handler(int signum);
@@ -50,10 +51,10 @@ char	*ft_readline(void);
 char	*get_prompt(void);
 
 //	utils
-t_cmd	*ft_cmdnew(void);
-t_cmd	*make_cmd(char **tab);
-t_cmd	*ft_cmdlast(t_cmd *cmd);
-void	ft_cmdadd_back(t_cmd **cmd, t_cmd *new);
+t_token	*ft_tokennew(void);
+t_token	*make_cmd(char **tab);
+t_token	*ft_tokenlast(t_token *cmd);
+void	ft_tokenadd_back(t_token **cmd, t_token *new);
 int		ft_lentab(char **tab);
 char	*tronc_optn(char *tab);
 int		check_quotes(char *line);
@@ -63,9 +64,9 @@ char	*remake_line(char *line, int n, int l);
 char	*remove_spaces(char *line, int i, int j);
 char	*keep_spaces(char *line);
 int		shorten(char *line);
-char	*make_spaces(char *line, char *res);
+char	*make_spaces(char *line, char *res, size_t i, int j);
 int		check_end(char *line, int i, char c);
-void	free_lst(t_cmd *cmd);
+void	free_lst(t_token *cmd);
 void	free_tab(char **tab);
 
 //	elems + ext
@@ -81,14 +82,21 @@ int		ext_tilde(char *tab);
 int		ext_bracers(char *tab);
 
 // cmd
-t_cmd	*get_cmd(char **tab);
-t_cmd	*fill_list(t_cmd *cmd, char **tab, int i, int check);
-void	fill_elem(t_cmd *cmd, char *tab, char *str);
-void	fill_elem_tronc(t_cmd *cmd, char *tab, char *str);
+t_token	*get_token(char **tab);
+t_token	*fill_list(t_token *cmd, char **tab, int i, int check);
+void	fill_elem(t_token *cmd, char *tab, char *str, int nb);
+void	fill_elem_tronc(t_token *cmd, char *tab, char *str);
+void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb);
 int		scenario(char *tab, int check);
-void	exec_scenario(t_cmd *cmd, char *tab, int nb);
-void	exec_scenario_2(t_cmd *cmd, char *tab, int nb);
-int		ft_optn(t_cmd *cmd, char *tab, int optn);
+void	exec_scenario(t_token *cmd, char *tab, int nb);
+void	exec_scenario_2(t_token *cmd, char *tab, int nb);
+int		ft_optn(t_token *cmd, char *tab, int optn);
 int		check_built(char *s1, const char *s2);
 int		built_cmp(char *tab);
+
+//parse_line
+int		parse_line(t_token *cmd);
+int		parse_redir(t_token *cmd);
+//split mini
+char	**split_mini(char const *s, char c);
 #endif

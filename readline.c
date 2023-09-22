@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/18 10:48:59 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:02:29 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**get_split(char *line)
 		free (nline);
 		return ((char **)1);
 	}
-	tab = ft_split(nline, ' ');
+	tab = split_mini(nline, ' ');
 	free(line);
 	free (nline);
 	return (tab);
@@ -68,7 +68,4 @@ char	*get_prompt(void)
 		return (NULL);
 }
 
-// apres redir c est un mot
-// tjrs comandes puis options puis args
-// au pipe on recomence le process
 // extern char **env; pour chopper les valeur de env sans getenv

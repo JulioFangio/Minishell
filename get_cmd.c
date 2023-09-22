@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd.c                                          :+:      :+:    :+:   */
+/*   get_token.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,15 @@
 
 #include "minishell.h"
 
-t_cmd	*fill_list(t_cmd *cmd, char **tab, int i, int check)
+t_token	*fill_list(t_token *cmd, char **tab, int i, int check)
 {
-	const t_cmd	*tmp = cmd;
+	t_token		*tmp;
 	int			res;
 	int			optn;
 
 	res = 0;
 	optn = 0;
+	tmp = cmd;
 	while (cmd && tab[++i])
 	{
 		res = scenario(tab[i], check);
@@ -35,29 +36,29 @@ t_cmd	*fill_list(t_cmd *cmd, char **tab, int i, int check)
 			optn = res;
 		cmd = cmd->next;
 	}
-	return ((t_cmd *)tmp);
+	return (tmp);
 }
 
-t_cmd	*get_cmd(char **tab)
+t_token	*get_token(char **tab)
 {
-	t_cmd	*cmd;
-	t_cmd	*tmp;
+	t_token	*cmd;
+	t_token	*tmp;
 
 	cmd = make_cmd(tab);
 	cmd = fill_list(cmd, tab, -1, 0);
 	tmp = cmd;
 	while (tmp)
 	{
-		printf(" type = %s et elem = %s\n", tmp->type, tmp->elem);
+		printf(" type = %s / elem = %s / code = %d\n", tmp->type, tmp->elem, tmp->code);
 		tmp = tmp->next;
 	}
 	return (cmd);
 }
 
-// t_cmd	*fill_list(t_cmd *cmd, char **tab)
+// t_token	*fill_list(t_token *cmd, char **tab)
 // {
 // 	int		i;
-// 	t_cmd	*tmp;
+// 	t_token	*tmp;
 // 	int		check;
 // 	char	*res;
 
@@ -109,7 +110,7 @@ t_cmd	*get_cmd(char **tab)
 // 	return (tmp);
 // }
 
-// int	is_exp(t_cmd *cmd, char *tab)
+// int	is_exp(t_token *cmd, char *tab)
 // {
 // 	if (ext_bracers(cmd, tab))
 // 		return (1);
@@ -122,7 +123,7 @@ t_cmd	*get_cmd(char **tab)
 // 	return (0);
 // }
 
-// int	is_corb(t_cmd *cmd, char *tab)
+// int	is_corb(t_token *cmd, char *tab)
 // {
 // 	if (is_builtin(cmd, tab))
 // 		return (2);
@@ -131,7 +132,7 @@ t_cmd	*get_cmd(char **tab)
 // 	return (0);
 // }
 
-// int	is_elem(t_cmd *cmd, char *tab)
+// int	is_elem(t_token *cmd, char *tab)
 // {
 // 	if (is_redir(cmd, tab))
 // 		return (4);
