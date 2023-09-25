@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 17:44:47 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:42:39 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define SUCCESS 0
 # define FAILURE 1
 
+# define CHILD 1
+# define PARENT 0
+
 # define NO_ARG 0
 # define CMD 1
 # define ARG 2
@@ -42,7 +45,7 @@
 # define CHEVRON 4 // >
 # define OPEN_CHEVRON 5 // <
 # define DOUBLE_CHEVRON 6 // >>
-# define DOUBLE_INPUT 7 // <<
+# define HERE_DOC 7 // <<
 # define END 8
 
 # define STDIN 0
@@ -63,7 +66,8 @@
 # define B_SIZE 1024
 # define MAX_PATH 1024
 
-		// BUILT_IN
+						/// EXEC ///
+		/// BUILT_IN
 // cd.c
 int		new_oldpath(t_env *env);
 int		new_path(t_env *env);
@@ -72,42 +76,36 @@ int		make_cd(char **arg, t_env *env);
 // cd_utils.c
 char	*get_path(t_env *env, char *var, size_t len);
 char	*get_oldpwd_path(char *path, t_env *env);
-
 // pwd.c
 int		make_pwd(t_env *env);
-
 // echo.c
 int		is_echo(char *line);
 int		handle_echo_options(char **arg, int *cur_pos, int flags);
 int		make_echo(char **arg);
-
 // exit.c
 int		str_isnum(char *str);
 int		make_exit(t_data *data, char **cmd);
 // env.c
 int		make_env(t_env *env);
-
 // unset.c
 // export.c
 
-		// ENV
+		/// ENV
 // getenv.c
 int		is_env(char *env);
 int		len_var_env(char *env);
 char	*extract_env_value(char *env);
 char	*get_env_value(char *arg, t_env *env);
 int		config_env_char_name(int c);
-
 // getenv_bis.c
 int		update_env(char *arg, t_env *env);
-
+char	*extract_name_env(char *dest, char *src);
 // setenv.c
 size_t	env_len(t_env *env);
 char	*env_malloc(t_env *env);
 void	set_env(t_data *data, char **env);
 t_env	*export_env(char *value);
 char	*clean_env(char *to_find);
-
 // doenv.c
 void	bubble_sort_env(char **env_tab, int env_len);
 void	putstr_env(char **env);
@@ -115,25 +113,27 @@ void	display_env(t_env *env, t_env *export);
 char	*dup_env(char *ptr_env, t_env *env);
 int		env_add_value_to_list(char *value, t_env *env);
 
-// env.c
-char	*extract_name_env(char *dest, char *src);
-		// EXEC
+	/// EXEC
 // builtin.c
 int		is_builtin(char *cmd);
 int		exec_builtin(t_data *data, char **cmd, t_token *token);
-
 // exec.c
 void	exec_command(t_data *data, t_token *token);
 char	**token_cmd_to_tab(t_token *token);
-
 // start_exec.c
+int		do_pipe(t_data *data);
+void	redir(t_data *data, t_token *token, int type);
+void	redir_exec(t_data *data, t_token *token);
 void	launch_minishell(t_data *data);
-
-// exec_utils.c
-char	**token_to_tab(t_token *token, char **tab);
 
 
 		// UTILS
+// token.c
+char	**token_to_tab(t_token *token, char **tab);
+char	**token_cmd_to_tab(t_token *token);
+t_token	*get_next_token(t_token *token, int next);
+t_token	*get_prev_token(t_token *token, int prev);
+
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
@@ -142,14 +142,20 @@ void	free_tab(char **tab);
 // error.c
 void	ft_exit(char *error);
 
-// utils.c
+// tab.c
 size_t	tab_size(char **tab);
+
+// fd.c
+void	ft_close_fd(int fd);
+
+// token.c
+
 
 		// MAIN
 
 void	redir_exec(t_data *data, t_token *token);
 
-
+						// PARSING //
 
 //	signals
 void	sigint_handler(int signum);

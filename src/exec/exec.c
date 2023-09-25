@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 18:52:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:30:11 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	exec_command(t_data *data, t_token *token)
 	//else if (cmd && ft_strcmp(cmd[0]), "exit") != 0)
 		//data->result = exec_bin(cmd, data, data->env);
 	free_tab(cmd);
-	//ft_close(pipefdin)
-	// 		  (pipefdout)
+	ft_close_fd(data->pipe_in);
+	ft_close_fd(data->pipe_out);
 	data->pipe_in = -1;
 	data->pipe_out = -1;
 	data->exec = 0;
