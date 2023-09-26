@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 16:02:42 by jaristil          #+#    #+#             */
+/*   Updated: 2023/09/26 16:02:42 by jaristil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
@@ -17,12 +27,7 @@ char	**token_to_tab(t_token *token, char **tab)
 }
 
 char	**token_cmd_to_tab(t_token *token)
-{if (token && next)
-		token = token->next;
-	while (token && token->type < PIPE)
-		token = token->next;
-	return (token);
-}
+{
 	t_token	*token_ptr;
 	char	**tab;
 	int		i;
@@ -31,17 +36,11 @@ char	**token_cmd_to_tab(t_token *token)
 		return (NULL);
 	token_ptr = token->next;
 	i = 2;
-	// while (token_ptr && token_ptr->type != PIPE)?
 	while (token_ptr && token_ptr->type < PIPE)
-	{if (token && next)
-		token = token->next;
-	while (token && token->type < PIPE)
-		token = token->next;
-	return (token);
-}
+	{
 		token_ptr = token_ptr->next;
 		i++;
-	}// while (token_ptr && token_ptr->type != PIPE)?
+	}
 	tab = malloc(sizeof(char *) * (i));
 	if (tab == NULL)
 		return (ft_exit(ERR_MALLOC), NULL); // do i have to return?

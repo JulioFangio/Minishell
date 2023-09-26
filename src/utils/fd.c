@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_fd.c                                         :+:      :+:    :+:   */
+/*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:21:55 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/25 13:23:28 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:54:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,19 @@ void	ft_close_fd(int fd)
 		close(fd);
 }
 
+void	ft_close_all_fd(t_data *data)
+{
+	ft_close_fd(data->fd_in);
+	ft_close_fd(data->fd_out);
+	ft_close_fd(data->pipe_in);
+	ft_close_fd(data->pipe_out);
+}
+
+void	reset_to_initial_fd(t_data *data)
+{
+	data->pid = -1;
+	data->fd_in = -1;
+	data->fd_out = -1;
+	data->pipe_in = -1;
+	data->pipe_out = -1;
+}
