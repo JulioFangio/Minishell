@@ -42,9 +42,9 @@ t_token	*ft_tokennew(void)
 	elem = malloc(sizeof(t_token));
 	if (!(elem))
 		return (NULL);
-	elem->type = NULL;
+	elem->str = NULL;
 	elem->elem = NULL;
-	elem->code = 0;
+	elem->type = 0;
 	elem->next = (NULL);
 	elem->prev = (NULL);
 	return (elem);

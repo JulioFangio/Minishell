@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 16:27:09 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:44:07 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,6 @@ int	built_cmp(char *tab)
 	return (0);
 }
 
-void	fill_elem(t_token *cmd, char *tab, char *str, int nb)
-{
-	cmd->type = ft_strdup(str);
-	cmd->elem = ft_strdup(tab);
-	cmd->code = nb;
-	return ;
-}
-
-void	fill_elem_tronc(t_token *cmd, char *tab, char *str)
-{
-	char	*res;
-
-	cmd->type = ft_strdup(str);
-	res = tronc_optn(tab);
-	cmd->elem = ft_strdup(res);
-	cmd->code = 2;
-	free(res);
-	return ;
-}
-
 int	scenario(char *tab, int check)
 {
 	if (ext_bracers(tab))
@@ -80,8 +60,8 @@ int	scenario(char *tab, int check)
 		return (is_pipe(tab));
 	else if (is_char(tab))
 		return (is_char(tab));
-	else if (check == 0 && is_builtin(tab))
-		return (is_builtin(tab));
+	else if (check == 0 && is_a_builtin(tab))
+		return (is_a_builtin(tab));
 	else if (check == 0)
 		return (12);
 	return (13);

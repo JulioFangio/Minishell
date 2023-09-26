@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:57 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/25 17:39:02 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:32:30 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_env_value(char *arg, t_env *env)
 	while (env && env->value)
 	{
 		extract_name_env(env_name_value, env->value);
-		if (ft_strcmp(env_name_value, env->value) == 0)
+		if (ft_strcmp(arg, env_name_value) == 0)
 		{
 			free(env_value);
 			env_value = NULL;

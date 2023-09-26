@@ -43,13 +43,13 @@ t_token	*get_token(char **tab)
 {
 	t_token	*cmd;
 	t_token	*tmp;
-lse if (is_type(prev_tok, PIPE))
+
 	cmd = make_cmd(tab);
 	cmd = fill_list(cmd, tab, -1, 0);
 	tmp = cmd;
 	while (tmp)
 	{
-		printf(" type = %s / elem = %s / code = %d\n", tmp->type, tmp->elem, tmp->code);
+		printf(" type = %s / elem = %s / type = %d\n", tmp->str, tmp->elem, tmp->type);
 		tmp = tmp->next;
 	}
 	return (cmd);

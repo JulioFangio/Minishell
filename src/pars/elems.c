@@ -40,7 +40,7 @@ int	is_char(char *tab)
 	return (0);
 }
 
-int	is_builtin(char *tab)
+int	is_a_builtin(char *tab)
 {
 	if (built_cmp(tab))
 		return (11);

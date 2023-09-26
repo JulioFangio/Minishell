@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/22 17:30:06 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:19:24 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av, char **env)
 	ft_bzero(&data, sizeof(t_data));
 	if (env[0] == NULL)
 		return (FAILURE);
+	reset_to_initial_fd(&data);
 	set_env(&data, env);
 	data.export = export_env(NULL);
 	if (ac != 1)
@@ -33,6 +34,6 @@ int	main(int ac, char **av, char **env)
 	// 		// launch_minishell(&data);
 	// 	data.token = free_token(data.token);
 	// }
-	// free_all(&data);
+	// free_and_close(&data);
 	return (data.result);
 }

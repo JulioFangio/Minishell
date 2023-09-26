@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:59:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/12 18:05:10 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:39:15 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_path(t_env *env, char *var, size_t len)
 	{
 		if (ft_strncmp(env->value, var, len) == 0)
 		{
-			size_oldpwd = ft_strlen(env);
+			size_oldpwd = ft_strlen(env->value) - len;
 			old_pwd = malloc(sizeof(char) * (size_oldpwd + 1));
 			i = 0;
 			j = 0;

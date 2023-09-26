@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/25 17:24:55 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:31:35 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,10 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
-// typedef struct s_token
-// {
-// 	char			*str;
-// 	int				type;
-// 	struct s_token	*next;
-// 	struct s_token	*prev;
-// }					t_token;
-
 typedef struct s_token
-{
-	char			*type; // a sauter
-	char			*elem; //str
-	int				code; /// type
+{	
+	char			*str;
+	int				type;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -48,6 +39,8 @@ typedef struct s_data
 	pid_t	pid;
 	int		parent;
 	int		result;
+	int		in;
+	int		out;
 	int		pipe_in;
 	int		pipe_out;
 	int		fd_in;

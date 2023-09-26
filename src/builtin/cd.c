@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:59:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/19 15:43:22 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:38:10 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	new_oldpath(t_env *env)
 		return (FAILURE);
 	oldpwd = ft_strjoin("OLDPWD=", pwd);
 	if (update_env(oldpwd, env) == 0)
-		upgrade_env(oldpwd, env);
+		env_add_value_to_list(oldpwd, env);
 	free(oldpwd);
 	oldpwd = NULL;
 	return (SUCCESS);
@@ -80,20 +80,6 @@ int	handle_directory_change(int directory, t_env *env)
 	path = NULL;
 	return (res);
 }
-
-void	show_error(char **arg)
-{
-	ft_putstr_fd("cd: ", STDERR);
-	ft_putstr_fd(args[1], STDERR);
-	if (args[2])
-		ft_putendl_fd(": string not in pwd", STDERR);
-	else
-	{
-		ft_putstr_fd(": ", STDERR);
-		ft_putstr_fd(strerror(errno), STDERR);
-	}
-}
-
 /*handles the "cd" command according to the arguments supplied.
 It can be used to change directories to the HOME directory,
 the previous directory, a specific directory or to display an appropriate
@@ -119,8 +105,8 @@ int	make_cd(char **arg, t_env *env)
 		new_path(env);
 		if (res < 0)
 			res *= -1;
-		if (res != 0)
-			show_error(arg);
+	//	if (res != 0)
+	//		handle_error(arg);
 	}
 	return (res);
 }

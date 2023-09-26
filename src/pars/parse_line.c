@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 16:27:22 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:13:39 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ int	parse_line(t_token *cmd)
 {
 	while (cmd)
 	{
-		if (cmd->code == 4)
+		if (cmd->type == 4 || cmd->type == 5 || cmd->type == 6)
+		{
 			if (!parse_redir(cmd))
 				return (0);
+		}
 		cmd = cmd->next;
 	}
 	return (1);

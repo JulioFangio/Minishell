@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 16:27:14 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:46:48 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_scenario(t_token *cmd, char *tab, int nb)
 	else if (nb == 6)
 		fill_elem(cmd, tab, "filename", 0);
 	else if (nb == 7)
-		fill_elem(cmd, tab, "redir", 4);
+		fill_elem_redir(cmd, tab, "redir");
 	else
 		exec_scenario_2(cmd, tab, nb);
 }
@@ -57,12 +57,4 @@ int	ft_optn(t_token *cmd, char *tab, int optn)
 	return (0);
 }
 
-void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb)
-{
-	//extern char	**environ;
-
-	cmd->type = ft_strdup(str);
-	cmd->elem = ft_strdup(tab);
-	cmd->code = nb;
-	return ;
-}
+// char	*recup_env()

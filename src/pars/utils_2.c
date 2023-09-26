@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 16:28:45 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:29:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	how_long(char *line, char c)
 	return (count);
 }
 
-char	*tronc_optn(char *tab)
+char	*tronc_optn(char *tab, int nb)
 {
 	int		len;
 	int		i;
@@ -56,7 +56,7 @@ char	*tronc_optn(char *tab)
 		i++;
 		j++;
 	}
-	return (tronc);
+	return (check_for_var(tronc, nb));
 }
 
 int	check_quotes(char *line)
@@ -93,6 +93,25 @@ int	check_line(char *line)
 	if (!check_quotes(line))
 		return (0);
 	return (1);
+}
+
+char	*pick_env(char *tab)
+{
+	extern char	**environ;
+	int			i;
+	char		*res;
+
+	i = 0;
+	while (environ[i])
+	{
+		if (!ft_strncmp(tab + 1, environ[i], ft_strlen(tab) - 1))
+		{
+			res = extract_env_value(environ[i]);
+			return (res);
+		}
+		i++;
+	}
+	return (tab);
 }
 
 // char	*keep_spaces(char *line)

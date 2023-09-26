@@ -6,14 +6,13 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:47 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/11 16:47:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:35:49 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*env_size
-calculates the total len of the string in
+/*calculates the total len of the string in
 the environment variables stored in a linked list*/
 size_t	env_len(t_env *env)
 {
@@ -32,8 +31,7 @@ size_t	env_len(t_env *env)
 	return (len);
 }
 
-/*env_on_str
-allocates memory for a string containing
+/*allocates memory for a string containing
 all environment variables as a single character string*/
 char	*env_malloc(t_env *env)
 {
@@ -42,12 +40,11 @@ char	*env_malloc(t_env *env)
 	ptr_env = malloc(sizeof(char) * env_len(env) +1);
 	if (!ptr_env)
 		return (ft_exit(ERR_MALLOC), NULL);
-	ptr_env = copy(ptr_env, env);
+	ptr_env = dup_env(ptr_env, env);
 	return (ptr_env);
 }
 
-/*set_env
-set all environment variables from the env array,
+/*set all environment variables from the env array,
 allowing mini-shell to access and manage
 these env variables for command execution*/
 void	set_env(t_data *data, char **env)
@@ -71,7 +68,7 @@ void	set_env(t_data *data, char **env)
 		if (!ptr2_env)
 			return (ft_exit(ERR_MALLOC));
 		ptr2_env->value = ft_strdup(env[i++]);
-		if (!env->value)
+		if (!ptr2_env->value)
 			return (ft_exit(ERR_DUP));
 		ptr2_env->next = NULL;
 		ptr1_env->next = ptr2_env;
@@ -79,8 +76,7 @@ void	set_env(t_data *data, char **env)
 	}
 }
 
-/*set_export
-create and initialize a new t_env structure
+/*create and initialize a new t_env structure
 representing an environment variable to be exported.
 It's used to manage exported env variables in a mini-shell context*/
 t_env	*export_env(char *value)
@@ -102,8 +98,7 @@ t_env	*export_env(char *value)
 	return (export);
 }
 
-/*check_env
-replaces all non-ASCII characters in a line string with the '$' character
+/*replaces all non-ASCII characters in a line string with the '$' character
 It returns a new modified string*/
 char	*clean_env(char *to_find)
 {

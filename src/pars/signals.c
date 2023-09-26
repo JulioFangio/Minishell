@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 18:20:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:18:55 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,16 @@ int	start(char *line, t_data *data)
 	data->token = res;
 	if (!parse_line(res))
 	{
+		free_data(data);
 		free_tab(tab);
 		free_lst(res);
 		return (1);
 	}
-	launch_minishell(data);
+	if (data->token && data->exit == 0)
+		launch_minishell(data);
+	free_token(res);
 	free_tab(tab);
-	free_lst(res);
+	free_and_close(data);
 	return (1);
 }
 
@@ -90,3 +93,6 @@ void	run_shell_loop(t_data *data)
 // et qui cree un tableau de tableau comportant cmd/builtin + les options et les args
 // 3 === reflechir au fait de creer une nouvelle structure en tableau pour y stocker
 // le tableau en question et les redirections avec leurs fd
+
+
+// rentrer dans data puis free while la liste de t_env puis free data 

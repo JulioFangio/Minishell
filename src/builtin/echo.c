@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/19 15:41:15 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:39:40 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	make_echo(char **arg)
 	int	flags;
 
 	i = 1;
+	flags = 0;
 	if (tab_size(arg) > 1)
 	{
 		flags = handle_echo_options(arg, &i, flags);

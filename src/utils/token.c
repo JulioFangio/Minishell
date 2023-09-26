@@ -67,3 +67,22 @@ t_token	*get_prev_token(t_token *token, int prev)
 		token = token->prev;
 	return (token);
 }
+
+int	token_is_pipe(t_token *token)
+{
+	while (token && is_type(token, END) == 0)
+	{
+		if (is_type(token, PIPE))
+			return (SUCCESS);
+		token = token->next;
+	}
+	return (FAILURE);
+}
+
+int	is_type(t_token *token, int type)
+{
+	if (token && token->type == type)
+		return (SUCCESS);
+	else
+		return (FAILURE);
+}

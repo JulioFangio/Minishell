@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/25 17:42:39 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:11:01 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # define B_SIZE 1024
 # define MAX_PATH 1024
 
-						/// EXEC ///
+						/// -- EXEC_MINISHELL -- /// 
 		/// BUILT_IN
 // cd.c
 int		new_oldpath(t_env *env);
@@ -113,7 +113,7 @@ void	display_env(t_env *env, t_env *export);
 char	*dup_env(char *ptr_env, t_env *env);
 int		env_add_value_to_list(char *value, t_env *env);
 
-	/// EXEC
+		/// EXEC
 // builtin.c
 int		is_builtin(char *cmd);
 int		exec_builtin(t_data *data, char **cmd, t_token *token);
@@ -122,41 +122,36 @@ void	exec_command(t_data *data, t_token *token);
 char	**token_cmd_to_tab(t_token *token);
 // start_exec.c
 int		do_pipe(t_data *data);
-void	redir(t_data *data, t_token *token, int type);
+void	do_redir(t_data *data, t_token *token, int type);
 void	redir_exec(t_data *data, t_token *token);
 void	launch_minishell(t_data *data);
 
-
-		// UTILS
+		/// UTILS
 // token.c
 char	**token_to_tab(t_token *token, char **tab);
 char	**token_cmd_to_tab(t_token *token);
 t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
+int		token_is_pipe(t_token *token);
+int		is_type(t_token *token, int type);
+
 
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
-//void	*free_token(t_token *token);
-
+void	*free_token(t_token *token);
+void	free_and_close(t_data *data);
 // error.c
 void	ft_exit(char *error);
-
 // tab.c
 size_t	tab_size(char **tab);
-
 // fd.c
 void	ft_close_fd(int fd);
+void	ft_close_all_fd(t_data *data);
+void	reset_to_initial_fd(t_data *data);
 
-// token.c
 
-
-		// MAIN
-
-void	redir_exec(t_data *data, t_token *token);
-
-						// PARSING //
-
+						/// -- PARSING -- ///
 //	signals
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
