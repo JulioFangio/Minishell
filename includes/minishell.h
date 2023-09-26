@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/26 18:11:01 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:36:07 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,12 @@ t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
 int		token_is_pipe(t_token *token);
 int		is_type(t_token *token, int type);
-
-
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
 void	*free_token(t_token *token);
-void	free_and_close(t_data *data);
+void	free_and_close_data(t_data *data);
+void    free_data(t_data *data);
 // error.c
 void	ft_exit(char *error);
 // tab.c
@@ -187,7 +186,7 @@ void	free_tab(char **tab);
 int		is_redir(char *tab);
 int		is_pipe(char *tab);
 int		is_char(char *tab);
-int		is_builtin(char *tab);
+int		is_a_builtin(char *tab);
 int		is_heredoc(char *tab);
 int		whole_count(char *line);
 int		ext_filename(char *tab);

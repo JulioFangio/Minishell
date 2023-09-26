@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/25 17:46:48 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/26 18:31:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_scenario(t_token *cmd, char *tab, int nb)
 	else if (nb == 6)
 		fill_elem(cmd, tab, "filename", 0);
 	else if (nb == 7)
-		fill_elem_redir(cmd, tab, "redir");
+		xfill_elem_redir(cmd, tab, "redir");
 	else
 		exec_scenario_2(cmd, tab, nb);
 }
