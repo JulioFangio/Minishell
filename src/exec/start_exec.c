@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/25 17:43:03 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:00:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	do_pipe(t_data *data)
 	pid_t	pid;
 	int		pipefd[2];
 
-	pipe(pipefd);
+	if (pipe(pipefd) < 0)
+		return (perror("pipe"), FAILURE);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -40,7 +41,7 @@ int	do_pipe(t_data *data)
 	}
 }
 
-void	redir(t_data *data, t_token *token, int type)
+void	do_redir(t_data *data, t_token *token, int type)
 {
 	ft_close_fd(data->fd_out);
 	if (type == CHEVRON)
@@ -70,9 +71,9 @@ void	redir_exec(t_data *data, t_token *token)
 	next_tok = get_next_token(token, 0);
 	prev_tok = get_prev_token(token, 0);
 	if (is_type(prev_tok, CHEVRON))
-		redir(data, token, CHEVRON);
+		do_redir(data, token, CHEVRON);
 	else if (is_type(prev_tok, DOUBLE_CHEVRON))
-		redir(data, token, DOUBLE_CHEVRON);
+		do_redir(data, token, DOUBLE_CHEVRON);
 	else if (is_type(prev_tok, PIPE))
 		pipe = do_pipe(data);
 	//else if (is_type(prev_tok, OPEN_CHEVRON))
@@ -96,9 +97,19 @@ void	launch_minishell(t_data *data)
 		data->exec = 1;
 		data->end = 1;
 		redir_exec(data, data->token);
+		ft_close_all_fd(data);
+		reset_to_initial_fd(data);
+		dup2(data->in, STDIN);
+		dup2(data->out, STDOUT);
 		waitpid(-1, &status, 0);
-		WEXITSTATUS(status);
+		status = WEXITSTATUS(status);
 		if (data->end == 0)
 			data->result = status;
+		if (data->parent == 0)
+		{
+			free_and_close(data);
+			exit(data->result);
+		}
+		data->err_redir = 0;
 	}
 }
