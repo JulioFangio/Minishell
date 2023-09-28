@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/26 18:31:59 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:48:53 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_scenario(t_token *cmd, char *tab, int nb)
 	else if (nb == 6)
 		fill_elem(cmd, tab, "filename", 0);
 	else if (nb == 7)
-		xfill_elem_redir(cmd, tab, "redir");
+		fill_elem_redir(cmd, tab, "redir");
 	else
 		exec_scenario_2(cmd, tab, nb);
 }

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/26 18:36:07 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:45:36 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,35 +114,39 @@ char	*dup_env(char *ptr_env, t_env *env);
 int		env_add_value_to_list(char *value, t_env *env);
 
 		/// EXEC
-// builtin.c
+// exec_builtin.c
 int		is_builtin(char *cmd);
 int		exec_builtin(t_data *data, char **cmd, t_token *token);
+// exec_pipe.c
+int		do_pipe(t_data *data);
+// exec_redir
+void	do_redir(t_data *data, t_token *token, int type);
+void	redir_chev(t_data *dat, t_token *token);
+void	open_heredoc(t_data *data);
+void	redir_heredoc(t_data *data, t_token *token);
 // exec.c
 void	exec_command(t_data *data, t_token *token);
-char	**token_cmd_to_tab(t_token *token);
 // start_exec.c
-int		do_pipe(t_data *data);
-void	do_redir(t_data *data, t_token *token, int type);
-void	redir_exec(t_data *data, t_token *token);
+void	exec_redir(t_data *data, t_token *token);
 void	launch_minishell(t_data *data);
 
 		/// UTILS
 // token.c
-char	**token_to_tab(t_token *token, char **tab);
-char	**token_cmd_to_tab(t_token *token);
 t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
 int		token_is_pipe(t_token *token);
-int		is_type(t_token *token, int type);
+int		check_token(t_token *token, int type);
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
 void	*free_token(t_token *token);
 void	free_and_close_data(t_data *data);
-void    free_data(t_data *data);
+void	free_data(t_data *data);
 // error.c
 void	ft_exit(char *error);
 // tab.c
+char	**token_to_tab(t_token *token, char **tab);
+char	**token_cmd_to_tab(t_token *token);
 size_t	tab_size(char **tab);
 // fd.c
 void	ft_close_fd(int fd);
@@ -151,6 +155,7 @@ void	reset_to_initial_fd(t_data *data);
 
 
 						/// -- PARSING -- ///
+
 //	signals
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
@@ -169,7 +174,7 @@ t_token	*make_cmd(char **tab);
 t_token	*ft_tokenlast(t_token *cmd);
 void	ft_tokenadd_back(t_token **cmd, t_token *new);
 int		ft_lentab(char **tab);
-char	*tronc_optn(char *tab);
+char	*tronc_optn(char *tab, int nb);
 int		check_quotes(char *line);
 int		check_line(char *line);
 int		how_long(char *line, char c);
@@ -180,7 +185,12 @@ int		shorten(char *line);
 char	*make_spaces(char *line, char *res, size_t i, int j);
 int		check_end(char *line, int i, char c);
 void	free_lst(t_token *cmd);
-void	free_tab(char **tab);
+char	*pick_env(char *tab);
+char	*check_for_var(char *tronc, int nb);
+char	*get_new_line(char *res, char *tronc, char *gvar, int lg);
+char	*extract_var(char *tronc, char *var);
+char	*get_var(char *tronc);
+// void	free_tab(char **tab);
 
 //	elems + ext
 int		is_redir(char *tab);
@@ -200,6 +210,7 @@ t_token	*fill_list(t_token *cmd, char **tab, int i, int check);
 void	fill_elem(t_token *cmd, char *tab, char *str, int nb);
 void	fill_elem_tronc(t_token *cmd, char *tab, char *str);
 void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb);
+void	fill_elem_redir(t_token *cmd, char *tab, char *str);
 int		scenario(char *tab, int check);
 void	exec_scenario(t_token *cmd, char *tab, int nb);
 void	exec_scenario_2(t_token *cmd, char *tab, int nb);

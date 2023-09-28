@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/27 18:02:33 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:10:33 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	launch_minishell(t_data *data)
 			data->result = status;
 		if (data->parent == 0)
 		{
-			free_and_close(data);
+			free_and_close_data(data);
 			exit(data->result);
 		}
 		data->err_redir = 0;

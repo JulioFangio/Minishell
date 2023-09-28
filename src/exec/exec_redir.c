@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:12:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/27 18:01:52 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:10:16 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	open_heredoc(t_data *data)
 		data->err_redir = FAILURE;
 		return ;
 	}
-	unlike(".heredoc");
+	unlink(".heredoc");
 	dup2(data->fd_in, STDIN);
 }
 
@@ -68,10 +68,10 @@ void	open_heredoc(t_data *data)
 // and  give the out of pipe to write data->pipefd[1]
 void	redir_heredoc(t_data *data, t_token *token)
 {
-	char	*hd_file;
+	char	*hd_file = NULL; // en attendant d'avoir recup input de ju
 	int		fd;
 
-	unlike(".heredoc");
+	unlink(".heredoc");
 	fd = open(".heredoc", O_WRONLY | O_CREAT);
 	// verifier flags
 	if (fd < 0 || !(token->str) || ft_strlen(token->str) == 0)
