@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/26 17:39:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:48:18 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ int	handle_echo_options(char **arg, int *cur_pos, int flags)
 		i = 1;
 		while (arg[*cur_pos][i])
 		{
-			// if (arg[*cur_pos][i] && arg[*cur_pos][i] != '\n' && arg[*cur_pos][i] != "n")
-			if (arg[*cur_pos][i] && arg[*cur_pos][i] != '\n')
+			if (arg[*cur_pos][i] && arg[*cur_pos][i] != 'n')
 			{
 				i = -1;
-				if (*cur_pos == 1) // if (*cur_pos == 1 && i == -1)?
+				if (*cur_pos == 1)
 					flags = 0;
 				break ;
 			}
