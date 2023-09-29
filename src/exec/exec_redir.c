@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:12:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/27 18:10:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:46:58 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ void	do_redir(t_data *data, t_token *token, int type)
 {
 	ft_close_fd(data->fd_out);
 	if (type == CHEVRON)
-		data ->fd_out = open(token->str, O_CREAT, O_WRONLY);
-		// verifier les flags pour open
+		data ->fd_out = open(token->str, O_CREAT, O_WRONLY, O_TRUNC);
 	else
-		data->fd_in = open(token->str, O_CREAT, O_WRONLY);
+		data->fd_out = open(token->str, O_CREAT, O_WRONLY, O_APPEND);
 	if (data->fd_out < 0)
 	{
 		ft_putstr_fd(token->str, STDERR);
@@ -37,7 +36,6 @@ void	redir_chev(t_data *data, t_token *token)
 	// in pipex it make mistake but normally fixed and ensure that
 	// the old open file is well closed
 	data->fd_in = open(token->str, O_RDONLY);
-	// verifier les flags
 	if (data->fd_in < 0)
 	{
 		ft_putstr_fd(token->str, STDERR);
@@ -52,7 +50,6 @@ void	redir_chev(t_data *data, t_token *token)
 void	open_heredoc(t_data *data)
 {
 	data->fd_in = open(".heredoc", O_RDONLY);
-	// verifiez les flags
 	if (data->fd_in < 0)
 	{
 		ft_putstr_fd(ERR_OPEN, STDERR);
@@ -72,7 +69,7 @@ void	redir_heredoc(t_data *data, t_token *token)
 	int		fd;
 
 	unlink(".heredoc");
-	fd = open(".heredoc", O_WRONLY | O_CREAT);
+	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	// verifier flags
 	if (fd < 0 || !(token->str) || ft_strlen(token->str) == 0)
 	{

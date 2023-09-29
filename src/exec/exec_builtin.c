@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:40:34 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/27 14:11:37 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:51:05 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	exec_builtin(t_data *data, char **cmd, t_token *token)
 		result = make_cd(cmd, data->env);
 	if (ft_strcmp("pwd", cmd[0]) == 0)
 		result = make_pwd(data->env);
-	if (ft_strcmp("export", cmd[0]) == 0 && token_is_pipe(token) == 0)
+	if (ft_strcmp("export", cmd[0]) == 0 && token_is_pipe(token) == FAILURE)
 	{
 	//	make_export(cmd, data, data->env, data->export);
 		result = data->result;
 	}
-	//if (ft_strcmp("unset", cmd[0]) == 0 && token_is_pipe(token) == 0)
+	//if (ft_strcmp("unset", cmd[0]) == 0 && token_is_pipe(token) == FAILURE)
 	//	result = make_unset(cmd, data);
 	if (ft_strcmp("env", cmd[0]) == 0)
 		result = make_env(data->env);

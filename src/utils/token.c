@@ -34,7 +34,7 @@ int	token_is_pipe(t_token *token)
 {
 	while (token && check_token(token, END) == 0)
 	{
-		if (check_token(token, PIPE))
+		if (check_token(token, PIPE) == SUCCESS)
 			return (SUCCESS);
 		token = token->next;
 	}
