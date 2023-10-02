@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/27 17:45:36 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:10:31 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define ERR_SPLIT "Failed to split command\n"
 # define ERR_HOME "Failed to set HOME\n"
 
+// ifndef ? comme buffer size GNL?
 # define B_SIZE 1024
 # define MAX_PATH 1024
 
@@ -88,6 +89,7 @@ int		make_exit(t_data *data, char **cmd);
 // env.c
 int		make_env(t_env *env);
 // unset.c
+int		make_unset(char **arg, t_data *data);
 // export.c
 
 		/// ENV
@@ -124,8 +126,11 @@ void	do_redir(t_data *data, t_token *token, int type);
 void	redir_chev(t_data *dat, t_token *token);
 void	open_heredoc(t_data *data);
 void	redir_heredoc(t_data *data, t_token *token);
-// exec.c
+// exec_cmd.c
 void	exec_command(t_data *data, t_token *token);
+// exec_bin.c
+int		exec_binary(char **arg, t_data *data, t_env *env);
+
 // start_exec.c
 void	exec_redir(t_data *data, t_token *token);
 void	launch_minishell(t_data *data);

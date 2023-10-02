@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/29 14:46:53 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/29 15:02:08 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ void	launch_minishell(t_data *data)
 
 	//while (data->exit == 0 && data->token)
 	//{
-		data->parent = 1;
-		data->exec = 1;
-		data->end = 1;
-		exec_redir(data, data->token);
-		ft_close_all_fd(data);
-		reset_to_initial_fd(data);
-		dup2(data->in, STDIN);
-		dup2(data->out, STDOUT);
-		waitpid(-1, &status, 0);
-		status = WEXITSTATUS(status);
-		if (data->end == 0)
-			data->result = status;
-		if (data->parent == 0)
-		{
-			free_and_close_data(data);
-			exit(data->result);
-		}
-		data->err_redir = 0;
+	data->parent = 1;
+	data->exec = 1;
+	data->end = 1;
+	exec_redir(data, data->token);
+	ft_close_all_fd(data);
+	reset_to_initial_fd(data);
+	dup2(data->in, STDIN);
+	dup2(data->out, STDOUT);
+	waitpid(-1, &status, 0);
+	status = WEXITSTATUS(status);
+	if (data->end == 0)
+		data->result = status;
+	if (data->parent == 0)
+	{
+		free_and_close_data(data);
+		exit(data->result);
+	}
+	data->err_redir = 0;
 	//}
 }
