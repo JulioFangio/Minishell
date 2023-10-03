@@ -6,12 +6,11 @@
 #    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 13:31:55 by jaristil          #+#    #+#              #
-#    Updated: 2023/06/21 19:30:20 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/03 18:17:46 by jaristil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
 
 # Compilateurs
 CC = cc
@@ -22,7 +21,7 @@ FLAGS = -Wall -Wextra -Werror
 SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 	ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 	ft_itoa.c ft_memchr.c ft_memcmp.c \
-	ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c \
+	ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_memedel.c \
 	ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
 	ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
 	ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
