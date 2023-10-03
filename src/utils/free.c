@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/28 16:58:02 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:34:56 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	*free_token(t_token *token)
 	return (NULL);
 }
 
-
 void	free_and_close_data(t_data *data)
 {
 	ft_close_fd(data->in);
@@ -69,21 +68,15 @@ void	free_and_close_data(t_data *data)
 	//free_env(data->export);
 }
 
-void	free_data(t_data *data)
+void	free_env_unset(t_data *data, t_env *env)
 {
-	while (data->env)
+	if (data->env == env && env->next == NULL)
 	{
-		free(data->env->value);
-		data->env = data->env->next;
+		ft_memdel(data->env->value);
+		data->env->value = NULL;
+		data->env->next = NULL;
+		return ;
 	}
-	if (data->export)
-	{
-		while (data->export)
-		{
-			free(data->export->value);
-			data->export = data->export->next;
-		}
-	}
-    // free(data->env);
-    // free(data);
+	ft_memdel(env->value);
+	ft_memdel(env);
 }

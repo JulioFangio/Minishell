@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/02 18:10:31 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:34:49 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		make_exit(t_data *data, char **cmd);
 // env.c
 int		make_env(t_env *env);
 // unset.c
+int		unset_env(char **arg, t_data *data, int i);
 int		make_unset(char **arg, t_data *data);
 // export.c
 
@@ -146,7 +147,7 @@ void	free_env(t_env *env);
 void	free_tab(char **tab);
 void	*free_token(t_token *token);
 void	free_and_close_data(t_data *data);
-void	free_data(t_data *data);
+void	free_env_unset(t_data *data, t_env *env);
 // error.c
 void	ft_exit(char *error);
 // tab.c
