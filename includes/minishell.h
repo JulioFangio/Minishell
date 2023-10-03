@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 14:39:12 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:27:53 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ int		make_exit(t_data *data, char **cmd);
 // env.c
 int		make_env(t_env *env);
 // unset.c
+int		len_to_equal(char *env);
+char	*ft_strchr_minishell(const char *str, char c);
+int		comp_len_val(char *arg, char *value);
 int		unset_env(char **arg, t_data *data, int i);
 int		make_unset(char **arg, t_data *data);
 // export.c
@@ -162,7 +165,7 @@ void	ft_close_all_fd(t_data *data);
 void	reset_to_initial_fd(t_data *data);
 
 
-						/// -- PARSING -- ///
+						/// -- PARSING_MINISHELL -- ///
 
 //	signals
 void	sigint_handler(int signum);

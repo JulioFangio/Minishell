@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:05 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/15 13:49:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:45:05 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	make_exit(t_data *data, char **cmd)
 {
 	data->exit = 1;
 	ft_putendl_fd("exit", STDERR);
-	if (cmd[1] && str_isnum(cmd[1]) == FAILURE)
+	if (cmd[1] && str_isnum(cmd[1]))
 	{
 		data->result = 128;
 		ft_putstr_fd("exit:", STDERR);

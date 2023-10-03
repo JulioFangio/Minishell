@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:12:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 15:49:24 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:45:11 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	do_redir(t_data *data, t_token *token, int type)
 void	redir_chev(t_data *data, t_token *token)
 {
 	ft_close_fd(data->fd_in);
-	// in pipex it make mistake but normally fixed and ensure that
-	// the old open file is well closed
 	data->fd_in = open(token->str, O_RDONLY);
 	if (data->fd_in < 0)
 	{
@@ -61,16 +59,13 @@ void	open_heredoc(t_data *data)
 	dup2(data->fd_in, STDIN);
 }
 
-// create pipe from in to take all the input write in the << data->pipefd[0]
-// and  give the out of pipe to write data->pipefd[1]
 void	redir_heredoc(t_data *data, t_token *token)
 {
-	char	*hd_file = NULL; // en attendant d'avoir recup input de ju
+	char	*hd_file = NULL;
 	int		fd;
 
 	unlink(".heredoc");
 	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	// verifier flags
 	if (fd < 0 || !(token->str) || ft_strlen(token->str) == 0)
 	{
 		ft_putstr_fd(token->str, STDERR);
@@ -82,8 +77,6 @@ void	redir_heredoc(t_data *data, t_token *token)
 	// hd_file = // ce que ju recup sous forme de *str(token->str);
 	if (!hd_file)
 		ft_putstr_fd("", fd);
-		// it write an empty stirng inside the file .heredoc
-		// so jules has to return NULL if he can't find occurence
 	else
 		ft_putstr_fd(hd_file, fd);
 	free(hd_file);
