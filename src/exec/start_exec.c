@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/29 15:02:08 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:16:21 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ void	exec_redir(t_data *data, t_token *token)
 		redir_heredoc(data, token);
 	if (next_tok && check_token(next_tok, END) == FAILURE && pipe != 1)
 		exec_redir(data, next_tok->next);
-	if ((check_token(prev_tok, END) == SUCCESS
-			|| check_token(prev_tok, PIPE) == SUCCESS || !prev_tok)
-		&& data->err_redir == 0 && pipe != 1)
+	if ((check_token(prev_tok, END) || check_token(prev_tok, PIPE)
+			|| !prev_tok) && data->err_redir == 0 && pipe != 1)
 		exec_command(data, token);
 }
 

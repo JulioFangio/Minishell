@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/29 14:21:31 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:21:11 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **env)
 		return (FAILURE);
 	reset_to_initial_fd(&data);
 	set_env(&data, env);
-	data.export = export_env(NULL);
+	//data.export = export_env(NULL);
 	if (ac != 1)
 		return (FAILURE);
 	run_shell_loop(&data);

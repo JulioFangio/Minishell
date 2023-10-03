@@ -12,7 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-
 int	ext_bracers(char *tab)
 {
 	if (tab[0] == '{')
@@ -29,11 +28,11 @@ int	ext_tilde(char *tab)
 
 int	ext_dollar(char *tab)
 {
-	if (tab[0] == '$' && tab[1] == '(' && tab[2] == '(')
-		return (3);
-	else if (tab[0] == '$' && tab[1] == '(')
-		return (4);
-	else if (tab[0] == '$')
+	// if (tab[0] == '$' && tab[1] == '(' && tab[2] == '(')
+	// 	return (3);
+	// else if (tab[0] == '$' && tab[1] == '(')
+	// 	return (4);
+	if (tab[0] == '$')
 		return (5);
 	return (0);
 }

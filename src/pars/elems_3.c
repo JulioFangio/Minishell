@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/27 13:48:53 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:47:11 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_optn(t_token *cmd, char *tab, int optn)
 {
 	if (optn == 7)
 		fill_elem(cmd, tab, "name", 0);
-	else
+	else if (optn == 8)
 		fill_elem(cmd, tab, "delimiter", 0);
 	return (0);
 }

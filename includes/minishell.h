@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 14:34:49 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:39:12 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ void	free_tab(char **tab);
 void	*free_token(t_token *token);
 void	free_and_close_data(t_data *data);
 void	free_env_unset(t_data *data, t_env *env);
+void	free_data(t_data *data);
+
 // error.c
 void	ft_exit(char *error);
 // tab.c

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/26 13:29:41 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/27 13:16:21 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	how_long(char *line, char c)
 	{
 		if (i > 0 && line[i] == c && line[i - 1] != 32 && line[i - 1] != c)
 			count++;
-		if (i < ft_strlen(line) && line[i] == c
+		else if (i < ft_strlen(line) && line[i] == c
 			&& line[i + 1] != 32 && line[i + 1] != c)
 			count++;
 		i++;
@@ -49,7 +49,7 @@ char	*tronc_optn(char *tab, int nb)
 		return (NULL);
 	while (i < len - 1)
 	{
-		if (tab[i] == '`')
+		if (tab[i] == '_')
 			tronc[j] = 32;
 		else
 			tronc[j] = tab[i];
@@ -57,42 +57,6 @@ char	*tronc_optn(char *tab, int nb)
 		j++;
 	}
 	return (check_for_var(tronc, nb));
-}
-
-int	check_quotes(char *line)
-{
-	size_t	i;
-	char	c;
-
-	i = 0;
-	c = '\0';
-	while (line[i])
-	{
-		if (line[i] == '"' || line[i] == '\'')
-		{
-			c = line[i];
-			i++;
-			while (line[i] && line[i] != c)
-				i++;
-			if (line[i] == '\0')
-				return (0);
-			else if (line[i + 1] != '\0' && (line[i + 1] != 32 ||
-					(line[i + 1] < 9 && line[i + 1] > 13)))
-				return (0);
-			c = '\0';
-		}
-		i++;
-	}
-	if (c != '\0')
-		return (0);
-	return (1);
-}
-
-int	check_line(char *line)
-{
-	if (!check_quotes(line))
-		return (0);
-	return (1);
 }
 
 char	*pick_env(char *tab)

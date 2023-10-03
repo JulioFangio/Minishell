@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/25 17:44:07 by juduval          ###   ########.fr       */
+/*   Updated: 2023/09/26 19:15:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	built_cmp(char *tab)
 
 int	scenario(char *tab, int check)
 {
-	if (ext_bracers(tab))
-		return (ext_bracers(tab));
-	else if (ext_tilde(tab))
-		return (ext_tilde(tab));
-	else if (ext_dollar(tab))
+	// if (ext_bracers(tab))
+	// 	return (ext_bracers(tab));
+	// else if (ext_tilde(tab))
+	// 	return (ext_tilde(tab));
+	if (ext_dollar(tab))
 		return (ext_dollar(tab));
-	else if (ext_filename(tab))
-		return (ext_filename(tab));
+	// else if (ext_filename(tab))
+	// 	return (ext_filename(tab));
 	else if (is_redir(tab))
 		return (is_redir(tab));
 	else if (is_heredoc(tab))

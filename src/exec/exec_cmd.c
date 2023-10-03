@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/02 15:02:51 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:17:30 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_command(t_data *data, t_token *token)
 	if (cmd && ft_strcmp(cmd[0], "exit") == 0
 		&& token_is_pipe(token) == FAILURE)
 		make_exit(data, cmd);
-	else if (cmd && is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0)
+	else if (cmd && !is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0)
 		data->exec = exec_builtin(data, cmd, token);
 	//else if (cmd && ft_strcmp(cmd[0]), "exit") != 0)
 		//data->result = exec_bin(cmd, data, data->env);

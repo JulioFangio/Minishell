@@ -43,7 +43,7 @@ t_token	*ft_tokennew(void)
 	if (!(elem))
 		return (NULL);
 	elem->str = NULL;
-	elem->elem = NULL;
+	// elem->elem = NULL;
 	elem->type = 0;
 	elem->next = (NULL);
 	elem->prev = (NULL);

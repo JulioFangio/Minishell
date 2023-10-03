@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 17:20:30 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:07:51 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/minishell.h"
 
@@ -25,7 +24,6 @@ char	**get_split(char *line)
 	nline = remake_line(line, n, l);
 	if (!check_line(line))
 	{
-		printf("%s: command not found\n", line);
 		free (line);
 		free (nline);
 		return ((char **)1);

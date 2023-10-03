@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/02 15:02:10 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:53:19 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	start(char *line, t_data *data)
 	char				**tab;
 	t_token				*res;
 
-	redir();
 	tab = get_split(line);
 	if (tab == (char **)1)
 		return (1);
@@ -65,9 +64,9 @@ int	start(char *line, t_data *data)
 		return (1);
 	}
 	launch_minishell(data);
-	//free_token(res);
-	free_tab(tab);
-	//free_and_close_data(data); // segfault here
+	/* free_tab(tab);
+	free_lst(res);
+	free_data(data); */
 	return (1);
 }
 
@@ -76,6 +75,7 @@ void	run_shell_loop(t_data *data)
 	char	*line;
 
 	using_history();
+	redir();
 	while (42)
 	{
 		line = ft_readline();

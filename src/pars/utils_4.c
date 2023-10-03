@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/26 14:33:58 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/03 14:03:54 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,29 @@ char	*keep_spaces(char *line)
 	int		i;
 	char	b;
 
-	i = -1;
+	i = 0;
 	res = ft_calloc(ft_strlen(line) + 1, sizeof(char));
-	while (line[++i])
+	while (line[i])
 	{
-		if (line[i] == 34 || line[i] == 39)
+		if ((line[i] == 34 || line[i] == 39))
 		{
 			b = line[i];
 			res[i] = line[i];
 			i++;
-			while (line[i] != b)
+			while (line[i] && line[i] != b)
 			{
 				if (line[i] == 32 || (line[i] >= 9 && line[i] <= 13))
-					res[i] = '`';
+					res[i] = '_';
 				else
 					res[i] = line[i];
 				i++;
 			}
 		}
-		res[i] = line[i];
+		else
+		{
+			res[i] = line[i];
+			i++;
+		}
 	}
 	return (res);
 }
@@ -67,7 +71,7 @@ char	*remake_line(char *line, int n, int l)
 		return (NULL);
 	res = make_spaces(line, res, 0, 0);
 	res2 = remove_spaces(res, i, j);
-	res3 = keep_spaces(res2);
+	res3 = keep_spaces(res);
 	free(res);
 	free(res2);
 	return (res3);
@@ -83,12 +87,15 @@ void	free_lst(t_token *cmd)
 	{
 		tmp = cmd;
 		cmd = cmd->next;
-		free(tmp->elem);
+		// free(tmp->elem);
 		free(tmp->str);
 		free(tmp);
 		i++;
 	}
 }
+
+//quand les quotes ne sont pas fermantes la premieres fois erreur invalid 
+// read of size mais pas les autres fois
 
 // void	free_tab(char **tab)
 // {

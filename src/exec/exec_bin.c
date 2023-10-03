@@ -6,13 +6,13 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 14:24:06 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:42:18 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_binary(char **arg, t_data *data, t_env *env)
+/* int	exec_binary(char **arg, t_data *data, t_env *env)
 {
 	int		i_dir; //i[0]
 	int		ret; // i[1]
@@ -33,3 +33,4 @@ int	exec_binary(char **arg, t_data *data, t_env *env)
 		return (FAILURE);
 	path = 
 }
+ */
