@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 17:27:53 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:22:00 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,15 @@ int		make_exit(t_data *data, char **cmd);
 // env.c
 int		make_env(t_env *env);
 // unset.c
+int		unset_export(char **arg, t_data *data, int i);
+int		unset_env(char **arg, t_data *data, int i);
+int		make_unset(char **arg, t_data *data);
+// unset_utils.c
 int		len_to_equal(char *env);
 char	*ft_strchr_minishell(const char *str, char c);
 int		comp_len_val(char *arg, char *value);
-int		unset_env(char **arg, t_data *data, int i);
-int		make_unset(char **arg, t_data *data);
+void	free_export(t_data *data, t_env *export);
+int		remove_export(t_data *data, char **arg, int i);
 // export.c
 
 		/// ENV

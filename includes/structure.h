@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 15:46:01 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:46:02 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_token
 typedef struct s_data
 {
 	t_env	*env;
-	//t_env	*export;
+	t_env	*export;
 	t_token	*token;
 	pid_t	pid;
 	int		parent;

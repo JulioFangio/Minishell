@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 16:20:57 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:10:33 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ it sets a flag to indicate that the option is enabled
 If the "-n" option is interrupted by another character, it resets the flags
 The cur_pos parameter is used to track the position
 of the argument being processed in the arg array*/
-
-/*TO FIX : IF -nnnnnnn so = -n*/
 int	handle_echo_options(char **arg, int *cur_pos, int flags)
 {
 	int	i;

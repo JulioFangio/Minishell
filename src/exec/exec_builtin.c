@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:40:34 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 16:38:14 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:23:53 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	exec_builtin(t_data *data, char **cmd, t_token *token)
 	//	make_export(cmd, data, data->env, data->export);
 		result = data->result;
 	}
-	//if (ft_strcmp("unset", cmd[0]) == 0 && token_is_pipe(token) == FAILURE)
-	//	result = make_unset(cmd, data);
+	if (ft_strcmp("unset", cmd[0]) == 0 && token_is_pipe(token) == FAILURE)
+		result = make_unset(cmd, data);
 	if (ft_strcmp("env", cmd[0]) == 0)
 		result = make_env(data->env);
 	return (result);
