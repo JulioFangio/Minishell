@@ -6,66 +6,16 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 17:31:50 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:12:26 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	len_to_equal(char *env)
-{
-	int	i;
 
-	i = 0;
-	while (env && env[i] != '=')
-		i++;
-	return (i);
-}
 
-/*finds the first occurrence of the '=' character in the str string
-and returns a new string containing the portion
-of str up to this '=' character*/
-char	*ft_strchr_minishell(const char *str, char c)
-{
-	char	*res;
-	size_t	len;
-	size_t	i;
-
-	len = 0;
-	i = 0;
-	if (!str || !c)
-		return (NULL);
-	while (str[len] && str[len] != '=')
-		len++;
-	if (len == ft_strlen(str))
-		return (NULL);
-	res = malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (ft_exit(ERR_MAL), NULL);
-	while (i++ < len)
-	{
-		res[i] = str[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (ret);
-}
-
-int	comp_len_val(char *arg, char *value)
-{
-	char	*cmp;
-
-	cmp = ft_strchr_minishell(arg, '=');
-	if (cmp == NULL)
-		cmp = arg;
-	if (ft_strlen(cmp) == ft_strlen(value))
-		return (SUCCESS);
-		// 0
-	else
-		return (FAILURE);
-		// 1
-}
-
+/*scans the chained list of environment variables and deletes
+the environment variable specified by args[nb] if found*/
 int	unset_env(char **arg, t_data *data, int i)
 {
 	t_env	*env;
@@ -80,6 +30,31 @@ int	unset_env(char **arg, t_data *data, int i)
 		free_env_unset(data, env->next);
 		return (0);
 	}
+	while (env && env->next)
+	{
+		if ((comp_len_val(env->next->value, arg[i]) == SUCCESS)
+			&& !ft_strncmp(arg[i], env->next->value, len_to_equal(env->next->value)))
+		{
+			tmp = env->next->next;
+			free_env_unset(data, env->next);
+			env->next = tmp;
+			return (0);
+		}
+		env = env->next;
+	}
+	return (0);
+}
+
+int	unset_export(char **arg, t_data *data, int i)
+{
+	t_env	*export;
+	int		result;
+
+	export = data->export;
+	if (!(arg[i]) || export->value == NULL)
+		return (1);
+	result = remove_export(data, arg, i);
+	return (result);
 }
 
 int	make_unset(char **arg, t_data *data)
@@ -92,7 +67,7 @@ int	make_unset(char **arg, t_data *data)
 	while (arg[i++])
 	{
 		unset_env(arg, data, i);
-		//unset_export(arg, data, i);
+		unset_export(arg, data, i);
 	}
 	return (0);
 }
