@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 15:14:42 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:48:52 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,25 @@
 # define ERR_ARG "Invalid numbers of aguments\n"
 # define ERR_INPUT_ARG "The argument is not valid"
 # define ERR_ENV "Environnement error\n"
+# define ERR_DIR "is a directory\n"
 # define ERR_OPEN "No such file or directory\n"
 # define ERR_PATH  "Failed to find path\n"
+# define ERR_CMD "Command not found\n"
+# define ERR_PERM "Permission Denied\n"
 # define ERR_MALLOC	"Failed to allocate memory\n"
 # define ERR_DUP "Failed to duplicate\n"
 # define ERR_SPLIT "Failed to split command\n"
 # define ERR_HOME "Failed to set HOME\n"
 
-// ifndef ? comme buffer size GNL?
-# define B_SIZE 1024
-# define MAX_PATH 1024
+// ifndef ? comme buffer size GNL? ASK VERIFICATION
+# ifndef B_SIZE
+#  define B_SIZE 1024
+# endif
+
+# ifndef MAX_PATH
+#  define MAX_PATH 1024
+# endif
+
 
 						/// -- EXEC_MINISHELL -- /// 
 		/// BUILT_IN
@@ -141,8 +150,8 @@ void	redir_heredoc(t_data *data, t_token *token);
 // exec_cmd.c
 void	exec_command(t_data *data, t_token *token);
 // exec_bin.c
+int		child_process(char *path, char **arg, t_data *data, t_env *env);
 int		exec_binary(char **arg, t_data *data, t_env *env);
-
 // start_exec.c
 void	exec_redir(t_data *data, t_token *token);
 void	launch_minishell(t_data *data);
@@ -153,6 +162,7 @@ t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
 int		token_is_pipe(t_token *token);
 int		check_token(t_token *token, int type);
+t_token	*iter_token_cmd(t_token *token, int iter);
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
@@ -160,9 +170,13 @@ void	*free_token(t_token *token);
 void	free_and_close_data(t_data *data);
 void	free_env_unset(t_data *data, t_env *env);
 void	free_data(t_data *data);
-
+// child.c
+void	clean_child_process(t_data *data, t_env *env, char *path, char **arg);
+int		ret_child(char **env_tab, char *path, int result);
+char	*strjoin_path(const char *s1, const char *s2);
 // error.c
 void	ft_exit(char *error);
+int		child_error(char *path);
 // tab.c
 char	**token_to_tab(t_token *token, char **tab);
 char	**token_cmd_to_tab(t_token *token);
