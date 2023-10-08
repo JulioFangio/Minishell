@@ -53,7 +53,7 @@ int is_def_type(t_token *token, int type)
 {
     if (type == NO_ARG && check_token(token, NO_ARG))
         return (1);
-    else if (type == TCMD && check_token(token, CMD))
+    else if (type == CMD && check_token(token, CMD))
         return (1);
     else if (type == ARG && check_token(token, ARG))
         return (1);
