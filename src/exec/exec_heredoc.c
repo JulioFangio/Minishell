@@ -66,7 +66,7 @@ char	*get_input_heredoc(char *limiter)
 void	open_heredoc(t_data *data)
 {
 	data->fd_in = open(".heredoc", O_RDONLY);
-	if (data->fd_in < 0)
+	if (data->fd_in == -1)
 	{
 		ft_putstr_fd(ERR_OPEN, STDERR);
 		data->result = FAILURE;
@@ -83,8 +83,8 @@ void	redir_heredoc(t_data *data, t_token *token)
 	int		fd;
 
 	unlink(".heredoc");
-	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0 || !(token->str) || ft_strlen(token->str) == 0)
+	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd == -1 || !(token->str) || ft_strlen(token->str) == 0)
 	{
 		ft_putstr_fd(token->str, STDERR);
 		ft_putendl_fd(ERR_OPEN, STDERR);
@@ -93,7 +93,6 @@ void	redir_heredoc(t_data *data, t_token *token)
 		return ;
 	}
 	hd_input = get_input_heredoc(token->str);
-	check_for_var(hd_input, 1);
 	if (!hd_input)
 		ft_putstr_fd("", fd);
 	else
