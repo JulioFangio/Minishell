@@ -31,10 +31,10 @@ void	exec_redir(t_data *data, t_token *token)
 		redir_chev(data, token);
 	else if (check_token(prev_tok, HERE_DOC))
 		redir_heredoc(data, token);
-	if (next_tok && !check_token(next_tok, END) && pipe != 1)
+	if (next_tok && !check_token(next_tok, END) && pipe != PARENT)
 		exec_redir(data, next_tok->next);
 	if ((check_token(prev_tok, END) || check_token(prev_tok, PIPE)
-			|| !prev_tok) && data->err_redir == 0 && pipe != 1)
+			|| !prev_tok) && data->err_redir == 0 && pipe != PARENT)
 		exec_command(data, token);
 }
 
