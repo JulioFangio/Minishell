@@ -49,6 +49,29 @@ int	check_token(t_token *token, int type)
 		return (0);
 }
 
+int is_def_type(t_token *token, int type)
+{
+    if (type == NO_ARG && check_token(token, NO_ARG))
+        return (1);
+    else if (type == TCMD && check_token(token, CMD))
+        return (1);
+    else if (type == ARG && check_token(token, ARG))
+        return (1);
+    else if (type == PIPE && check_token(token, PIPE))
+        return (1);
+    else if (type == CHEVRON && check_token(token, CHEVRON))
+        return (1);
+    else if (type == OPEN_CHEVRON && check_token(token, OPEN_CHEVRON))
+        return (1);
+    else if (type == DOUBLE_CHEVRON && check_token(token, DOUBLE_CHEVRON))
+        return (1);
+    else if (type == HERE_DOC && check_token(token, HERE_DOC))
+        return (1);
+    else if (type == END && check_token(token, END))
+        return (1);
+    return (0);
+}
+
 t_token	*iter_token_cmd(t_token *token, int iter)
 {
 	if (token && iter)
