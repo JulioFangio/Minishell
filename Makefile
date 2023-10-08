@@ -6,7 +6,7 @@
 #    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/10/08 15:02:02 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/08 19:52:05 by jaristil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/ele
 		\
 		utils/token.c utils/fd.c utils/tab.c \
 		utils/free.c utils/error.c \
+		utils/child.c \
 		\
 		env/getenv.c env/getenv_bis.c \
 		env/setenv.c \
