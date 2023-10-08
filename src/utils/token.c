@@ -35,18 +35,18 @@ int	token_is_pipe(t_token *token)
 	while (token && check_token(token, END) == 0)
 	{
 		if (check_token(token, PIPE) == SUCCESS)
-			return (SUCCESS);
+			return (1);
 		token = token->next;
 	}
-	return (FAILURE);
+	return (0);
 }
 
 int	check_token(t_token *token, int type)
 {
 	if (token && token->type == type)
-		return (SUCCESS);
+		return (1);
 	else
-		return (FAILURE);
+		return (0);
 }
 
 t_token	*iter_token_cmd(t_token *token, int iter)
