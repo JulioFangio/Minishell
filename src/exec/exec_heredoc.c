@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-char	*strcpy_heredoc(char *dest, char *src)
+char	*strcpy_heredoc(char *dest, const char *src)
 {
 	ft_memcpy(dest, src, ft_strlen(src)+ 1);
 	return (dest);
