@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/04 16:22:00 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:14:42 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,10 @@ int		do_pipe(t_data *data);
 // exec_redir
 void	do_redir(t_data *data, t_token *token, int type);
 void	redir_chev(t_data *dat, t_token *token);
+// exec_heredoc.c
+char	*strcpy_heredoc(char *dest, char *src);
+char	*strjoin_heredoc(char *s1, char *s2);
+char	*get_input_heredoc(char *limiter);
 void	open_heredoc(t_data *data);
 void	redir_heredoc(t_data *data, t_token *token);
 // exec_cmd.c
@@ -192,7 +196,7 @@ int		ft_lentab(char **tab);
 char	*tronc_optn(char *tab, int nb);
 int		check_quotes(char *line);
 int		check_line(char *line);
-int		how_long(char *line, char c);
+int		how_long(char *line, char c, int count, size_t i);
 char	*remake_line(char *line, int n, int l);
 char	*remove_spaces(char *line, int i, int j);
 char	*keep_spaces(char *line);
@@ -205,6 +209,8 @@ char	*check_for_var(char *tronc, int nb);
 char	*get_new_line(char *res, char *tronc, char *gvar, int lg);
 char	*extract_var(char *tronc, char *var);
 char	*get_var(char *tronc);
+int		skip_quotes(char *line, size_t i);
+char	*ft_dupquotes(const char *str, char q);
 // void	free_tab(char **tab);
 
 //	elems + ext
@@ -234,7 +240,7 @@ int		check_built(char *s1, const char *s2);
 int		built_cmp(char *tab);
 
 //parse_line
-int		parse_line(t_token *cmd);
+int		parse_line(t_token *cmd, char **tab);
 int		parse_redir(t_token *cmd);
 //split mini
 char	**split_mini(char const *s, char c);

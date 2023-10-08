@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 16:47:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:16:29 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	launch_minishell(t_data *data)
 
 	//while (data->exit == 0 && data->token)
 	//{
+	
 	data->parent = 1;
 	data->exec = 1;
 	data->end = 1;

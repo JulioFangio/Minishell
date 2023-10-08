@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 15:46:34 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 13:12:27 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ void	free_and_close_data(t_data *data)
 	ft_close_all_fd(data);
 	//close(STDIN);
 	//close(STDOUT);
-	data->token = free_token(data->token);
-	free_env(data->env);
-	//free_env(data->export);
+	if (data->token)
+		data->token = free_token(data->token);
+	if (data->env)
+		free_env(data->env);
+	if (data->export)
+		free_env(data->export);
 }
 
-/* void	free_env_unset(t_data *data, t_env *env)
+void	free_env_unset(t_data *data, t_env *env)
 {
 	if (data->env == env && env->next == NULL)
 	{
@@ -79,7 +82,7 @@ void	free_and_close_data(t_data *data)
 	ft_memdel(env->value);
 	ft_memdel(env);
 }
- */
+
 
 void	free_data(t_data *data)
 {

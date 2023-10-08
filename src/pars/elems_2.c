@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/26 19:15:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:04:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,18 @@ int	built_cmp(char *tab)
 
 int	scenario(char *tab, int check)
 {
-	// if (ext_bracers(tab))
-	// 	return (ext_bracers(tab));
-	// else if (ext_tilde(tab))
-	// 	return (ext_tilde(tab));
 	if (ext_dollar(tab))
-		return (ext_dollar(tab));
-	// else if (ext_filename(tab))
-	// 	return (ext_filename(tab));
+		return (5);
 	else if (is_redir(tab))
-		return (is_redir(tab));
+		return (7);
 	else if (is_heredoc(tab))
-		return (is_heredoc(tab));
+		return (8);
 	else if (is_pipe(tab))
-		return (is_pipe(tab));
+		return (9);
 	else if (is_char(tab))
-		return (is_char(tab));
+		return (10);
 	else if (check == 0 && is_a_builtin(tab))
-		return (is_a_builtin(tab));
+		return (11);
 	else if (check == 0)
 		return (12);
 	return (13);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/03 14:03:32 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/08 13:23:06 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	parse_redir(t_token *cmd)
 		printf("minishell: syntax error near unexpected token `%c%c'\n", c, c);
 		return (0);
 	}
-	else if (is_redir(tmp->next->str))
+	else if (tmp->next && is_redir(tmp->next->str))
 	{
 		c = cmd->str[0];
 		if (ft_strlen(cmd->str) < 2)
@@ -76,8 +76,9 @@ int	parse_redir(t_token *cmd)
 	return (1);
 }
 
-int	parse_line(t_token *cmd)
+int	parse_line(t_token *cmd, char **tab)
 {
+	(void)tab;
 	while (cmd)
 	{
 		if (cmd->type == 4 || cmd->type == 5 || cmd->type == 6)
@@ -85,6 +86,7 @@ int	parse_line(t_token *cmd)
 			if (!parse_redir(cmd))
 				return (0);
 		}
+		// check_heredoc(cmd, tab);
 		cmd = cmd->next;
 	}
 	return (1);

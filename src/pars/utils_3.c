@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:53:31 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/22 16:28:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:25:52 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/minishell.h"
 
@@ -17,36 +16,55 @@ int	whole_count(char *line)
 {
 	int	i;
 
-	i = how_long(line, '<') + how_long(line, '>') + how_long(line, '|')
-		+ how_long(line, '=') + how_long(line, '&');
+	i = how_long(line, '<', 0, 0) + how_long(line, '>', 0, 0)
+		+ how_long(line, '|', 0, 0);
 	return (i);
 }
 
 static int	is_sep(char c)
 {
-	if (c == '<' || c == '>' || c == '|' || c == '=' || c == '&')
+	if (c == '<' || c == '>' || c == '|')
 		return (1);
+	return (0);
+}
+
+int	front_or_back_space(char *line, char *res, size_t i, int j)
+{
+	if (i > 0 && is_sep(line[i])
+		&& !is_sep(line[i - 1]) && line[i - 1] != 32)
+	{
+		res[j] = ' ';
+		j++;
+		res[j] = line[i];
+		return (1);
+	}
+	if (i < ft_strlen(line) && is_sep(line[i])
+		&& !is_sep(line[i + 1]) && line[i + 1] != 32)
+	{
+		res[j] = line[i];
+		j++;
+		res[j] = ' ';
+		return (1);
+	}
 	return (0);
 }
 
 char	*make_spaces(char *line, char *res, size_t i, int j)
 {
+	size_t	n;
+
+	n = 0;
 	while (line[i])
 	{
-		if (i > 0 && is_sep(line[i])
-			&& !is_sep(line[i - 1]) && line[i - 1] != 32)
-		{
-			res[j] = ' ';
-			j++;
-			res[j] = line[i];
-		}
-		if (i < ft_strlen(line) && is_sep(line[i])
-			&& !is_sep(line[i + 1]) && line[i + 1] != 32)
+		n = skip_quotes(line, i);
+		while (i < n)
 		{
 			res[j] = line[i];
 			j++;
-			res[j] = ' ';
+			i++;
 		}
+		if (front_or_back_space(line, res, i, j))
+			j++;
 		else
 			res[j] = line[i];
 		j++;
@@ -54,6 +72,10 @@ char	*make_spaces(char *line, char *res, size_t i, int j)
 	}
 	return (res);
 }
+
+//faire en sorte que make spaces ne fasse pas les spaces dans les quotes et les doules quotes;
+//modifier aussi le comtage a whole_count
+//tester avec la commande -> echo "cat lol.c | cat>lol.c"
 
 int	shorten(char *line)
 {

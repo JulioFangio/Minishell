@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/03 14:03:54 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:30:37 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*keep_spaces(char *line)
 	char	b;
 
 	i = 0;
+	printf("line = %s et lenline = %zu\n", line, ft_strlen(line));
 	res = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 	while (line[i])
 	{
@@ -59,8 +60,8 @@ char	*keep_spaces(char *line)
 char	*remake_line(char *line, int n, int l)
 {
 	char	*res;
-	char	*res2;
-	char	*res3;
+	// char	*res2;
+	// char	*res3;
 	int		i;
 	int		j;
 
@@ -70,11 +71,11 @@ char	*remake_line(char *line, int n, int l)
 	if (!res)
 		return (NULL);
 	res = make_spaces(line, res, 0, 0);
-	res2 = remove_spaces(res, i, j);
-	res3 = keep_spaces(res);
-	free(res);
-	free(res2);
-	return (res3);
+	// res2 = remove_spaces(res, i, j);
+	// res3 = keep_spaces(res);
+	// free(res);
+	// free(res2);
+	return (res);
 }
 
 void	free_lst(t_token *cmd)
@@ -88,10 +89,31 @@ void	free_lst(t_token *cmd)
 		tmp = cmd;
 		cmd = cmd->next;
 		// free(tmp->elem);
-		free(tmp->str);
+		if (tmp->str)
+			free(tmp->str);
 		free(tmp);
 		i++;
 	}
+}
+
+char	*ft_dupquotes(const char *str, char q)
+{
+	int		size;
+	char	*res;
+	int		b;
+
+	size = 1;
+	while (str[size] && str[size] != q)
+		size++;
+	b = size + 1;
+	res = ft_calloc(size + 2, sizeof(char));
+	size = 0;
+	while (size < b)
+	{
+		res[size] = str[size];
+		size++;
+	}
+	return (res);
 }
 
 //quand les quotes ne sont pas fermantes la premieres fois erreur invalid 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/03 17:35:09 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:00:22 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,47 +44,6 @@ void	redir(void)
 	sigemptyset(&sq.sa_mask);
 	sq.sa_flags = 0;
 	sigaction(SIGQUIT, &sq, NULL);
-}
-
-int	start(char *line, t_data *data)
-{
-	char				**tab;
-	t_token				*res;
-
-	tab = get_split(line);
-	if (tab == (char **)1)
-		return (1);
-	res = get_token(tab);
-	data->token = res;
-	if (!parse_line(res))
-	{
-		free_data(data);
-		free_tab(tab);
-		free_lst(res);
-		return (1);
-	}
-	launch_minishell(data);
-	/* free_tab(tab);
-	free_lst(res);
-	free_data(data); */
-	return (1);
-}
-
-void	run_shell_loop(t_data *data)
-{
-	char	*line;
-
-	using_history();
-	redir();
-	while (42)
-	{
-		line = ft_readline();
-		if (line == NULL)
-			break ;
-		if (!start(line, data))
-			break ;
-	}
-	rl_clear_history();
 }
 
 // 1 === convertir les t_token en t_token pour compatibilite avec la struct de juv

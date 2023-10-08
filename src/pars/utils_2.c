@@ -6,26 +6,45 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/27 13:16:21 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:52:55 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/minishell.h"
 
-int	how_long(char *line, char c)
+int	skip_quotes(char *line, size_t i)
 {
-	size_t	i;
-	int		count;
+	char	b;
 
-	i = 0;
-	count = 0;
-	while (line[i])
+	if (line[i] == 34 || line[i] == 39)
 	{
-		if (i > 0 && line[i] == c && line[i - 1] != 32 && line[i - 1] != c)
-			count++;
-		else if (i < ft_strlen(line) && line[i] == c
-			&& line[i + 1] != 32 && line[i + 1] != c)
+		b = line[i];
+		i++;
+		while (line[i] && line[i] != b)
+			i++;
+		return (i);
+	}
+	return (i);
+}
+
+int	how_long(char *line, char c, int count, size_t i)
+{
+	char	b;
+	size_t	len;
+
+	len = ft_strlen(line);
+	while (line[i] && i < len)
+	{
+		if (line[i] == '"' || line[i] == '\'')
+		{
+			b = line[i];
+			i++;
+			while (line[i] && i < len && line[i] != b)
+				i++;
+		}
+		else if (line[i] == c && i > 0 && i < len
+			&& ((line[i - 1] != 32 && line[i - 1] != c)
+				|| (line[i + 1] != 32 && line[i + 1] != c)))
 			count++;
 		i++;
 	}
@@ -49,10 +68,7 @@ char	*tronc_optn(char *tab, int nb)
 		return (NULL);
 	while (i < len - 1)
 	{
-		if (tab[i] == '_')
-			tronc[j] = 32;
-		else
-			tronc[j] = tab[i];
+		tronc[j] = tab[i];
 		i++;
 		j++;
 	}
@@ -77,6 +93,40 @@ char	*pick_env(char *tab)
 	}
 	return (tab);
 }
+
+
+// char	*make_spaces(char *line, char *res, size_t i, int j)
+// {
+// 	size_t	n;
+
+// 	n = 0;
+// 	while (line[i])
+// 	{
+// 		printf("la liiiiiiiiiiiiiigne ============= %s\n", line);
+// 		n = skip_quotes(line, i);
+// 		while (i < n)
+// 		{
+// 			res[j] = line[i];
+// 			j++;
+// 			i++;
+// 		}
+// 		if (is_sep(line[i]) && ((line[i - 1] && !is_sep(line[i - 1])
+// 					&& line[i - 1] != 32) || (line[i + 1]
+// 					&& !is_sep(line[i + 1]) && line[i + 1] != 32)))
+// 		{
+// 			res[j] = ' ';
+// 			j++;
+// 			res[j] = line[i];
+// 		}
+// 		else
+// 			res[j] = line[i];
+// 		j++;
+// 		i++;
+// 	}
+// 	printf("res ============= %s\n", res);
+// 	return (res);
+// }
+
 
 // char	*keep_spaces(char *line)
 // {

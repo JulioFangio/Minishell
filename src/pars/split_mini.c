@@ -20,21 +20,27 @@ static	int	ft_isseparator(char c, char sep)
 	return (0);
 }
 
-static	int	ft_countwords(const char *str, char sep)
+static	int	ft_countwords(const char *str, char sep, int i, int count)
 {
-	int		i;
-	int		count;
+	char	b;
 
-	i = 0;
-	count = 0;
 	while (str[i])
 	{
 		if (ft_isseparator(str[i], sep))
 			i++;
+		else if (str[i] == '"' || str[i] == '\'')
+		{
+			b = str[i];
+			count++;
+			i++;
+			while (str[i] != b)
+				i++;
+			i++;
+		}
 		else
 		{
 			count++;
-			while (str[i] != sep && str[i])
+			while (str[i] && str[i] != sep && str[i] != '"' && str[i] != '\'')
 				i++;
 		}
 	}
@@ -47,6 +53,11 @@ static	char	*ft_strdupbis(const char *s, char sep)
 	char	*copy;
 
 	size = 0;
+	if (s[size] == 34 || s[size] == 39)
+	{
+		copy = ft_dupquotes(s, s[size]);
+		return (copy);
+	}
 	while (s[size] != sep && s[size])
 		size++;
 	copy = ft_calloc(size + 1, sizeof(char));
@@ -81,10 +92,10 @@ char	**split_mini(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	ns = ft_calloc((ft_countwords(s, c) + 1), sizeof(char *));
+	ns = ft_calloc((ft_countwords(s, c, 0, 0) + 1), sizeof(char *));
 	if (!(ns))
 		return (0);
-	if (ft_countwords(s, c) == 0)
+	if (ft_countwords(s, c, 0, 0) == 0)
 		return (ns);
 	while (s[i])
 	{

@@ -45,6 +45,7 @@ t_token	*ft_tokennew(void)
 	elem->str = NULL;
 	// elem->elem = NULL;
 	elem->type = 0;
+	//elem->fd = -1;
 	elem->next = (NULL);
 	elem->prev = (NULL);
 	return (elem);
