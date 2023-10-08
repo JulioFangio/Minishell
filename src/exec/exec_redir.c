@@ -34,7 +34,7 @@ void	redir_chev(t_data *data, t_token *token)
 {
 	ft_close_fd(data->fd_in);
 	data->fd_in = open(token->str, O_RDONLY);
-	if (data->fd_in < 0)
+	if (data->fd_in == -1)
 	{
 		ft_putstr_fd(token->str, STDERR);
 		ft_putendl_fd(ERR_OPEN, STDERR);
