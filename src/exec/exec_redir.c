@@ -23,8 +23,8 @@ void	do_redir(t_data *data, t_token *token, int type)
 	{
 		ft_putstr_fd(token->str, STDERR);
 		ft_putendl_fd(ERR_OPEN, STDERR);
-		data->result = 1;
-		data->err_redir = 1;
+		data->result = FAILURE;
+		data->err_redir = FAILURE;
 		return ;
 	}
 	dup2(data->fd_out, STDOUT);
