@@ -48,3 +48,18 @@ int	check_token(t_token *token, int type)
 	else
 		return (FAILURE);
 }
+
+t_token	*iter_token_cmd(t_token *token, int iter)
+{
+	if (token && iter)
+		token = token->next;
+	while (token && token->type != CMD)
+	{
+		token = token->next;
+		if (token && token->type == CMD && !token->prev)
+			;
+		else if (token && token->type == CMD && token->prev->type != END)
+			token = token->next;
+	}
+	return (token);
+}
