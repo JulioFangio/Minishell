@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 15:16:29 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:54:00 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	exec_redir(t_data *data, t_token *token)
 void	launch_minishell(t_data *data)
 {
 	int		status;
+	t_token	*token;
 
 	//while (data->exit == 0 && data->token)
 	//{
-	
+	token = iter_token_cmd(data->token, 0);
 	data->parent = 1;
 	data->exec = 1;
 	data->end = 1;
@@ -64,5 +65,6 @@ void	launch_minishell(t_data *data)
 		exit(data->result);
 	}
 	data->err_redir = 0;
+	token = iter_token_cmd(data->token, 1);
 	//}
 }
