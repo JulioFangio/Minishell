@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:00:46 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 15:15:03 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:20:46 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*strcpy_heredoc(char *dest, char *src)
 char	*strjoin_heredoc(char *s1, char *s2)
 {
 	char	*str;
-	char	ptr;
+	char	*ptr;
 	size_t	len;
 
 	if (!s1)
@@ -57,7 +57,6 @@ char	*get_input_heredoc(char *limiter)
 		}
 		else if (ft_strcmp(line, limiter) == 0)
 			return (free(line), input);
-		printf("This is my input :%s\n This is my line : %s\n", input, line);
 		input_tmp = strjoin_heredoc(input, line);
 		input = ft_strjoin(input_tmp, "\n");
 		free(input_tmp);
