@@ -47,6 +47,9 @@ void	launch_minishell(t_data *data)
 	//while (data->exit == 0 && data->token)
 	//{
 	token = iter_token_cmd(data->token, 0);
+	if (is_def_type(token, CHEVRON) || is_def_type(token, OPEN_CHEVRON)
+		|| is_def_type(token, DOUBLE_CHEVRON) || is_def_type(token, HERE_DOC))
+		token = data->token->next;
 	data->parent = 1;
 	data->exec = 1;
 	data->end = 1;
