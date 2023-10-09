@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 13:12:30 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:17:32 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	main(int ac, char **av, char **env)
 	// 		// launch_minishell(&data);
 	// 	data.token = free_token(data.token);
 	// }
-	free_and_close_data(&data);
+	//free_and_close_data(&data);
 	return (data.result);
 }

@@ -49,15 +49,18 @@ int	check_token(t_token *token, int type)
 		return (FAILURE);
 }
 
+/*iterates through a list of tokens,
+finds the next token of type CMD according
+to the specific conditions, and returns it*/
 t_token	*iter_token_cmd(t_token *token, int iter)
 {
-	if (token && iter)
+	if (token && iter != 0)
 		token = token->next;
 	while (token && token->type != CMD)
 	{
 		token = token->next;
 		if (token && token->type == CMD && !token->prev)
-			;
+			continue ;
 		else if (token && token->type == CMD && token->prev->type != END)
 			token = token->next;
 	}
