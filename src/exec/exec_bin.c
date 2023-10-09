@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/09 19:33:41 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:43:52 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,16 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 	char	**env_tab;
 
 	result = 0;
-	int i = 0;
-	while (arg[i])
-	{
-		printf("THE RG %s\n", arg[i]);
-		i++;
-	}
-
 	data->pid = fork();
 	if (data->pid == 0)
 	{
 		tmp = env_malloc(env);
-		//printf("THE TMP: \n%s\n", tmp);
 		env_tab = ft_split(tmp, '\n');
-//		int i = 0;
-//		while (env_tab[i] != NULL)
-//		{
-//			printf("ENV_TAB:\n %s\n", env_tab[i]);
-//			i++;
-//		}
 		if (!env_tab)
 			return (ft_exit(ERR_MALLOC), FAILURE);
 		ft_memdel(tmp);
 		//printf("EXEC PATH\n: %s\n", path);
-		// contient cat ici au lieu de contenir le chemin complet sans /
+		// contient cat ici au lieu de contenir /usr/bin/cat
 		if (ft_strchr(path, '/'))
 		{
 //			int i = 0;
@@ -51,7 +37,7 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 //				printf("THE RG %s\n", arg[i]);
 //				i++;
 //			}
-			printf("okkkkkk\n");
+			//printf("okkkkkk\n");
 			execve(path, arg, env_tab);
 		}
 		result = ret_child(env_tab, path, result);
@@ -86,7 +72,7 @@ char	*child_dir(char *bin_cmd, char *cmd)
 		if (S_ISREG(file_stat.st_mode))
 		{
 			path = ft_strdup(full_path);
-			//printf("2nd PATH %s\n", path);
+			printf("2nd PATH %s\n", path);
 		}
 	}
 	else
@@ -126,13 +112,12 @@ int	exec_bin(char **arg, t_data *data, t_env *env)
 	while (arg[0] && bin_cmd[i_dir] && !path)
 	{
 		path = child_dir(bin_cmd[i_dir++], arg[0]);
-		//printf("THIS IS LAST PATH %s\n", path);
+		printf("THIS IS LAST PATH %s\n", path);
 	}
 	free_tab(bin_cmd);
-	printf("PATH RECEIVED WHEN OK %s\n", path);
 	if (path)
 	{
-		printf("PATH RECEIVED WHEN OK %s\n", path);
+		printf("PATH RECEIVED WHEN SUPER OK %s\n", path);
 		ret = child_process(path, arg, data, env);
 	}
 	else
