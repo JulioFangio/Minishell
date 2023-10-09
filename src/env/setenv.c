@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:47 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/09 18:53:04 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:53:38 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ size_t	env_len(t_env *env)
 	{
 		if (env->value)
 		{
-			//printf("ENV_VALUE\n: %s\n", env->value);
 			len = ft_strlen(env->value);
 			len += 1;
 		}
 		env = env->next;
 	}
-	// /printf("THE LEN %zu\n", len);
 	return (len);
 }
 
