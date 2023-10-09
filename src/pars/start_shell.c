@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/08 16:25:56 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:14:13 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	start(char *line, t_data *data)
 		return (1);
 	}
 	launch_minishell(data);
-	//free_and_close_data(data);
-	//free_tab(tab);
+	free_tab(tab);
 	return (1);
 }
 

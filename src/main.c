@@ -6,12 +6,14 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 16:17:32 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:25:41 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/* "wc -l" not work but wc -l yes for the PATH in child_dir 
+*/
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -23,17 +25,9 @@ int	main(int ac, char **av, char **env)
 		return (FAILURE);
 	reset_to_initial_fd(&data);
 	set_env(&data, env);
-	//data.export = export_env(NULL);
 	if (ac != 1)
 		return (FAILURE);
 	run_shell_loop(&data);
-	// while (data.exit == 0)
-	// {
-	// 	//parsing + signal
-	// 	if (data.token && data.exit == 0)
-	// 		// launch_minishell(&data);
-	// 	data.token = free_token(data.token);
-	// }
 	//free_and_close_data(&data);
 	return (data.result);
 }

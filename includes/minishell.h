@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 19:55:21 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:54:49 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,8 @@ char	*clean_env(char *to_find);
 void	bubble_sort_env(char **env_tab, int env_len);
 void	putstr_env(char **env);
 void	display_env(t_env *env, t_env *export);
-char	*dup_env(char *ptr_env, t_env *env);
+//char	*dup_env(char *ptr_env, t_env *env);
+char	*dup_env(t_env *env);
 int		env_add_value_to_list(char *value, t_env *env);
 
 		/// EXEC
@@ -142,7 +143,7 @@ int		do_pipe(t_data *data);
 void	do_redir(t_data *data, t_token *token, int type);
 void	redir_chev(t_data *dat, t_token *token);
 // exec_heredoc.c
-char	*strcpy_heredoc(char *dest, char *src);
+char	*strcpy_heredoc(char *dest, const char *src);
 char	*strjoin_heredoc(char *s1, char *s2);
 char	*get_input_heredoc(char *limiter);
 void	open_heredoc(t_data *data);
@@ -151,7 +152,8 @@ void	redir_heredoc(t_data *data, t_token *token);
 void	exec_command(t_data *data, t_token *token);
 // exec_bin.c
 int		child_process(char *path, char **arg, t_data *data, t_env *env);
-int		exec_binary(char **arg, t_data *data, t_env *env);
+char	*child_dir(char *bin_cmd, char *cmd);
+int		exec_bin(char **arg, t_data *data, t_env *env);
 // start_exec.c
 void	exec_redir(t_data *data, t_token *token);
 void	launch_minishell(t_data *data);
@@ -162,6 +164,7 @@ t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
 int		token_is_pipe(t_token *token);
 int		check_token(t_token *token, int type);
+int		is_def_type(t_token *token, int type);
 t_token	*iter_token_cmd(t_token *token, int iter);
 // free.c
 void	free_env(t_env *env);

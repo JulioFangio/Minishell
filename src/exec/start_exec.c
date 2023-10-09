@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 17:25:41 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:31:18 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,33 @@ void	exec_redir(t_data *data, t_token *token)
 	pipe = 0;
 	next_tok = get_next_token(token, 0);
 	prev_tok = get_prev_token(token, 0);
-	if (check_token(prev_tok, CHEVRON) == SUCCESS)
+	if (check_token(prev_tok, CHEVRON))
 		do_redir(data, token, CHEVRON);
-	else if (check_token(prev_tok, DOUBLE_CHEVRON) == SUCCESS)
+	else if (check_token(prev_tok, DOUBLE_CHEVRON))
 		do_redir(data, token, DOUBLE_CHEVRON);
-	else if (check_token(prev_tok, PIPE) == SUCCESS)
+	else if (check_token(prev_tok, PIPE))
 		pipe = do_pipe(data);
-	else if (check_token(prev_tok, OPEN_CHEVRON) == SUCCESS)
+	else if (check_token(prev_tok, OPEN_CHEVRON))
 		redir_chev(data, token);
-	else if (check_token(prev_tok, HERE_DOC) == SUCCESS)
+	else if (check_token(prev_tok, HERE_DOC))
 		redir_heredoc(data, token);
-	if (next_tok && check_token(next_tok, END) == FAILURE && pipe != 1)
+	if (next_tok && !check_token(next_tok, END) && pipe != 1)
 		exec_redir(data, next_tok->next);
 	if ((check_token(prev_tok, END) || check_token(prev_tok, PIPE)
 			|| !prev_tok) && data->err_redir == 0 && pipe != 1)
 		exec_command(data, token);
+
 }
 
-// check les appels systeme
 void	launch_minishell(t_data *data)
 {
 	int		status;
 	t_token	*token;
 
-	//while (data->exit == 0 && data->token)
-	//{
 	token = iter_token_cmd(data->token, 0);
+// 	if (is_def_type(token, CHEVRON) || is_def_type(token, OPEN_CHEVRON)
+//		|| is_def_type(token, DOUBLE_CHEVRON) || is_def_type(token, HERE_DOC))
+//		token = data->token->next;
 	data->parent = 1;
 	data->exec = 1;
 	data->end = 1;
@@ -66,5 +67,4 @@ void	launch_minishell(t_data *data)
 	}
 	data->err_redir = 0;
 	token = iter_token_cmd(data->token, 1);
-	//}
 }

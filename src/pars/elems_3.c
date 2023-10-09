@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 14:04:33 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/09 13:49:54 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	exec_scenario(t_token *cmd, char *tab, int nb)
 int	ft_optn(t_token *cmd, char *tab, int optn)
 {
 	if (optn == 7)
-		fill_elem(cmd, tab, "name", 9);
+		fill_elem(cmd, tab, "name", 1);
 	else if (optn == 8)
-		fill_elem(cmd, tab, "delimiter", 8);
+		fill_elem(cmd, tab, "delimiter", 1);
 	return (0);
 }
 

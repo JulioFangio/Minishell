@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:45:27 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/11 15:08:33 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:16:24 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,33 +90,59 @@ void	display_env(t_env *env, t_env *export)
 	free_tab(env_tab);
 }
 
-/*env_cpy
+/*
 copies the values of environment variables stored in a linked list
 into a string, adding a line feed between each value*/
-char	*dup_env(char *ptr_env, t_env *env)
+//char	*dup_env(char *ptr_env, t_env *env)
+char *dup_env(t_env *env)
 {
-	int	i;
-	int	j;
+    // Comptez d'abord combien d'octets seront nécessaires
+    int total_size = 0;
+    t_env *current = env;
+    while (current && current->next)
+    {
+        if (current->value)
+        {
+            total_size += strlen(current->value);
+        }
+        if (current->next->next)
+        {
+            // Ajoutez la taille d'un saut de ligne
+            total_size++;
+        }
+        current = current->next;
+    }
 
-	i = 0;
-	while (env && env->next)
-	{
-		if (env->value)
-		{
-			j = 0;
-			while (env->value[j])
-			{
-				ptr_env[i] = env->value[j];
-				j++;
-				i++;
-			}	
-		}
-		if (env->next->next)
-			ptr_env[i++] = '\n';
-		env = env->next;
-	}
-	ptr_env[i] = '\0';
-	return (ptr_env);
+    // Allouez la mémoire nécessaire pour ptr_env
+    char *ptr_env = (char *)malloc(total_size + 1); // +1 pour le caractère nul
+
+    if (!ptr_env)
+    {
+        // Gestion de l'erreur de mémoire
+        return NULL;
+    }
+
+    // Copiez les données dans ptr_env
+    int i = 0;
+    current = env;
+    while (current && current->next)
+    {
+        if (current->value)
+        {
+            strcpy(ptr_env + i, current->value);
+            i += strlen(current->value);
+        }
+        if (current->next->next)
+        {
+            ptr_env[i++] = '\n';
+        }
+        current = current->next;
+    }
+
+    // Ajoutez la terminaison nulle
+    ptr_env[i] = '\0';
+
+    return ptr_env;
 }
 
 int	env_add_value_to_list(char *value, t_env *env)

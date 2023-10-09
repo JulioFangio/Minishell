@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:37:48 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 19:48:47 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:23:20 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ char	*strjoin_path(const char *s1, const char *s2)
 	char	*tmp;
 	char	*path;
 
+	path = NULL;
 	tmp = ft_strjoin(s1, "/");
 	if (!tmp)
+		return (ft_exit(ERR_MALLOC), NULL);
+	path = ft_strjoin(tmp, s2);
+	if (!path)
 		return (ft_exit(ERR_MALLOC), NULL);
 	free(tmp);
 	tmp = NULL;
@@ -37,6 +41,7 @@ void	clean_child_process(t_data *data, t_env *env, char *path, char **arg)
 {
 	int	i;
 
+	i = 0;
 	(void)env;
 	(void)arg;
 	free_and_close_data(data);

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:47 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/26 17:35:49 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:53:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ size_t	env_len(t_env *env)
 	{
 		if (env->value)
 		{
+			//printf("ENV_VALUE\n: %s\n", env->value);
 			len = ft_strlen(env->value);
 			len += 1;
 		}
 		env = env->next;
 	}
+	// /printf("THE LEN %zu\n", len);
 	return (len);
 }
 
@@ -37,10 +39,11 @@ char	*env_malloc(t_env *env)
 {
 	char	*ptr_env;
 
-	ptr_env = malloc(sizeof(char) * env_len(env) +1);
+	ptr_env = malloc(sizeof(char) * env_len(env) + 1);
 	if (!ptr_env)
 		return (ft_exit(ERR_MALLOC), NULL);
-	ptr_env = dup_env(ptr_env, env);
+	//ptr_env = dup_env(ptr_env, env);
+	ptr_env = dup_env(env);
 	return (ptr_env);
 }
 
