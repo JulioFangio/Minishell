@@ -17,7 +17,11 @@ t_token	*get_next_token(t_token *token, int next)
 	if (token && next)
 		token = token->next;
 	while (token && token->type < PIPE)
+	{
+		if (!token->next)
+			break ;
 		token = token->next;
+	}
 	return (token);
 }
 
@@ -32,7 +36,7 @@ t_token	*get_prev_token(t_token *token, int prev)
 
 int	token_is_pipe(t_token *token)
 {
-	while (token && check_token(token, END) == 0)
+	while (token)
 	{
 		if (check_token(token, PIPE) == 1)
 			return (1);
@@ -65,10 +69,6 @@ int	is_def_type(t_token *token, int type)
 		return (1);
 	else if (type == DOUBLE_CHEVRON && check_token(token, DOUBLE_CHEVRON))
 		return (1);
-	else if (type == HERE_DOC && check_token(token, HERE_DOC))
-		return (1);
-	else if (type == END && check_token(token, END))
-		return (1);
 	return (0);
 }
 
@@ -81,11 +81,9 @@ t_token	*iter_token_cmd(t_token *token, int iter)
 		token = token->next;
 	while (token && token->type != CMD)
 	{
+		if (!token->next)
+			break ;
 		token = token->next;
-		if (token && token->type == CMD && !token->prev)
-			;
-		else if (token && token->type == CMD && token->prev->type != END)
-			token = token->next;
 	}
 	return (token);
 }

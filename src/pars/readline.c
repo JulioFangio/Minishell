@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 17:18:55 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 14:29:54 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ char	**get_split(char *line)
 
 	l = ft_strlen(line);
 	n = whole_count(line);
-	nline = remake_line(line, n, l);
 	if (!check_line(line))
 	{
 		free (line);
-		free (nline);
 		return ((char **)1);
 	}
+	nline = remake_line(line, n, l);
 	tab = split_mini(nline, ' ');
 	free(line);
 	free (nline);
@@ -53,16 +52,16 @@ char	*ft_readline(void)
 
 char	*get_prompt(void)
 {
-	char	*dir;
+	// char	*dir;
 	char	*prompt;
 
-	dir = getcwd(NULL, 0);
-	if (dir)
-	{
-		prompt = ft_strjoin(dir, "$ ");
-		free(dir);
+	// dir = getcwd(NULL, 0);
+	// if (dir)
+	// {
+		prompt = ft_strjoin("", "Minishell$ ");
+		// free(dir);
 		return (prompt);
-	}
-	else
-		return (NULL);
+	// }
+	// else
+	// 	return (NULL);
 }

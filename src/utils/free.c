@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 13:12:27 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:23:57 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	free_tab(char **tab)
 		{
 			free(tab[i]);
 			tab[i] = NULL;
-		}			
+		}
 	}
 	free(tab);
+	tab = NULL;
 }
 
 void	free_env(t_env *env)
@@ -34,40 +35,51 @@ void	free_env(t_env *env)
 
 	while (env)
 	{
-		tmp = env;
-		env = env->next;
-		free(tmp->value);
-		free(tmp);
+		tmp = env->next;
+		if (env->value)
+		{
+			free(env->value);
+			env->value = NULL;
+		}
+		free(env);
+		env = tmp;
 	}
 }
 
-void	*free_token(t_token *token)
+void	free_token(t_token *token)
 {
 	t_token	*tmp;
 
 	while (token)
 	{
-		tmp = token;
-		token = token->next;
-		free(tmp->str);
-		free(tmp);
+		tmp = token->next;
+		if (token->str)
+		{
+			free(token->str);
+			token->str = NULL;
+		}
+		free(token);
+		token = tmp;
 	}
-	return (NULL);
 }
 
-void	free_and_close_data(t_data *data)
+void	free_and_close_data(t_data *data, int nb)
 {
 	ft_close_fd(data->in);
 	ft_close_fd(data->out);
 	ft_close_all_fd(data);
 	//close(STDIN);
 	//close(STDOUT);
+	// (void)nb;
+	printf("Minishell program freeing in here %d\n", nb);
 	if (data->token)
-		data->token = free_token(data->token);
+		free_token(data->token);
 	if (data->env)
 		free_env(data->env);
 	if (data->export)
 		free_env(data->export);
+	if (data->tab)
+		free_tab(data->tab);
 }
 
 void	free_env_unset(t_data *data, t_env *env)
@@ -84,21 +96,21 @@ void	free_env_unset(t_data *data, t_env *env)
 }
 
 
-void	free_data(t_data *data)
-{
-	while (data->env)
-	{
-		free(data->env->value);
-		data->env = data->env->next;
-	}
-	//if (data->exprt)
-	//{
-	//	while (data->exprt)
-	//	{
-	//		free(data->exprt->value);
-	//		data->exprt = data->exprt->next;
-	//	}
-//	}
-	// free(data->env);
-	// free(data);
-}
+// void	free_data(t_data *data)
+// {
+// 	while (data->env)
+// 	{
+// 		free(data->env->value);
+// 		data->env = data->env->next;
+// 	}
+// 	//if (data->exprt)
+// 	//{
+// 	//	while (data->exprt)
+// 	//	{
+// 	//		free(data->exprt->value);
+// 	//		data->exprt = data->exprt->next;
+// 	//	}
+// //	}
+// 	// free(data->env);
+// 	// free(data);
+// }

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 17:52:55 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 11:49:11 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	how_long(char *line, char c, int count, size_t i)
 	len = ft_strlen(line);
 	while (line[i] && i < len)
 	{
-		if (line[i] == '"' || line[i] == '\'')
+		if (line[i + 1] && (line[i] == '"' || line[i] == '\''))
 		{
 			b = line[i];
 			i++;

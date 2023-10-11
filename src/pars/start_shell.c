@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/09 17:14:13 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:36:11 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 int	start(char *line, t_data *data)
 {
-	char				**tab;
 	t_token				*token;
 
-	tab = get_split(line);
-	if (tab == (char **)1)
+	data->tab = get_split(line);
+	if (data->tab == (char **)1)
 		return (1);
-	token = get_token(tab);
+	token = get_token(data->tab);
 	data->token = token;
-	if (!parse_line(token, tab))
+	if (!parse_line(data))
 	{
-		free_and_close_data(data);
-		free_tab(tab);
+		free_and_close_data(data, 0);
 		return (1);
 	}
+	recuperate_data(data);
+	check_heredoc(data);
 	launch_minishell(data);
-	free_tab(tab);
+	// free_and_close_data(data, 0);
 	return (1);
 }
 
@@ -39,7 +39,7 @@ void	run_shell_loop(t_data *data)
 
 	using_history();
 	redir();
-	while (42)
+	while (data->exit == 0)
 	{
 		line = ft_readline();
 		if (line == NULL)

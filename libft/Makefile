@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
+#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 13:31:55 by jaristil          #+#    #+#              #
-#    Updated: 2023/10/03 18:26:16 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/10 13:25:45 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,10 @@ OBJ_BONUS = $(BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 %.o : %.c
-	$(CC) -g3 -o $@ -c $< $(FLAGS)
+	@$(CC) -g3 -o $@ -c $< $(FLAGS)
 
 clean:
 	rm -rf $(OBJ)

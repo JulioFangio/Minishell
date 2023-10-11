@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/09 13:49:54 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:26:47 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int	ft_optn(t_token *cmd, char *tab, int optn)
 	if (optn == 7)
 		fill_elem(cmd, tab, "name", 1);
 	else if (optn == 8)
-		fill_elem(cmd, tab, "delimiter", 1);
+		fill_elem(cmd, tab, "delimiter", 8);
 	return (0);
 }
-
-// char	*recup_env()
-// "coucou >>ca va"

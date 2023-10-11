@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 19:37:03 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:50:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	child_error(char *path)
 	}
 	else if (!ft_strchr(path, '/'))
 		ft_putendl_fd(ERR_CMD, STDERR);
-	ft_putstr_fd(path, STDERR);
 	if (!ft_strchr(path, '/') || fd == -1)
 		result = 127;
 	else

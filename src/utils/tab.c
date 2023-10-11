@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:41:07 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/09 17:16:57 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:35:03 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**token_to_tab(t_token *token, char **tab)
 	i = 1;
 	while (token && token->type < PIPE)
 	{
-		tab[i++] = token->str;
+		tab[i++] = ft_strdup(token->str);
 		token = token->next;
 	}
 	tab[i] = NULL;
@@ -55,7 +55,7 @@ char	**token_cmd_to_tab(t_token *token)
 	if (tab == NULL)
 		return (ft_exit(ERR_MALLOC), NULL); // do i have to return?
 	token_ptr = token->next;
-	tab[0] = token->str;
+	tab[0] = ft_strdup(token->str);
 	tab = token_to_tab(token_ptr, tab);
 	return (tab);
 }

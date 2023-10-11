@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
+#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/10/08 19:52:05 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/10 13:39:43 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/ele
 		\
 		pars/expansion.c pars/utils.c pars/utils_2.c pars/utils_3.c pars/utils_4.c pars/utils_5.c pars/parse_line.c \
 		\
-		pars/split_mini.c pars/start_shell.c\
+		pars/split_mini.c pars/start_shell.c pars/signals_2.c pars/get_heredoc.c\
 		\
 		utils/token.c utils/fd.c utils/tab.c \
 		utils/free.c utils/error.c \
@@ -54,7 +54,7 @@ SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/ele
 		\
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIB_FLAGS) $(LIBFT) $(READLINE_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIB_FLAGS) $(LIBFT) $(READLINE_FLAGS) -o $(NAME)
 
 all: $(NAME)
 
@@ -62,13 +62,13 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR)%.o: src/%.c | $(OBJ_DIR) $(OBJ_DIRS)
-	$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIRS):
-	mkdir -p $(OBJ_DIRS)
+	@mkdir -p $(OBJ_DIRS)
 
 clean:
 	rm -rf $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/09 18:54:49 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 20:22:37 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 # define CHEVRON 4 // >
 # define OPEN_CHEVRON 5 // <
 # define DOUBLE_CHEVRON 6 // >>
-# define HERE_DOC 7 // <<
-# define END 8
+# define END 8 // 
+
 
 # define STDIN 0
 # define STDOUT 1
@@ -169,8 +169,8 @@ t_token	*iter_token_cmd(t_token *token, int iter);
 // free.c
 void	free_env(t_env *env);
 void	free_tab(char **tab);
-void	*free_token(t_token *token);
-void	free_and_close_data(t_data *data);
+void	free_token(t_token *token);
+void	free_and_close_data(t_data *data, int nb);
 void	free_env_unset(t_data *data, t_env *env);
 void	free_data(t_data *data);
 // child.c
@@ -189,12 +189,14 @@ void	ft_close_fd(int fd);
 void	ft_close_all_fd(t_data *data);
 void	reset_to_initial_fd(t_data *data);
 
-
 						/// -- PARSING_MINISHELL -- ///
 
 //	signals
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
+void	sigquit_handler_hd(int signum);
+void	sigint_handler_hd(int signum);
+void	redir_hd(t_data *data);
 void	redir(void);
 
 //	other
@@ -251,14 +253,16 @@ void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb);
 void	fill_elem_redir(t_token *cmd, char *tab, char *str);
 int		scenario(char *tab, int check);
 void	exec_scenario(t_token *cmd, char *tab, int nb);
-void	exec_scenario_2(t_token *cmd, char *tab, int nb);
 int		ft_optn(t_token *cmd, char *tab, int optn);
 int		check_built(char *s1, const char *s2);
 int		built_cmp(char *tab);
 
 //parse_line
-int		parse_line(t_token *cmd, char **tab);
+int		parse_line(t_data *data);
 int		parse_redir(t_token *cmd);
+t_data	*recuperate_data(t_data *data);
+void	check_heredoc(t_data *data);
+char	*get_prompt_heredoc(void);
 //split mini
 char	**split_mini(char const *s, char c);
 

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 18:30:37 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 11:56:30 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,30 +70,12 @@ char	*remake_line(char *line, int n, int l)
 	res = ft_calloc(l + n + 1, sizeof(char));
 	if (!res)
 		return (NULL);
-	res = make_spaces(line, res, 0, 0);
+	res = make_spaces(line, res, 0, (l + n));
 	// res2 = remove_spaces(res, i, j);
 	// res3 = keep_spaces(res);
 	// free(res);
 	// free(res2);
 	return (res);
-}
-
-void	free_lst(t_token *cmd)
-{
-	t_token	*tmp;
-	int		i;
-
-	i = 0;
-	while (cmd)
-	{
-		tmp = cmd;
-		cmd = cmd->next;
-		// free(tmp->elem);
-		if (tmp->str)
-			free(tmp->str);
-		free(tmp);
-		i++;
-	}
 }
 
 char	*ft_dupquotes(const char *str, char q)

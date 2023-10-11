@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/08 13:23:06 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:34:49 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,19 @@ int	parse_redir(t_token *cmd)
 	return (1);
 }
 
-int	parse_line(t_token *cmd, char **tab)
+int	parse_line(t_data *data)
 {
-	(void)tab;
-	while (cmd)
+	t_token	*tmp;
+
+	tmp = data->token;
+	while (tmp)
 	{
-		if (cmd->type == 4 || cmd->type == 5 || cmd->type == 6)
+		if (tmp->type == 4 || tmp->type == 5 || tmp->type == 6)
 		{
-			if (!parse_redir(cmd))
+			if (!parse_redir(tmp))
 				return (0);
 		}
-		// check_heredoc(cmd, tab);
-		cmd = cmd->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }

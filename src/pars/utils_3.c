@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:53:31 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 15:25:52 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:03:53 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ int	front_or_back_space(char *line, char *res, size_t i, int j)
 char	*make_spaces(char *line, char *res, size_t i, int j)
 {
 	size_t	n;
+	int		len;
 
+	len = j;
 	n = 0;
-	while (line[i])
+	j = 0;
+	while (line[i] && i < ft_strlen(line) && j < len)
 	{
 		n = skip_quotes(line, i);
 		while (i < n)
@@ -63,7 +66,7 @@ char	*make_spaces(char *line, char *res, size_t i, int j)
 			j++;
 			i++;
 		}
-		if (front_or_back_space(line, res, i, j))
+		if (j < len - 1 && front_or_back_space(line, res, i, j))
 			j++;
 		else
 			res[j] = line[i];

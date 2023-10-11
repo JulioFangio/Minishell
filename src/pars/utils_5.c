@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/09/26 16:01:11 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:31:24 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,15 @@ char	*extract_var(char *tronc, char *var)
 	lv = ft_strlen(var);
 	lg = ft_strlen(gvar);
 	lr = lg - lv;
-	res = ft_calloc(ft_strlen(tronc) + lr + 1, sizeof(char));
-	res = get_new_line(res, tronc, gvar, lv);
+	res = ft_calloc((ft_strlen(tronc) + lr) + 1, sizeof(char));
+	printf("gvar ========== %s : %d et var ======== %s : %d\n", gvar, lg, var, lv);
+	res = get_new_line(res, tronc, gvar, lg);
 	free (gvar);
 	free (tronc);
 	return (res);
 }
 
-char	*get_new_line(char *res, char *tronc, char *gvar, int lv)
+char	*get_new_line(char *res, char *tronc, char *gvar, int lg)
 {
 	int	i;
 	int	j;
@@ -64,7 +65,7 @@ char	*get_new_line(char *res, char *tronc, char *gvar, int lv)
 	k = 0;
 	while (tronc[i])
 	{
-		if (tronc[i] == '$')
+		if (tronc[i + 1] && tronc[i] == '$')
 		{
 			while (gvar[k])
 			{
@@ -72,7 +73,7 @@ char	*get_new_line(char *res, char *tronc, char *gvar, int lv)
 				k++;
 				j++;
 			}
-			i += lv;
+			i += lg;
 		}
 		res[j] = tronc[i];
 		i++;

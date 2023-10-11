@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 12:50:13 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:24:47 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_token
 {	
 	char			*str;
 	int				type;
+	int				fd;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -36,6 +37,7 @@ typedef struct s_data
 	t_env	*env;
 	t_env	*export;
 	t_token	*token;
+	char	**tab;
 	pid_t	pid;
 	int		parent;
 	int		result;
