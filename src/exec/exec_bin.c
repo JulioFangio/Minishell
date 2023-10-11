@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 14:48:26 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:59:23 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ char	*child_dir(char *bin_cmd, char *cmd)
 		if (S_ISREG(file_stat.st_mode))
 			path = ft_strdup(full_path);
 	}
-	else
-		ft_memdel(full_path);
+	ft_memdel(full_path);
 	return (path);
 }
 
@@ -70,7 +69,7 @@ int	exec_bin(char **arg, t_data *data, t_env *env)
 
 	i_dir = 0;
 	ret = 0;
-	while (env && env->value && ft_strncmp(env->value, "PATH=", 5 != 0))
+	while (env && env->value && ft_strncmp(env->value, "PATH=", 5) != 0)
 		env = env->next;
 	if (!env || !env->next)
 		return (child_process(arg[0], arg, data, env));
