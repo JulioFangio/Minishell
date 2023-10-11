@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 14:23:57 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:38:13 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	free_and_close_data(t_data *data, int nb)
 	printf("Minishell program freeing in here %d\n", nb);
 	if (data->token)
 		free_token(data->token);
-	if (data->env)
-		free_env(data->env);
+	// if (data->env)
+	// 	free_env(data->env);
 	if (data->export)
 		free_env(data->export);
 	if (data->tab)

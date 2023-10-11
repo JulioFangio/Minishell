@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/10 11:49:11 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:47:03 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,13 @@ char	*pick_env(char *tab)
 	char		*res;
 
 	i = 0;
+	printf("var = %s\n", tab);
 	while (environ[i])
 	{
 		if (!ft_strncmp(tab + 1, environ[i], ft_strlen(tab) - 1))
 		{
 			res = extract_env_value(environ[i]);
+			printf("res = %s\n", res);
 			return (res);
 		}
 		i++;

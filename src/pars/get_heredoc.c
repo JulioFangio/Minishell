@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/10 12:17:09 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:40:07 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,22 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 		{
 			ft_printf("warning: here-document delimited by end-of-file");
 			ft_printf(" (wanted `%s')\n", token->next->str);
-			free_and_close_data(data, 0);
+			free_and_close_data(data, 18);
+			free_env(data->env);
 			free(line);
 			exit (1);
 		}
 		else
 		{
 			line = check_for_var(line, 1);
+			printf("liiiiiiiiiiiiiiiiiiiiiine = %s\n", line);
 			write(fds[1], &line, ft_strlen(line));
 			write(fds[1], "\n", 1);
 		}
 	}
 	token->fd = fds[1];
-	free_and_close_data(data, 0);
+	free_and_close_data(data, 50);
+	free_env(data->env);
 	free(line);
 	exit (1);
 }
@@ -99,6 +102,7 @@ void	check_heredoc(t_data *data)
 		if (tmp->type == 7)
 		{
 			fork_heredoc(data, tmp);
+			printf("laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
 		}
 		tmp = tmp->next;
 	}

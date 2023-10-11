@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 20:22:37 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:14:57 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 # define CHEVRON 4 // >
 # define OPEN_CHEVRON 5 // <
 # define DOUBLE_CHEVRON 6 // >>
-# define END 8 // 
-
+# define HERE_DOC 7 // <<
+# define END 8
 
 # define STDIN 0
 # define STDOUT 1
@@ -225,7 +225,7 @@ int		check_end(char *line, int i, char c);
 void	free_lst(t_token *cmd);
 char	*pick_env(char *tab);
 char	*check_for_var(char *tronc, int nb);
-char	*get_new_line(char *res, char *tronc, char *gvar, int lg);
+char	*get_new_line(char *res, char *tronc, char *gvar, int lv);
 char	*extract_var(char *tronc, char *var);
 char	*get_var(char *tronc);
 int		skip_quotes(char *line, size_t i);

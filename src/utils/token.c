@@ -81,7 +81,7 @@ t_token	*iter_token_cmd(t_token *token, int iter)
 		token = token->next;
 	while (token && token->type != CMD)
 	{
-		if (!token->next)
+		if (!token->next) // i add this condition
 			break ;
 		token = token->next;
 	}

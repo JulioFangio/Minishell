@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/10 17:36:11 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:45:04 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	start(char *line, t_data *data)
 	if (!parse_line(data))
 	{
 		free_and_close_data(data, 0);
+		free_env(data->env);
 		return (1);
 	}
 	recuperate_data(data);
 	check_heredoc(data);
 	launch_minishell(data);
-	// free_and_close_data(data, 0);
+	free_and_close_data(data, 45);
 	return (1);
 }
 
@@ -39,7 +40,7 @@ void	run_shell_loop(t_data *data)
 
 	using_history();
 	redir();
-	while (data->exit == 0)
+	while (42 && data->exit == 0)
 	{
 		line = ft_readline();
 		if (line == NULL)
@@ -47,5 +48,6 @@ void	run_shell_loop(t_data *data)
 		if (!start(line, data))
 			break ;
 	}
+	free_env(data->env);
 	rl_clear_history();
 }

@@ -1,2 +1,1 @@
-juventz
- jules
+juv wc -l test.txt

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/10 12:14:09 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:41:44 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	sigint_handler_hd(int signum)
 	(void)signum;
 	data = NULL;
 	data = recuperate_data(data);
-	free_and_close_data(data, 1);
+	free_and_close_data(data, 7);
+	free_env(data->env);
 	exit (1);
 }
 

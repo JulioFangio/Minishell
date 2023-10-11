@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 16:50:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/11 13:49:02 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	child_error(char *path)
 	struct stat	path_stat;
 	int			fd;
 	int			result;
+	t_data		*data;
 
+	data = NULL;
+	data = recuperate_data(data);
 	fd = open(path, O_WRONLY);
 	if (stat(path, &path_stat) == 0)
 	{
@@ -37,10 +40,13 @@ int	child_error(char *path)
 	}
 	else if (!ft_strchr(path, '/'))
 		ft_putendl_fd(ERR_CMD, STDERR);
+	ft_putstr_fd(path, STDERR);
 	if (!ft_strchr(path, '/') || fd == -1)
 		result = 127;
 	else
 		result = 126;
 	ft_close_fd(fd);
+	free_and_close_data(data, 35);
+	free_env(data->env);
 	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:05 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 17:37:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:28:44 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int	make_exit(t_data *data, char **cmd)
 	}
 	else if (cmd[1])
 		data->result = ft_atoi(cmd[1]);
+	printf("DAT-EXIT==== %d\n", data->exit);
 	return (data->result);
 }

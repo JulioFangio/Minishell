@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 14:26:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:47:32 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	launch_minishell(t_data *data)
 	t_token	*token;
 
 	token = iter_token_cmd(data->token, 0);
-	printf("1st LAUNCH TOKEN STR : %s\n", token->str);
-	printf("1st LAUNCH TOKEN TYPE: %d\n", token->type);
-	printf("1st next STR %s\n", data->token->str);
+	//printf("1st LAUNCH TOKEN STR : %s\n", token->str);
+	//printf("1st LAUNCH TOKEN TYPE: %d\n", token->type);
+	//printf("1st next STR %s\n", data->token->str);
 //	if (is_def_type(token, CHEVRON) || is_def_type(token, OPEN_CHEVRON)
 //		|| is_def_type(token, DOUBLE_CHEVRON))
 //		token = data->token->next;

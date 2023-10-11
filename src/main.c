@@ -6,14 +6,12 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 19:16:30 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:55:47 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// segfault if | error to do
-// error for cd ls for exampl
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -30,6 +28,6 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (FAILURE);
 	run_shell_loop(&data);
-	free_and_close_data(&data, 1);
+	//free_and_close_data(&data, 1);
 	return (data.result);
 }
