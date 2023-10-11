@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:37:48 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 14:12:30 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:20:28 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	clean_child_process(t_data *data, t_env *env, char *path, char **arg)
 	(void)env;
 	(void)arg;
 	(void)data;
-	// free_and_close_data(data, 0);
+	//free_and_close_data(data, 0);
 	if (path)
 	{
 		free(path);
