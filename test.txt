@@ -1,1 +1,0 @@
-juv wc -l test.txt
