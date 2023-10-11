@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 13:40:07 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:30:32 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-	// redir_heredoc(data, token)
-
-char	*ft_readline_heredoc(char *limiter)
-{
-	char	*line;
-	char	*prompt;
-
-	prompt = get_prompt_heredoc();
-	line = readline(prompt);
-	free(prompt);
-	if (line == NULL)
-	{
-		ft_printf("warning: here-document delimited by end-of-file");
-		ft_printf(" (wanted `%s')\n", limiter);
-		return (NULL);
-	}
-	return (line);
-}
 
 char	*get_prompt_heredoc(void)
 {
@@ -37,6 +18,19 @@ char	*get_prompt_heredoc(void)
 
 	prompt = ft_strdup("> ");
 	return (prompt);
+}
+
+static void    get_out_of_heredoc(t_data *data, t_token *token, char *line)
+{
+	if (line == NULL)
+	{
+		ft_printf("warning: here-document delimited by end-of-file");
+		ft_printf(" (wanted `%s')\n", token->next->str);
+	}
+	free_and_close_data(data, 18);
+	free_env(data->env);
+	free(line);
+	exit (1);
 }
 
 void	create_heredoc(t_data *data, t_token *token, int *fds)
@@ -49,15 +43,9 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 		if (line)
 			free(line);
 		line = readline("> ");
-		if (line == NULL)
-		{
-			ft_printf("warning: here-document delimited by end-of-file");
-			ft_printf(" (wanted `%s')\n", token->next->str);
-			free_and_close_data(data, 18);
-			free_env(data->env);
-			free(line);
-			exit (1);
-		}
+		if (line == NULL
+			|| !ft_strncmp(line, token->next->str, ft_strlen(line)))
+			get_out_of_heredoc(data, token, line);
 		else
 		{
 			line = check_for_var(line, 1);
