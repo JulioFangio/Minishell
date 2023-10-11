@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 14:47:32 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:45:37 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	exec_redir(t_data *data, t_token *token)
 	{
 		do_redir(data, token, DOUBLE_CHEVRON);
 	}
-	else if (check_token(prev_tok, PIPE))
-	{
-		pipe = do_pipe(data);
-	}
 	else if (check_token(prev_tok, OPEN_CHEVRON))
 	{
 		redir_chev(data, token);
+	}
+	else if (check_token(prev_tok, PIPE))
+	{
+		pipe = do_pipe(data);
 	}
 	if ((check_token(prev_tok, PIPE) || !prev_tok)
 		&& data->err_redir == 0 && pipe != 1)
