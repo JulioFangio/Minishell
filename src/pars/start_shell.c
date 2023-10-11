@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 13:45:04 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:46:09 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	start(char *line, t_data *data)
 	if (!parse_line(data))
 	{
 		free_and_close_data(data, 0);
-		free_env(data->env);
 		return (1);
 	}
 	recuperate_data(data);

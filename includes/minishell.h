@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 13:14:57 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:46:01 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 # define OPEN_CHEVRON 5 // <
 # define DOUBLE_CHEVRON 6 // >>
 # define HERE_DOC 7 // <<
-# define END 8
 
 # define STDIN 0
 # define STDOUT 1
@@ -259,6 +258,8 @@ int		built_cmp(char *tab);
 
 //parse_line
 int		parse_line(t_data *data);
+int		parse_pipe(t_token *cmd);
+int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
 t_data	*recuperate_data(t_data *data);
 void	check_heredoc(t_data *data);

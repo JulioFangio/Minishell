@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/10 14:29:54 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:44:08 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_line(char *line)
+{
+	if (!check_quotes(line))
+	{
+		printf("%s: syntax error\n", line);
+		return (0);
+	}
+	return (1);
+}
 
 char	**get_split(char *line)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/09 15:34:49 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:45:22 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,43 @@ int	check_quotes(char *line)
 	return (1);
 }
 
-int	check_line(char *line)
+int	parse_pipe(t_token *cmd)
 {
-	if (!check_quotes(line))
+	if (cmd->next && cmd->type == 3 && cmd->next->type == 3)
 	{
-		printf("%s: syntax error\n", line);
+		ft_putendl_fd("minishell: syntax error near unexpected token `||'",
+			STDERR);
 		return (0);
+	}
+	else if (cmd->type == 3 && ft_strlen(cmd->str) == 1)
+	{
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
+			STDERR);
+		return (0);
+	}
+	return (parse_pipe_while(cmd));
+}
+
+int	parse_pipe_while(t_token *cmd)
+{
+	t_token	*tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		if (tmp->type == 3 && tmp->str[1] == '|')
+		{
+			ft_putendl_fd("minishell: syntax error near unexpected token `||'",
+				STDERR);
+			return (0);
+		}
+		else if (tmp->next && tmp->type == 3 && tmp->next->type == 3)
+		{
+			ft_putendl_fd("minishell: syntax error near unexpected token `||'",
+				STDERR);
+			return (0);
+		}
+		tmp = tmp->next;
 	}
 	return (1);
 }
@@ -81,6 +112,8 @@ int	parse_line(t_data *data)
 	t_token	*tmp;
 
 	tmp = data->token;
+	if (!parse_pipe(data->token))
+		return (0);
 	while (tmp)
 	{
 		if (tmp->type == 4 || tmp->type == 5 || tmp->type == 6)

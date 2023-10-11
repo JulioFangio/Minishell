@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 18:45:37 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/11 19:31:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	exec_redir(t_data *data, t_token *token)
 	}
 	else if (check_token(prev_tok, DOUBLE_CHEVRON))
 	{
+		printf("I AM INSIDE DOUBLE CHEVRON\n");
 		do_redir(data, token, DOUBLE_CHEVRON);
 	}
 	else if (check_token(prev_tok, OPEN_CHEVRON))
@@ -57,15 +58,16 @@ void	launch_minishell(t_data *data)
 	t_token	*token;
 
 	token = iter_token_cmd(data->token, 0);
-	//printf("1st LAUNCH TOKEN STR : %s\n", token->str);
-	//printf("1st LAUNCH TOKEN TYPE: %d\n", token->type);
+	printf("1st LAUNCH TOKEN STR : %s\n", token->str);
+	printf("1st LAUNCH TOKEN TYPE: %d\n", token->type);
 	//printf("1st next STR %s\n", data->token->str);
-//	if (is_def_type(token, CHEVRON) || is_def_type(token, OPEN_CHEVRON)
-//		|| is_def_type(token, DOUBLE_CHEVRON))
-//		token = data->token->next;
-//	printf("2nd TOKEN : %s\n", token->str);
-	//while (data->exit == 0 && token)
-	//{
+	if (is_def_type(token, CHEVRON) || is_def_type(token, OPEN_CHEVRON)
+		|| is_def_type(token, DOUBLE_CHEVRON))
+		token = data->token->next;
+	printf("2nd LAUNCH TOKEN : %s\n", token->str);
+	printf("2nd LAUNCH TOKEN TYPE: %d\n", token->type);
+	while (data->exit == 0 && token)
+	{
 		data->parent = 1;
 		data->exec = 1;
 		data->end = 1;
@@ -87,5 +89,5 @@ void	launch_minishell(t_data *data)
 		token = iter_token_cmd(token, 1);
 	//printf("LAST LAUNCH TOKEN STR : %s\n", token->str);
 	//printf("LAST LAUNCH TOKEN TYPE: %d\n", token->type);
-//	}
+	}
 }
