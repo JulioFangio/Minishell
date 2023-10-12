@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 13:25:11 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/12 16:52:48 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ char	*extract_var(char *tronc, char *var)
 	// printf("gvar = %s, var = %s, tronc = %s\n", gvar, var, tronc);
 	res = ft_calloc((ft_strlen(tronc) + lr) + 1, sizeof(char));
 	res = get_new_line(res, tronc, gvar, lv);
-	free (gvar);
+	if (strcmp(gvar, var))
+		free (gvar);
 	return (res);
 }
 

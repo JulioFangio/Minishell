@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 19:46:01 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:30:46 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ void	launch_minishell(t_data *data);
 
 		/// UTILS
 // token.c
-t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
 int		token_is_pipe(t_token *token);
 int		check_token(t_token *token, int type);

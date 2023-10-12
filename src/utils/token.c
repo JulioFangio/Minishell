@@ -12,19 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-t_token	*get_next_token(t_token *token, int next)
-{
-	if (token && next)
-		token = token->next;
-	while (token && token->type < PIPE)
-	{
-		if (!token->next)
-			break ;
-		token = token->next;
-	}
-	return (token);
-}
-
 t_token	*get_prev_token(t_token *token, int prev)
 {
 	if (token && prev)
