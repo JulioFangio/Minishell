@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 15:30:32 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:17:30 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,17 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 	char	*line;
 
 	line = NULL;
-	while (ft_strncmp(line, token->next->str, ft_strlen(line)))
+	while (ft_strncmp(line, token->next->str, ft_strlen(token->next->str)))
 	{
 		if (line)
 			free(line);
 		line = readline("> ");
 		if (line == NULL
-			|| !ft_strncmp(line, token->next->str, ft_strlen(line)))
+			|| !ft_strncmp(line, token->next->str, ft_strlen(token->next->str)))
 			get_out_of_heredoc(data, token, line);
 		else
 		{
 			line = check_for_var(line, 1);
-			printf("liiiiiiiiiiiiiiiiiiiiiine = %s\n", line);
 			write(fds[1], &line, ft_strlen(line));
 			write(fds[1], "\n", 1);
 		}

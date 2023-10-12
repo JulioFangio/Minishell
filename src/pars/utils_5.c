@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 13:25:11 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/12 16:48:06 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,34 @@ char	*extract_var(char *tronc, char *var)
 	// printf("gvar = %s, var = %s, tronc = %s\n", gvar, var, tronc);
 	res = ft_calloc((ft_strlen(tronc) + lr) + 1, sizeof(char));
 	res = get_new_line(res, tronc, gvar, lv);
-	free (gvar);
+	if (strcmp(gvar, var))
+		free (gvar);
 	return (res);
+}
+
+char	*check_for_var(char *tronc, int nb)
+{
+	int		i;
+	char	*var;
+	char	*res;
+
+	i = -1;
+	var = NULL;
+	res = NULL;
+	if (nb == 0)
+		return (tronc);
+	while (tronc[++i])
+	{
+		if (tronc[i] == '$')
+		{
+			var = get_var(tronc);
+			res = extract_var(tronc, var);
+			free(var);
+			free (tronc);
+			return (res);
+		}
+	}
+	return (tronc);
 }
 
 static size_t	write_exp(char *res, char *gvar, size_t j)
@@ -95,29 +121,4 @@ char	*get_new_line(char *res, char *tronc, char *gvar, int lv)
 		}
 	}
 	return (res);
-}
-
-char	*check_for_var(char *tronc, int nb)
-{
-	int		i;
-	char	*var;
-	char	*res;
-
-	i = -1;
-	var = NULL;
-	res = NULL;
-	if (nb == 0)
-		return (tronc);
-	while (tronc[++i])
-	{
-		if (tronc[i] == '$')
-		{
-			var = get_var(tronc);
-			res = extract_var(tronc, var);
-			free(var);
-			free (tronc);
-			return (res);
-		}
-	}
-	return (tronc);
 }

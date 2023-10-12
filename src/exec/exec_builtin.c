@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:40:34 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 14:46:13 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:48:50 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int	exec_builtin(t_data *data, char **cmd, t_token *token)
 
 	result = 0;
 	if (ft_strcmp("echo", cmd[0]) == 0)
+	{
 		result = make_echo(cmd);
+		free_tab(cmd);
+		return (0);
+	}
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		result = make_cd(cmd, data->env);
 	if (ft_strcmp("pwd", cmd[0]) == 0)

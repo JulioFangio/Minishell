@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 19:46:01 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:23:25 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ char	*get_oldpwd_path(char *path, t_env *env);
 int		make_pwd(t_env *env);
 // echo.c
 int		is_echo(char *line);
-int		handle_echo_options(char **arg, int *cur_pos, int flags);
+// int		handle_echo_options(char **arg, int *cur_pos, int flags);
+int		handle_echo_options(char **arg);
 int		make_echo(char **arg);
 // exit.c
 int		str_isnum(char *str);
@@ -229,6 +230,7 @@ char	*extract_var(char *tronc, char *var);
 char	*get_var(char *tronc);
 int		skip_quotes(char *line, size_t i);
 char	*ft_dupquotes(const char *str, char q);
+void	recuperate_fds(t_data *data);
 // void	free_tab(char **tab);
 
 //	elems + ext

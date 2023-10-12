@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 15:42:27 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:45:23 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,23 @@ char	*tronc_optn(char *tab, int nb)
 	return (check_for_var(tronc, nb));
 }
 
+static int	ft_strcmp_env(const char *s1, const char *s2)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 1;
+	while (s2[i] != '=' && s1[j] && s2[i] && s1[j] == s2[i])
+	{
+		i++;
+		j++;
+	}
+	if (s2[i] == '=')
+		return (0);
+	return (1);
+}
+
 char	*pick_env(char *tab)
 {
 	extern char	**environ;
@@ -85,10 +102,9 @@ char	*pick_env(char *tab)
 	printf("var = %s\n", tab);
 	while (environ[i])
 	{
-		if (!ft_strncmp(tab + 1, environ[i], ft_strlen(tab) - 1))
+		if (!ft_strcmp_env(tab, environ[i]))
 		{
 			res = extract_env_value(environ[i]);
-			printf("res = %s\n", res);
 			return (res);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:41:51 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/27 15:44:11 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:09:30 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	do_pipe(t_data *data)
 	if (pid == 0)
 	{
 		ft_close_fd(pipefd[1]);
-		dup2(pipefd[0], STDIN);
+		dup2(pipefd[0], data->fd_in);
 		data->pipe_in = pipefd[0];
 		data->pid = -1;
 		data->parent = 0;
@@ -33,7 +33,7 @@ int	do_pipe(t_data *data)
 	else
 	{
 		ft_close_fd(pipefd[0]);
-		dup2(pipefd[1], STDOUT);
+		dup2(pipefd[1], data->fd_out);
 		data->pipe_out = pipefd[1];
 		data->pid = pid;
 		data->end = 0;

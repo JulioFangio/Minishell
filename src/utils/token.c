@@ -77,7 +77,7 @@ finds the next token of type CMD according
 to the specific conditions, and returns it*/
 t_token	*iter_token_cmd(t_token *token, int iter)
 {
-	if (token && iter)
+	if (token->next && token && iter)
 		token = token->next;
 	while (token)
 	{

@@ -49,7 +49,7 @@ t_token	*get_token(char **tab)
 	tmp = cmd;
 	while (tmp)
 	{
-		printf(" str = %s / type = %d\n", tmp->str, tmp->type);
+		// printf(" str = %s / type = %d / fd = %d\n", tmp->str, tmp->type, tmp->fd);
 		tmp = tmp->next;
 	}
 	return (cmd);

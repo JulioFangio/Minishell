@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_elems.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:42:04 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 15:57:14 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:47:57 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb)
 
 	(void)str;
 	tab_bis = ft_strdup(tab);
-	cmd->str = ft_strdup(check_for_var(tab_bis, 1));
+	cmd->str = check_for_var(tab_bis, 1);
 	cmd->type = nb;
 	return ;
 }
