@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 19:31:04 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:57:53 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,8 @@ void	exec_redir(t_data *data, t_token *token)
 	t_token	*prev_tok;
 
 	pipe = 0;
-	//printf("avant next token : %s\n", token->str);
-	//printf("avant next token : %d\n", token->type);
 	next_tok = get_next_token(token, 0);
 	prev_tok = get_prev_token(token, 0);
-	//printf("PREV_TOKEN->STR : %s\n", prev_tok->str);
-	//printf("PREV_TOKEN->TYPE : %d\n", prev_tok->type);
-	//printf("NEXT_TOKEN->STR : %s\n", next_tok->str);
-	//printf("NEXT_TOKEN->TYPE : %d\n", next_tok->type);
 	if (check_token(prev_tok, CHEVRON))
 	{
 		printf("I AM INSIDE CHEVRON\n");
@@ -58,20 +52,15 @@ void	launch_minishell(t_data *data)
 	t_token	*token;
 
 	token = iter_token_cmd(data->token, 0);
-	printf("1st LAUNCH TOKEN STR : %s\n", token->str);
-	printf("1st LAUNCH TOKEN TYPE: %d\n", token->type);
-	//printf("1st next STR %s\n", data->token->str);
 	if (is_def_type(token, CHEVRON) || is_def_type(token, OPEN_CHEVRON)
 		|| is_def_type(token, DOUBLE_CHEVRON))
 		token = data->token->next;
-	printf("2nd LAUNCH TOKEN : %s\n", token->str);
-	printf("2nd LAUNCH TOKEN TYPE: %d\n", token->type);
 	while (data->exit == 0 && token)
 	{
 		data->parent = 1;
 		data->exec = 1;
 		data->end = 1;
-		exec_redir(data, data->token);
+		exec_redir(data, token);
 		ft_close_all_fd(data);
 		reset_to_initial_fd(data);
 		dup2(data->in, STDIN);
@@ -87,7 +76,5 @@ void	launch_minishell(t_data *data)
 		}
 		data->err_redir = 0;
 		token = iter_token_cmd(token, 1);
-	//printf("LAST LAUNCH TOKEN STR : %s\n", token->str);
-	//printf("LAST LAUNCH TOKEN TYPE: %d\n", token->type);
 	}
 }

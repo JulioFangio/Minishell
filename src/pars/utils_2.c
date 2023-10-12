@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 19:48:57 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:42:27 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	how_long(char *line, char c, int count, size_t i)
 			while (line[i] && i < len && line[i] != b)
 				i++;
 		}
-		else if (line[i] == c && i > 0 && i < len
-			&& ((line[i - 1] != 32 && line[i - 1] != c)
-				|| (line[i + 1] != 32 && line[i + 1] != c)))
+		else if (line[i] == c && i < len
+			&& ((i > 0 && line[i - 1] != 32 && line[i - 1] != c)
+				|| (line[i + 1] && line[i + 1] != 32 && line[i + 1] != c)))
 			count++;
 		i++;
 	}

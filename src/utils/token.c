@@ -75,31 +75,15 @@ int	is_def_type(t_token *token, int type)
 /*iterates through a list of tokens,
 finds the next token of type CMD according
 to the specific conditions, and returns it*/
-/* t_token	*iter_token_cmd(t_token *token, int iter)
+t_token	*iter_token_cmd(t_token *token, int iter)
 {
 	if (token && iter)
 		token = token->next;
-	while (token && token->type != CMD)
+	while (token)
 	{
-		if (!token->next) // i add this condition
-			break ;
+		if (token->type == CMD)
+			return (token);
 		token = token->next;
 	}
-	return (token);
-}
- */
-
-t_token	*iter_token_cmd(t_token *token, int iter)
-{
-    if (token && iter)
-        token = token->next;
-    while (token)
-    {
-        if (token->type == CMD)
-        {
-            return token;
-        }
-        token = token->next;
-    }
-    return (NULL);
+	return (NULL);
 }
