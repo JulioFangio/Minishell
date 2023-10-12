@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_elems.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:42:04 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 14:12:23 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/12 15:57:14 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	fill_elem(t_token *cmd, char *tab, char *str, int nb)
 {
 	(void)str;
-	// cmd->strelem = ft_strdup(str);
 	cmd->str = ft_strdup(tab);
 	cmd->type = nb;
 	return ;
@@ -26,7 +25,6 @@ void	fill_elem_tronc(t_token *cmd, char *tab, char *str)
 	char	*res;
 
 	(void)str;
-	// cmd->elem = ft_strdup(str);
 	if (tab[0] == '"')
 		res = tronc_optn(tab, 1);
 	else
@@ -39,9 +37,11 @@ void	fill_elem_tronc(t_token *cmd, char *tab, char *str)
 
 void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb)
 {
+	char	*tab_bis;
+
 	(void)str;
-	// cmd->elem = ft_strdup(str);
-	cmd->str = ft_strdup(pick_env(tab));
+	tab_bis = ft_strdup(tab);
+	cmd->str = ft_strdup(check_for_var(tab_bis, 1));
 	cmd->type = nb;
 	return ;
 }
@@ -49,7 +49,6 @@ void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb)
 void	fill_elem_redir(t_token *cmd, char *tab, char *str)
 {
 	(void)str;
-	// cmd->elem = ft_strdup(str);
 	cmd->str = ft_strdup(tab);
 	if (tab[0] == '>' && tab[1] == '>')
 		cmd->type = 6;
