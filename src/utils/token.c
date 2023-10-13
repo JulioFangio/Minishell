@@ -12,19 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-t_token	*get_next_token(t_token *token, int next)
-{
-	if (token && next)
-		token = token->next;
-	while (token && token->type < PIPE)
-	{
-		if (!token->next)
-			break ;
-		token = token->next;
-	}
-	return (token);
-}
-
 t_token	*get_prev_token(t_token *token, int prev)
 {
 	if (token && prev)
@@ -77,7 +64,7 @@ finds the next token of type CMD according
 to the specific conditions, and returns it*/
 t_token	*iter_token_cmd(t_token *token, int iter)
 {
-	if (token->next && token && iter)
+	if (token && iter)
 		token = token->next;
 	while (token)
 	{

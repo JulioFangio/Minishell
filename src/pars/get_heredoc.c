@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 17:17:30 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:00:03 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 	char	*line;
 
 	line = NULL;
-	while (ft_strncmp(line, token->next->str, ft_strlen(token->next->str)))
+	while (ft_strcmp(line, token->next->str))
 	{
 		if (line)
 			free(line);
 		line = readline("> ");
 		if (line == NULL
-			|| !ft_strncmp(line, token->next->str, ft_strlen(token->next->str)))
+			|| !ft_strcmp(line, token->next->str))
 			get_out_of_heredoc(data, token, line);
 		else
 		{

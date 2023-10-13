@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 17:52:03 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/10 11:56:30 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,25 +96,6 @@ char	*ft_dupquotes(const char *str, char q)
 		size++;
 	}
 	return (res);
-}
-
-void	recuperate_fds(t_data *data)
-{
-	t_token	*tmp;
-
-	tmp = data->token;
-	while (tmp)
-	{
-		if (tmp->type >= 4 && tmp->type <= 6)
-			tmp->fd = open(tmp->next->str, O_CREAT | O_RDWR, 0644);
-		tmp = tmp->next;
-	}
-	tmp = data->token;
-	while (tmp)
-	{
-		printf(" str = %s / type = %d / fd = %d\n", tmp->str, tmp->type, tmp->fd);
-		tmp = tmp->next;
-	}
 }
 
 //quand les quotes ne sont pas fermantes la premieres fois erreur invalid 

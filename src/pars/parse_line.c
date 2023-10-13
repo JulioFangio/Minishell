@@ -3,49 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 19:45:22 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:58:13 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_quotes(char *line)
+int	find_intruder(t_token *token, char c)
 {
-	size_t	i;
-	char	c;
+	int	i;
 
-	i = 0;
-	c = '\0';
-	while (line[i])
+	i = -1;
+	if (!token->str)
+		return (1);
+	while (token->str[++i])
 	{
-		if (line[i] == '"' || line[i] == '\'')
+		if (token->str[i] == c)
 		{
-			c = line[i];
-			i++;
-			while (line[i] && line[i] != c)
-				i++;
-			if (line[i] == '\0')
-				return (0);
-			// else if (line[i + 1] != '\0' && (line[i + 1] != 32 ||
-			// 		(line[i + 1] < 9 && line[i + 1] > 13)))
-			// 	return (0);
-			c = '\0';
+			if (c == '|')
+			{
+				ft_putstr_fd("minishell: syntax error ", STDERR); 
+				ft_putendl_fd("near unexpected token `|'", STDERR);
+			}
+			return (0);
 		}
-		i++;
 	}
-	if (c != '\0')
-		return (0);
 	return (1);
 }
 
 int	parse_pipe(t_token *cmd)
 {
-	if (cmd->next && cmd->type == 3 && cmd->next->type == 3)
+	if (cmd->next && (cmd->type == 3 && cmd->next->type == 3))
 	{
-		ft_putendl_fd("minishell: syntax error near unexpected token `||'",
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 			STDERR);
 		return (0);
 	}
@@ -65,15 +58,16 @@ int	parse_pipe_while(t_token *cmd)
 	tmp = cmd;
 	while (tmp)
 	{
-		if (tmp->type == 3 && tmp->str[1] == '|')
+		if (tmp->type == 3 && (tmp->str[1] == '|' || !find_intruder(tmp, '<')
+				|| !find_intruder(tmp, '>')))
 		{
-			ft_putendl_fd("minishell: syntax error near unexpected token `||'",
+			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 				STDERR);
 			return (0);
 		}
 		else if (tmp->next && tmp->type == 3 && tmp->next->type == 3)
 		{
-			ft_putendl_fd("minishell: syntax error near unexpected token `||'",
+			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 				STDERR);
 			return (0);
 		}
@@ -85,27 +79,27 @@ int	parse_pipe_while(t_token *cmd)
 int	parse_redir(t_token *cmd)
 {
 	char	c;
-	t_token	*tmp;
 
-	tmp = cmd;
-	if (ft_strlen(cmd->str) > 2)
+	if (ft_strlen(cmd->str) > 2 || (ft_strlen(cmd->str) > 2
+			&& cmd->str[0] != cmd->str[1]))
 	{
 		c = cmd->str[0];
-		printf("minishell: syntax error near unexpected token `%c%c'\n", c, c);
+		printf("minishell: syntax error near unexpected token lol`%c%c'\n", c, c);
 		return (0);
 	}
-	else if (tmp->next && is_redir(tmp->next->str))
+	else if (cmd->next && is_redir(cmd->next->str))
 	{
 		c = cmd->str[0];
 		if (ft_strlen(cmd->str) < 2)
-			printf("minishell: syntax error near unexpected token `%c'\n", c);
+			printf("minishell: syntax error near unexpected token ok `%c'\n", c);
 		else
-			printf("minishell: syntax error near unexpected token `%c%c'\n",
+			printf("minishell: syntax error near unexpected token pet `%c%c'\n",
 				c, c);
 		return (0);
 	}
 	return (1);
 }
+// ##
 
 int	parse_line(t_data *data)
 {
@@ -114,9 +108,14 @@ int	parse_line(t_data *data)
 	tmp = data->token;
 	if (!parse_pipe(data->token))
 		return (0);
+	else if (!parse_heredoc(data->token))
+		return (0);
+	else if (!parse_first_token(data->token))
+		return (0);
 	while (tmp)
 	{
-		if (tmp->type == 4 || tmp->type == 5 || tmp->type == 6)
+		if (tmp->type == 4 || tmp->type == 5 || tmp->type == 6
+			|| tmp->type == 7)
 		{
 			if (!parse_redir(tmp))
 				return (0);
@@ -125,3 +124,8 @@ int	parse_line(t_data *data)
 	}
 	return (1);
 }
+// ## + parse_line_2.c parse heredoc
+
+
+		// || ((is_redir(cmd->str) || is_heredoc(cmd->str))
+		// 	&& (cmd->next && cmd->next->str[0] == '|')))

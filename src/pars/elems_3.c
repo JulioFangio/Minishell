@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 18:45:09 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:04:47 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exec_scenario(t_token *cmd, char *tab, int nb)
 {
 	if (nb == 5)
-		fill_elem_var(cmd, tab, "variable", 0);
+		fill_elem_var(cmd, tab, "variable", 15);
 	else if (nb == 7)
 		fill_elem_redir(cmd, tab, "redir");
 	else if (nb == 8)
@@ -35,7 +35,7 @@ void	exec_scenario(t_token *cmd, char *tab, int nb)
 int	ft_optn(t_token *cmd, char *tab, int optn)
 {
 	if (optn == 7)
-		fill_elem(cmd, tab, "name", 9);
+		fill_elem(cmd, tab, "name", 0);
 	else if (optn == 8)
 		fill_elem(cmd, tab, "delimiter", 8);
 	return (0);

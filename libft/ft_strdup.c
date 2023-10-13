@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:19:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 13:27:00 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 15:59:12 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s)
 	char	*copy;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	size = ft_strlen(s);
 	copy = malloc(sizeof(char) * (size + 1));
 	if (!(copy))

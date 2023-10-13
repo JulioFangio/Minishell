@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/12 20:23:25 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:04:43 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ char	*get_oldpwd_path(char *path, t_env *env);
 int		make_pwd(t_env *env);
 // echo.c
 int		is_echo(char *line);
-// int		handle_echo_options(char **arg, int *cur_pos, int flags);
-int		handle_echo_options(char **arg);
+int		handle_echo_options(char **arg, int *cur_pos, int flags);
 int		make_echo(char **arg);
 // exit.c
 int		str_isnum(char *str);
@@ -160,7 +159,6 @@ void	launch_minishell(t_data *data);
 
 		/// UTILS
 // token.c
-t_token	*get_next_token(t_token *token, int next);
 t_token	*get_prev_token(t_token *token, int prev);
 int		token_is_pipe(t_token *token);
 int		check_token(t_token *token, int type);
@@ -230,7 +228,6 @@ char	*extract_var(char *tronc, char *var);
 char	*get_var(char *tronc);
 int		skip_quotes(char *line, size_t i);
 char	*ft_dupquotes(const char *str, char q);
-void	recuperate_fds(t_data *data);
 // void	free_tab(char **tab);
 
 //	elems + ext
@@ -247,7 +244,7 @@ int		ext_bracers(char *tab);
 
 // cmd
 t_token	*get_token(char **tab);
-t_token	*fill_list(t_token *cmd, char **tab, int i, int check);
+t_token	*fill_list(t_token *cmd, char **tab, int check);
 void	fill_elem(t_token *cmd, char *tab, char *str, int nb);
 void	fill_elem_tronc(t_token *cmd, char *tab, char *str);
 void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb);
@@ -260,6 +257,10 @@ int		built_cmp(char *tab);
 
 //parse_line
 int		parse_line(t_data *data);
+int		parse_ls(t_data *data, int check_ls);
+int		parse_first_token(t_token *token);
+int		find_intruder(t_token *token, char c);
+int		parse_heredoc(t_token *token);
 int		parse_pipe(t_token *cmd);
 int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);

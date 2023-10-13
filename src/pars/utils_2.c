@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 16:45:23 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/12 16:51:22 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ char	*tronc_optn(char *tab, int nb)
 
 static int	ft_strcmp_env(const char *s1, const char *s2)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 1;
@@ -93,7 +93,7 @@ static int	ft_strcmp_env(const char *s1, const char *s2)
 }
 
 char	*pick_env(char *tab)
-{
+{	
 	extern char	**environ;
 	int			i;
 	char		*res;
@@ -111,7 +111,6 @@ char	*pick_env(char *tab)
 	}
 	return (tab);
 }
-
 
 // char	*make_spaces(char *line, char *res, size_t i, int j)
 // {
