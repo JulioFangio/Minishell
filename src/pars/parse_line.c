@@ -36,6 +36,8 @@ int	find_intruder(t_token *token, char c)
 
 int	parse_pipe(t_token *cmd)
 {
+	if (!cmd)
+		return 0;
 	if (cmd->next && (cmd->type == 3 && cmd->next->type == 3))
 	{
 		ft_putendl_fd("minishell: syntax error near unexpected token lol `|'",
