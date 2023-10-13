@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:42:04 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 16:38:07 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 18:42:35 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	fill_elem_tronc(t_token *cmd, char *tab, char *str)
 	char	*res;
 
 	(void)str;
-	printf("loooooooooool\n");
 	if (tab[0] == '"')
 		res = tronc_optn(tab, 1);
 	else

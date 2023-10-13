@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/10 13:24:47 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 20:56:17 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	t_token	*token;
 	char	**tab;
 	pid_t	pid;
+	int		check_hdc;
 	int		parent;
 	int		result;
 	int		in;

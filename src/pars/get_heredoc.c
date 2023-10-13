@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 17:00:03 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 20:56:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 			write(fds[1], "\n", 1);
 		}
 	}
-	token->fd = fds[1];
+	data->check_hdc = 1;
+	data->fd_in = fds[1];
 	free_and_close_data(data, 50);
 	free_env(data->env);
 	free(line);
@@ -89,7 +90,6 @@ void	check_heredoc(t_data *data)
 		if (tmp->type == 7)
 		{
 			fork_heredoc(data, tmp);
-			printf("laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
 		}
 		tmp = tmp->next;
 	}

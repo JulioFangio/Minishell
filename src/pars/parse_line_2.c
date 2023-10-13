@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:49:58 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 17:01:38 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 19:55:44 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	parse_ls(t_data *data, int check_ls)
 	tmp = data->token;
 	while (tmp && tmp->type != 3)
 	{
-		if (!ft_strcmp(tmp->str, "ls") && check_ls == 0)
+		if (tmp->type == 1 && !ft_strcmp(tmp->str, "ls") && check_ls == 0)
 		{
 				check_ls = 1;
 				tmp = data->token;
@@ -94,7 +94,7 @@ int	parse_ls(t_data *data, int check_ls)
 				STDERR);
 			return (0);
 		}
-		else if (tmp->type == 2 && check_ls == 1)
+		else if (tmp->str[0] != '-' && tmp->type == 2 && check_ls == 1)
 		{
 			ft_putstr_fd("ls: cannot access '", STDERR);
 			ft_putstr_fd(tmp->str, STDERR);

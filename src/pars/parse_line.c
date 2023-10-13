@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 16:58:13 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 22:19:13 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	find_intruder(t_token *token, char c)
 	i = -1;
 	if (!token->str)
 		return (1);
-	while (token->str[++i])
+	while (token->str[++i] && token->type != 3)
 	{
 		if (token->str[i] == c)
 		{
 			if (c == '|')
 			{
-				ft_putstr_fd("minishell: syntax error ", STDERR); 
+				ft_putstr_fd("minishell : ", STDERR);
 				ft_putendl_fd("near unexpected token `|'", STDERR);
 			}
 			return (0);
@@ -38,13 +38,13 @@ int	parse_pipe(t_token *cmd)
 {
 	if (cmd->next && (cmd->type == 3 && cmd->next->type == 3))
 	{
-		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
+		ft_putendl_fd("minishell: syntax error near unexpected token lol `|'",
 			STDERR);
 		return (0);
 	}
 	else if (cmd->type == 3 && ft_strlen(cmd->str) == 1)
 	{
-		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
+		ft_putendl_fd("minishell: syntax error near unexpected token zgeg`|'",
 			STDERR);
 		return (0);
 	}
@@ -61,13 +61,13 @@ int	parse_pipe_while(t_token *cmd)
 		if (tmp->type == 3 && (tmp->str[1] == '|' || !find_intruder(tmp, '<')
 				|| !find_intruder(tmp, '>')))
 		{
-			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
+			ft_putendl_fd("minishell: syntax error near unexpected token zboub `|'",
 				STDERR);
 			return (0);
 		}
 		else if (tmp->next && tmp->type == 3 && tmp->next->type == 3)
 		{
-			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
+			ft_putendl_fd("minishell: syntax error near unexpected token greu`|'",
 				STDERR);
 			return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/13 17:04:43 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 20:17:02 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		make_pwd(t_env *env);
 // echo.c
 int		is_echo(char *line);
 int		handle_echo_options(char **arg, int *cur_pos, int flags);
-int		make_echo(char **arg);
+int		make_echo(t_data *data, char **arg);
 // exit.c
 int		str_isnum(char *str);
 int		make_exit(t_data *data, char **cmd);

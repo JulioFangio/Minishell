@@ -3,38 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/12 16:49:36 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:57:09 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static void	put_fd_in_data(t_data *data)
+{
+	t_token	*tmp;
+
+	if (data->check_hdc != 1)
+		data->fd_in = 0;
+	data->fd_out = 1;
+	tmp = data->token;
+	while (tmp && tmp->type != 3)
+	{
+		if (tmp->next && tmp->next->str && (tmp->type == OPEN_CHEVRON))
+			data->fd_in = open(tmp->next->str, O_CREAT, O_RDWR, 0666);
+		else if (tmp->next && tmp->next->str && (tmp->type == CHEVRON
+				|| tmp->type == DOUBLE_CHEVRON))
+		{
+			if (data->fd_out != 1)
+				close(data->fd_out);
+			data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR | O_TRUNC, 0666);
+		}
+		tmp = tmp->next;
+	}
+	printf("data in = %d et data out = %d\n", data->fd_in, data->fd_out);
+}
+
 void	exec_redir(t_data *data, t_token *token)
 {
-	int		pipe;
-	t_token	*prev_tok;
-
-	pipe = 0;
-	prev_tok = get_prev_token(token, 0);
-	//printf("INSIDE CHEVRON: %s\n", prev_tok->str);
-	if (check_token(prev_tok, CHEVRON))
-	{
-		if (prev_tok)
-			printf("INSIDE CHEVRON: %s\n", prev_tok->str);
-		do_redir(data, token, CHEVRON);
-	}
-	else if (check_token(prev_tok, DOUBLE_CHEVRON))
-		do_redir(data, token, DOUBLE_CHEVRON);
-	else if (check_token(prev_tok, OPEN_CHEVRON))
-		redir_chev(data, token);
-	else if (check_token(prev_tok, PIPE))
-		pipe = do_pipe(data);
-	if ((check_token(prev_tok, PIPE) || !prev_tok)
-		&& data->err_redir == 0 && pipe != 1)
-		exec_command(data, token);
+	put_fd_in_data(data);
+	exec_command(data, token);
 }
 
 void	launch_minishell(t_data *data)
