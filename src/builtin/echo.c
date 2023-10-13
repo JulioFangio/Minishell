@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <errno.h>
 
 int	is_echo(char *line)
 {
@@ -63,6 +64,10 @@ int	make_echo(t_data *data, char **arg)
 
 	i = 1;
 	flags = 0;
+	if (write(data->fd_out, "\0", 1) == -1)
+		if (errno == ENOSPC)
+			return (ft_putendl_fd(
+					"echo: write error: No space left on device", 2), 1);
 	if (tab_size(arg) > 1)
 	{
 		flags = handle_echo_options(arg, &i, flags);
