@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/13 20:17:02 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 22:39:28 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@
 int		new_oldpath(t_env *env);
 int		new_path(t_env *env);
 int		handle_directory_change(int directory, t_env *env);
-int		make_cd(char **arg, t_env *env);
+int		make_cd(t_data *data, char **arg, t_env *env);
 // cd_utils.c
 char	*get_path(t_env *env, char *var, size_t len);
 char	*get_oldpwd_path(char *path, t_env *env);
 // pwd.c
-int		make_pwd(t_env *env);
+int		make_pwd(t_data *data, t_env *env);
 // echo.c
 int		is_echo(char *line);
 int		handle_echo_options(char **arg, int *cur_pos, int flags);

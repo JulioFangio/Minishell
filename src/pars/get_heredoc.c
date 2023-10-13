@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 20:56:41 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 23:08:44 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 	}
 	data->check_hdc = 1;
 	data->fd_in = fds[1];
+	close(fds[0]);
+	close(fds[1]);
 	free_and_close_data(data, 50);
 	free_env(data->env);
 	free(line);
@@ -76,7 +78,7 @@ void	fork_heredoc(t_data *data, t_token *token)
 		create_heredoc(data, token, fds);
 	}
 	close(fds[0]);
-	// close(fds[1]); a verif !!!!!!!!!!!!!!
+	close(fds[1]);
 	waitpid(child, &status, 0);
 }
 

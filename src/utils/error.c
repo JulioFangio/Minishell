@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/12 16:47:34 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:19:26 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	child_error(char *path)
 	else
 		result = 126;
 	ft_close_fd(fd);
-	//free_and_close_data(data, );
+	free_and_close_data(data, 66);
 	free_env(data->env);
 	return (result);
 }

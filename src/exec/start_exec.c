@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/13 20:57:09 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/13 23:00:11 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	launch_minishell(t_data *data)
 		ft_close_all_fd(data);
 		reset_to_initial_fd(data);
 		dup2(data->in, STDIN);
-		dup2(data->out, STDOUT);
+		dup2(data->out, data->fd_out);
 		waitpid(-1, &status, 0);
 		status = WEXITSTATUS(status);
 		if (data->end == 0)
