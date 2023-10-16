@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:05 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 16:58:28 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:10:58 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	str_isnum(char *str)
 int	make_exit(t_data *data, char **cmd)
 {
 	data->exit = 1;
-	ft_putendl_fd("exit", STDERR);
+	ft_putendl_fd("exitl", STDERR);
 	if (cmd[1] && str_isnum(cmd[1]))
 	{
 		data->result = 128;

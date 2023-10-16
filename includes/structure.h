@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/15 15:04:58 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 14:48:06 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	int		exec;
 	int		*pids;
 	int		idx_pid;
+	int		check;
 	int		err_redir;
 	int		exit;
 	int		end;

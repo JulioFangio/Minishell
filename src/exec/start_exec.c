@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/15 19:24:00 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 14:48:18 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ static void	set_pid_tab(t_data *data)
 
 void	launch_minishell(t_data *data)
 {
-	int		status;
+	// int		status;
 	t_token	*token;
-	int 	check;
 
 	set_pid_tab(data);
-	check = is_there_a_pipe(data->token);
+	data->check = is_there_a_pipe(data->token);
 	data->idx_pid = 0;
 	token = iter_token_cmd(data->token, 0);
 	while (data->exit == 0 && token)
@@ -69,19 +68,19 @@ void	launch_minishell(t_data *data)
 		data->parent = 1;
 		data->exec = 1;
 		data->end = 1;
-		exec_redir(data, token, check);
-		ft_close_all_fd(data);
-		reset_to_initial_fd(data);
-		waitpid(-1, &status, 0);
-		status = WEXITSTATUS(status);
-		if (data->end == 0)
-			data->result = status;
-		if (data->parent == 0)
-		{
-			free_and_close_data(data, 8);
-			exit(data->result);
-		}
-		data->err_redir = 0;
+		exec_redir(data, token, data->check);
+		// ft_close_all_fd(data);
+		// reset_to_initial_fd(data);
+		// waitpid(-1, &status, 0);
+		// status = WEXITSTATUS(status);
+		// if (data->end == 0)
+		// 	data->result = status;
+		// if (data->parent == 0)
+		// {
+		// 	free_and_close_data(data, 8);
+		// 	exit(data->result);
+		// }
+		// data->err_redir = 0;
 		token = iter_token_cmd(token, 1);
 		data->token = token;
 	}
