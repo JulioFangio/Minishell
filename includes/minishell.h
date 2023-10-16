@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/12 16:30:46 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:24:44 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,25 @@
 int		new_oldpath(t_env *env);
 int		new_path(t_env *env);
 int		handle_directory_change(int directory, t_env *env);
-int		make_cd(char **arg, t_env *env);
+int		make_cd(t_data *data, char **arg, t_env *env);
 // cd_utils.c
 char	*get_path(t_env *env, char *var, size_t len);
 char	*get_oldpwd_path(char *path, t_env *env);
 // pwd.c
-int		make_pwd(t_env *env);
+int		make_pwd(t_data *data, t_env *env);
 // echo.c
 int		is_echo(char *line);
 int		handle_echo_options(char **arg, int *cur_pos, int flags);
-int		make_echo(char **arg);
+int		make_echo(t_data *data, char **arg);
 // exit.c
 int		str_isnum(char *str);
 int		make_exit(t_data *data, char **cmd);
 // env.c
-int		make_env(t_env *env);
+int		make_env(t_data *data, t_env *env);
 // unset.c
-int		unset_export(char **arg, t_data *data, int i);
-int		unset_env(char **arg, t_data *data, int i);
-int		make_unset(char **arg, t_data *data);
+// int		unset_export(char **arg, t_data *data, int i);
+// int		unset_env(char **arg, t_data *data, int i);
+int		make_unset(t_data *data, char **cmd);
 // unset_utils.c
 int		len_to_equal(char *env);
 char	*ft_strchr_minishell(const char *str, char c);
@@ -107,6 +107,7 @@ int		comp_len_val(char *arg, char *value);
 void	free_export(t_data *data, t_env *export);
 int		remove_export(t_data *data, char **arg, int i);
 // export.c
+int		make_export(t_data *data, char **cmd);
 
 		/// ENV
 // getenv.c
@@ -137,7 +138,7 @@ int		env_add_value_to_list(char *value, t_env *env);
 int		is_builtin(char *cmd);
 int		exec_builtin(t_data *data, char **cmd, t_token *token);
 // exec_pipe.c
-int		do_pipe(t_data *data);
+void	do_pipe(t_data *data);
 // exec_redir
 void	do_redir(t_data *data, t_token *token, int type);
 void	redir_chev(t_data *dat, t_token *token);
@@ -154,7 +155,7 @@ int		child_process(char *path, char **arg, t_data *data, t_env *env);
 char	*child_dir(char *bin_cmd, char *cmd);
 int		exec_bin(char **arg, t_data *data, t_env *env);
 // start_exec.c
-void	exec_redir(t_data *data, t_token *token);
+void	exec_redir(t_data *data, t_token *token, int nb);
 void	launch_minishell(t_data *data);
 
 		/// UTILS
@@ -210,7 +211,7 @@ t_token	*make_cmd(char **tab);
 t_token	*ft_tokenlast(t_token *cmd);
 void	ft_tokenadd_back(t_token **cmd, t_token *new);
 int		ft_lentab(char **tab);
-char	*tronc_optn(char *tab, int nb);
+char	*tronc_optn(t_data *data, char *tab, int nb);
 int		check_quotes(char *line);
 int		check_line(char *line);
 int		how_long(char *line, char c, int count, size_t i);
@@ -220,11 +221,10 @@ char	*keep_spaces(char *line);
 int		shorten(char *line);
 char	*make_spaces(char *line, char *res, size_t i, int j);
 int		check_end(char *line, int i, char c);
-void	free_lst(t_token *cmd);
-char	*pick_env(char *tab);
-char	*check_for_var(char *tronc, int nb);
+char	*pick_env(t_data *data, char *tab);
+char	*check_for_var(t_data *data, char *tronc, int nb);
 char	*get_new_line(char *res, char *tronc, char *gvar, int lv);
-char	*extract_var(char *tronc, char *var);
+char	*extract_var(t_data *data, char *tronc, char *var);
 char	*get_var(char *tronc);
 int		skip_quotes(char *line, size_t i);
 char	*ft_dupquotes(const char *str, char q);
@@ -243,26 +243,32 @@ int		ext_tilde(char *tab);
 int		ext_bracers(char *tab);
 
 // cmd
-t_token	*get_token(char **tab);
-t_token	*fill_list(t_token *cmd, char **tab, int i, int check);
-void	fill_elem(t_token *cmd, char *tab, char *str, int nb);
-void	fill_elem_tronc(t_token *cmd, char *tab, char *str);
-void	fill_elem_var(t_token *cmd, char *tab, char *str, int nb);
-void	fill_elem_redir(t_token *cmd, char *tab, char *str);
+void	get_token(t_data *data);
+void	fill_list(t_data *data, int check);
+void	fill_elem(t_token *cmd, char *tab, int nb);
+void	fill_elem_tronc(t_data *data, t_token *cmd, char *tab);
+void	fill_elem_var(t_data *data, t_token *cmd, char *tab, int nb);
+void	fill_elem_redir(t_token *cmd, char *tab);
 int		scenario(char *tab, int check);
-void	exec_scenario(t_token *cmd, char *tab, int nb);
+void	exec_scenario(t_data *data, t_token *cmd, char *tab, int nb);
 int		ft_optn(t_token *cmd, char *tab, int optn);
 int		check_built(char *s1, const char *s2);
 int		built_cmp(char *tab);
 
 //parse_line
 int		parse_line(t_data *data);
+int		parse_ls(t_data *data, int check_ls);
+int		parse_first_token(t_token *token);
+int		find_intruder(t_token *token, char c);
+int		parse_heredoc(t_token *token);
 int		parse_pipe(t_token *cmd);
 int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
 t_data	*recuperate_data(t_data *data);
 void	check_heredoc(t_data *data);
 char	*get_prompt_heredoc(void);
+int		is_there_a_pipe(t_token *token);
+
 //split mini
 char	**split_mini(char const *s, char c);
 

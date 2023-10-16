@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:59:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/26 17:38:10 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:39:13 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ It can be used to change directories to the HOME directory,
 the previous directory, a specific directory or to display an appropriate
 error if the wrong argument is given.
 It also updates the "OLDPWD" and "PWD" environment variables accordingly.*/
-int	make_cd(char **arg, t_env *env)
+int	make_cd(t_data *data, char **arg, t_env *env)
 {
 	int	res;
 
@@ -96,7 +96,7 @@ int	make_cd(char **arg, t_env *env)
 	else if (ft_strcmp(arg[1], "-") == 0)
 	{
 		res = handle_directory_change(1, env);
-		make_pwd(env);
+		make_pwd(data, env);
 	}
 	else
 	{

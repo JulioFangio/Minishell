@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:34:21 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/04 16:21:51 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/14 22:51:48 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strchr_minishell(const char *str, char c)
 		len++;
 	if (len == ft_strlen(str))
 		return (NULL);
-	res = malloc(sizeof(char) * (len + 1));
+	res = ft_calloc((len + 1), sizeof(char));
 	if (!res)
 		return (ft_exit(ERR_MALLOC), NULL);
 	while (i++ < len)
@@ -47,7 +47,6 @@ char	*ft_strchr_minishell(const char *str, char c)
 		res[i] = str[i];
 		i++;
 	}
-	res[i] = '\0';
 	return (res);
 }
 

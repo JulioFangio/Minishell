@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 16:59:23 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:21:44 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,24 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 	char	**env_tab;
 
 	result = 0;
-	data->pid = fork();
-	if (data->pid == 0)
-	{
-		tmp = env_malloc(env);
-		env_tab = ft_split(tmp, '\n');
-		if (!env_tab)
-			return (ft_exit(ERR_MALLOC), FAILURE);
-		ft_memdel(tmp);
-		if (ft_strchr(path, '/'))
-			execve(path, arg, env_tab);
-		result = ret_child(env_tab, path, result);
-		clean_child_process(data, env, path, arg);
-		exit(result);
-	}
-	else
-		waitpid(data->pid, &result, 0);
+	// data->pid = fork();
+	// if (data->pid == 0)
+	// {
+	tmp = env_malloc(env);
+	env_tab = ft_split(tmp, '\n');
+	if (!env_tab)
+		return (ft_exit(ERR_MALLOC), FAILURE);
+	ft_memdel(tmp);
+	if (ft_strchr(path, '/'))
+		execve(path, arg, env_tab);
+	result = ret_child(env_tab, path, result);
+	clean_child_process(data, env, path, arg);
+	// }
+	// else
+	// {
+	// 	waitpid(data->pid, &result, 0);
+	// 	// exit(0);				// Wrong, it appeared you quit later
+	// }
 	result /= 256;
 	return (result);
 }

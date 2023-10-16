@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 19:46:09 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/14 13:56:40 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 int	start(char *line, t_data *data)
 {
-	t_token				*token;
-
 	data->tab = get_split(line);
 	if (data->tab == (char **)1)
 		return (1);
-	token = get_token(data->tab);
-	data->token = token;
+	get_token(data);
 	if (!parse_line(data))
 	{
 		free_and_close_data(data, 0);
@@ -28,6 +25,11 @@ int	start(char *line, t_data *data)
 	}
 	recuperate_data(data);
 	check_heredoc(data);
+	if (!parse_ls(data, 0))
+	{
+		free_and_close_data(data, 0);
+		return (1);
+	}
 	launch_minishell(data);
 	free_and_close_data(data, 45);
 	return (1);

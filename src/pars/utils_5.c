@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/12 16:52:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:52:57 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_var(char *tronc)
 	return (var);
 }
 
-char	*extract_var(char *tronc, char *var)
+char	*extract_var(t_data *data, char *tronc, char *var)
 {
 	int		lv;
 	int		lg;
@@ -48,11 +48,13 @@ char	*extract_var(char *tronc, char *var)
 	char	*res;
 	char	*gvar;
 
-	gvar = pick_env(var);
+	if (var[0] == '$' && var[1] == '?')
+		gvar = ft_itoa(data->error_code);
+	else
+		gvar = pick_env(data, var);
 	lv = ft_strlen(var);
 	lg = ft_strlen(gvar);
 	lr = lg - lv;
-	// printf("gvar = %s, var = %s, tronc = %s\n", gvar, var, tronc);
 	res = ft_calloc((ft_strlen(tronc) + lr) + 1, sizeof(char));
 	res = get_new_line(res, tronc, gvar, lv);
 	if (strcmp(gvar, var))
@@ -98,7 +100,7 @@ char	*get_new_line(char *res, char *tronc, char *gvar, int lv)
 	return (res);
 }
 
-char	*check_for_var(char *tronc, int nb)
+char	*check_for_var(t_data *data, char *tronc, int nb)
 {
 	int		i;
 	char	*var;
@@ -107,14 +109,17 @@ char	*check_for_var(char *tronc, int nb)
 	i = -1;
 	var = NULL;
 	res = NULL;
-	if (nb == 0)
+	if (nb == 0 || !data->env)
 		return (tronc);
 	while (tronc[++i])
 	{
 		if (tronc[i] == '$')
 		{
-			var = get_var(tronc);
-			res = extract_var(tronc, var);
+			if (tronc[i + 1] == '?')
+				var = ft_strdup("$?");
+			else
+				var = get_var(tronc);
+			res = extract_var(data, tronc, var);
 			free(var);
 			free (tronc);
 			return (res);

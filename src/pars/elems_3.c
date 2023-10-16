@@ -3,43 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   elems_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 19:54:39 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:47:47 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exec_scenario(t_token *cmd, char *tab, int nb)
+void	exec_scenario(t_data *data, t_token *cmd, char *tab, int nb)
 {
 	if (nb == 5)
-		fill_elem_var(cmd, tab, "variable", 0);
+		fill_elem_var(data, cmd, tab, 15); //variable
 	else if (nb == 7)
-		fill_elem_redir(cmd, tab, "redir");
+		fill_elem_redir(cmd, tab); //redir
 	else if (nb == 8)
-		fill_elem(cmd, tab, "heredoc", 7);
+		fill_elem(cmd, tab, 7); //heredoc
 	else if (nb == 9)
-		fill_elem(cmd, tab, "pipe", 3);
+		fill_elem(cmd, tab, 3); //pipe
 	else if (nb == 10)
-		fill_elem_tronc(cmd, tab, "optn/arg");
+		fill_elem_tronc(data, cmd, tab); //optn/arg
 	else if (nb == 11)
-		fill_elem(cmd, tab, "builtin", 1);
+		fill_elem(cmd, tab, 1); //builtin
 	else if (nb == 12)
-		fill_elem(cmd, tab, "command", 1);
+		fill_elem(cmd, tab, 1); //cmd
 	else if (nb == 13)
-		fill_elem(cmd, tab, "optn/arg", 2);
+		fill_elem(cmd, tab, 2); //optn/arg
 }
 
 int	ft_optn(t_token *cmd, char *tab, int optn)
 {
 	if (optn == 7)
-		fill_elem(cmd, tab, "name", 1);
+		fill_elem(cmd, tab, 9); //name
 	else if (optn == 8)
-		fill_elem(cmd, tab, "delimiter", 8);
+		fill_elem(cmd, tab, 8); //delimiter
 	return (0);
 }
-
-// char	*recup_env()
-// "coucou >>ca va"

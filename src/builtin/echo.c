@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/03 18:10:33 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:18:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <errno.h>
 
 int	is_echo(char *line)
 {
@@ -56,25 +57,30 @@ int	handle_echo_options(char **arg, int *cur_pos, int flags)
 	return (flags);
 }
 
-int	make_echo(char **arg)
+int	make_echo(t_data *data, char **arg)
 {
 	int	i;
 	int	flags;
 
 	i = 1;
 	flags = 0;
+	if (write(data->fd_out, "\0", 1) == -1)
+		if (errno == ENOSPC)
+			return (ft_putendl_fd(
+					"echo: write error: No space left on device", 2), 1);
 	if (tab_size(arg) > 1)
 	{
 		flags = handle_echo_options(arg, &i, flags);
 		while (arg[i])
 		{
-			ft_putstr_fd(arg[i], STDOUT);
+			ft_putstr_fd(arg[i], data->fd_out);
 			if (arg[i + 1] && arg[i][0] != '\0')
-				ft_putchar_fd(' ', STDOUT);
+				ft_putchar_fd(' ', data->fd_out);
 			i++;
 		}
 	}
 	if (flags == 0)
-		ft_putchar_fd('\n', STDOUT);
+		ft_putchar_fd('\n', data->fd_out);
 	return (SUCCESS);
 }
+//grer -n

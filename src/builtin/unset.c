@@ -3,71 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/08 12:48:32 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:56:43 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-
-/*scans the chained list of environment variables and deletes
-the environment variable specified by args[nb] if found*/
-int	unset_env(char **arg, t_data *data, int i)
+static void	delete_t_env(t_env *env, char *del, int check)
 {
-	t_env	*env;
+	t_env	*tmp;
+	t_env	*incr;
+	t_env	*incr2;
+
+	tmp = env;
+	incr = NULL;
+	incr2 = NULL;
+	while (tmp)
+	{
+		if (tmp->next && !ft_strncmp(tmp->next->value, del, check))
+		{
+			if (tmp->next->next)
+				incr = tmp->next->next;
+			incr2 = tmp->next;
+			if (incr2->value)
+			{
+				free(incr2->value);
+				incr2->value = NULL;
+			}
+			free(incr2);
+			tmp->next = incr;
+		}
+		tmp = tmp->next;
+	}
+}
+
+static int	something_to_unset(t_data *data, char *arg)
+{
+	int		check;
 	t_env	*tmp;
 
-	env = data->env;
-	if ((comp_len_val(env->value, arg[i]) == SUCCESS)
-		&& ft_strncmp(arg[i], env->value, len_to_equal(env->value)))
+	check = 0;
+	tmp = data->env;
+	while (arg[check] && arg[check] != '=')
+		check++;
+	while (tmp)
 	{
-		if (env->next)
-			data->env = env->next;
-		free_env_unset(data, env->next);
-		return (0);
-	}
-	while (env && env->next)
-	{
-		if ((comp_len_val(env->next->value, arg[i]) == SUCCESS)
-			&& !ft_strncmp(arg[i], env->next->value, len_to_equal(env->next->value)))
+		if (!ft_strncmp(tmp->value, arg, check))
 		{
-			tmp = env->next->next;
-			free_env_unset(data, env->next);
-			env->next = tmp;
-			return (0);
+			delete_t_env(data->env, tmp->value, check);
+			return (1);
 		}
-		env = env->next;
+		tmp = tmp->next;
 	}
-	return (0);
+	return (1);
 }
 
-int	unset_export(char **arg, t_data *data, int i)
-{
-	t_env	*export;
-	int		result;
-
-	export = data->export;
-	if (!(arg[i]) || export->value == NULL)
-		return (1);
-	result = remove_export(data, arg, i);
-	return (result);
-}
-
-int	make_unset(char **arg, t_data *data)
+int	make_unset(t_data *data, char **cmd)
 {
 	int	i;
 
 	i = 1;
-	if (!(arg[i]))
-		return (0);
-	while (arg[i++])
+	while (cmd[i])
 	{
-		unset_env(arg, data, i);
-		unset_export(arg, data, i);
+		if (!cmd[i] || !something_to_unset(data, cmd[i]))
+			return (1);
+		i++;
 	}
-	return (0);
+	return (1);
 }

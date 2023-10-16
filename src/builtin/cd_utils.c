@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:59:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/09/26 17:39:15 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:49:17 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /*search for a specific environment variable (var) in a chained list of env
- and extract its value*/
+and extract its value*/
 char	*get_path(t_env *env, char *var, size_t len)
 {
 	size_t	i;

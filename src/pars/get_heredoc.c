@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 15:30:32 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:07:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,25 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 	char	*line;
 
 	line = NULL;
-	while (ft_strncmp(line, token->next->str, ft_strlen(line)))
+	while (ft_strcmp(line, token->next->str))
 	{
 		if (line)
 			free(line);
 		line = readline("> ");
 		if (line == NULL
-			|| !ft_strncmp(line, token->next->str, ft_strlen(line)))
+			|| !ft_strcmp(line, token->next->str))
 			get_out_of_heredoc(data, token, line);
 		else
 		{
-			line = check_for_var(line, 1);
-			printf("liiiiiiiiiiiiiiiiiiiiiine = %s\n", line);
+			line = check_for_var(data, line, 1);
 			write(fds[1], &line, ft_strlen(line));
 			write(fds[1], "\n", 1);
 		}
 	}
-	token->fd = fds[1];
+	data->check_hdc = 1;
+	data->fd_in = fds[1];
+	close(fds[0]);
+	close(fds[1]);
 	free_and_close_data(data, 50);
 	free_env(data->env);
 	free(line);
@@ -76,7 +78,7 @@ void	fork_heredoc(t_data *data, t_token *token)
 		create_heredoc(data, token, fds);
 	}
 	close(fds[0]);
-	// close(fds[1]); a verif !!!!!!!!!!!!!!
+	close(fds[1]);
 	waitpid(child, &status, 0);
 }
 
@@ -90,7 +92,6 @@ void	check_heredoc(t_data *data)
 		if (tmp->type == 7)
 		{
 			fork_heredoc(data, tmp);
-			printf("laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
 		}
 		tmp = tmp->next;
 	}

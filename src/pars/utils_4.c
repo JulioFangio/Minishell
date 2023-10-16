@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/10 11:56:30 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:53:55 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,11 @@ char	*keep_spaces(char *line)
 char	*remake_line(char *line, int n, int l)
 {
 	char	*res;
-	// char	*res2;
-	// char	*res3;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	res = ft_calloc(l + n + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	res = make_spaces(line, res, 0, (l + n));
-	// res2 = remove_spaces(res, i, j);
-	// res3 = keep_spaces(res);
-	// free(res);
-	// free(res2);
 	return (res);
 }
 
