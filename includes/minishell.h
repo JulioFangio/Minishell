@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/15 18:24:44 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 19:49:12 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int		exec_builtin(t_data *data, char **cmd, t_token *token);
 // exec_pipe.c
 void	do_pipe(t_data *data);
 // exec_redir
-void	do_redir(t_data *data, t_token *token, int type);
+void	do_redir(t_data *data);
 void	redir_chev(t_data *dat, t_token *token);
 // exec_heredoc.c
 char	*strcpy_heredoc(char *dest, const char *src);
@@ -149,13 +149,13 @@ char	*get_input_heredoc(char *limiter);
 void	open_heredoc(t_data *data);
 void	redir_heredoc(t_data *data, t_token *token);
 // exec_cmd.c
-void	exec_command(t_data *data, t_token *token);
+void	exec_command(t_data *data);
 // exec_bin.c
 int		child_process(char *path, char **arg, t_data *data, t_env *env);
 char	*child_dir(char *bin_cmd, char *cmd);
 int		exec_bin(char **arg, t_data *data, t_env *env);
 // start_exec.c
-void	exec_redir(t_data *data, t_token *token, int nb);
+void	exec_redir(t_data *data);
 void	launch_minishell(t_data *data);
 
 		/// UTILS

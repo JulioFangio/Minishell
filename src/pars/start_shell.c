@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/14 13:56:40 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 20:52:47 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	run_shell_loop(t_data *data)
 
 	using_history();
 	redir();
-	while (42 && data->exit == 0)
+	while (data->exit == 0)
 	{
 		line = ft_readline();
 		if (line == NULL)

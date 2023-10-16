@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 14:48:06 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 21:15:54 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_data
 	int		result;
 	int		in;
 	int		out;
-	int		pipe_in;
-	int		pipe_out;
+	// int		pipe_in;
+	// int		pipe_out;
 	int		error_code;
 	int		fd_in;
 	int		fd_out;
@@ -55,6 +55,7 @@ typedef struct s_data
 	int		err_redir;
 	int		exit;
 	int		end;
+	int		pipefd[2];
 }			t_data;
 
 #endif

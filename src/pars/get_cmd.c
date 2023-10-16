@@ -56,10 +56,10 @@ void	get_token(t_data *data)
 	data->token = make_cmd(data->tab);
 	fill_list(data, 0);
 	tmp = data->token;
-	while (tmp)
-	{
-		printf(" str = %s / type = %d\n", tmp->str, tmp->type);
-		tmp = tmp->next;
-	}
+	// while (tmp)
+	// {
+	// 	printf(" str = %s / type = %d\n", tmp->str, tmp->type);
+	// 	tmp = tmp->next;
+	// }
 }
 // ##

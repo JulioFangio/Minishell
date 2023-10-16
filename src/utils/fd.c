@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:21:55 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 14:18:52 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 21:15:44 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,22 @@
 
 void	ft_close_fd(int fd)
 {
-	if (fd > 0)
+	if (fd > -1)
 		close(fd);
 }
 
 void	ft_close_all_fd(t_data *data)
 {
-	if (data->fd_in != 0)
+	if (data->fd_in > 2)
 		ft_close_fd(data->fd_in);
-	if (data->fd_out != 1)
+	if (data->fd_out > 2)
 		ft_close_fd(data->fd_out);
-	ft_close_fd(data->pipe_in);
-	ft_close_fd(data->pipe_out);
 }
 
 void	reset_to_initial_fd(t_data *data)
 {
-	// data->pid = -1;
-	data->fd_in = 0;
-	data->fd_out = 1;
-	data->pipe_in = -1;
-	data->pipe_out = -1;
+	data->fd_in = -1;
+	data->fd_out = -1;
+	// data->pipe_in = -1;
+	// data->pipe_out = -1;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 14:48:18 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/16 21:12:10 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@ int	is_there_a_pipe(t_token *token)
 	return (0);
 }
 
-void	exec_redir(t_data *data, t_token *token, int nb)
+void	exec_redir(t_data *data)
 {
-	//redefinir les fd aux nouvelles valeurs des redirections pour la cmd avant le pipe 
-	if (nb == 1)
-		do_pipe(data);
-	else
-		exec_command(data, token);
-	//executer la commande avec les bons fd
-	//rediriger les fd de la comande et les setups pour la comande c + 1 apres le pipe
+	
+	do_pipe(data);
+	exec_command(data);
 }
 
 static void	set_pid_tab(t_data *data)
@@ -46,12 +42,11 @@ static void	set_pid_tab(t_data *data)
 	tmp = data->token;
 	while (tmp)
 	{
-		if (tmp->type == 3)
+		if (tmp->type == PIPE)
 			count++;
 		tmp = tmp->next;
 	}
 	data->pids = ft_calloc(count, sizeof(int));
-	// prtect
 }
 
 void	launch_minishell(t_data *data)
@@ -61,6 +56,7 @@ void	launch_minishell(t_data *data)
 
 	set_pid_tab(data);
 	data->check = is_there_a_pipe(data->token);
+	printf("PIPE NUM : %d\n", data->check);
 	data->idx_pid = 0;
 	token = iter_token_cmd(data->token, 0);
 	while (data->exit == 0 && token)
@@ -68,11 +64,37 @@ void	launch_minishell(t_data *data)
 		data->parent = 1;
 		data->exec = 1;
 		data->end = 1;
-		exec_redir(data, token, data->check);
-		// ft_close_all_fd(data);
+		exec_redir(data);
+		// ft_close_all_fd(data); ->rendre le prompte
 		// reset_to_initial_fd(data);
+		token = iter_token_cmd(token, 1);
+		data->token = token;
+		// data->check = is_there_a_pipe(data->token);
+	}
+	ft_close_all_fd(data); 
+	reset_to_initial_fd(data);
+	int i = -1;
+	int status;
+	while(++i < data->idx_pid)
+	{
+		waitpid(data->pids[i], &status, 0);
+	}
+	data->result = WEXITSTATUS(status);
+	data->idx_pid = 0;
+	free(data->pids);
+}
+
+
+		// attendez l enfant ?
 		// waitpid(-1, &status, 0);
+
+		//reset in out
+		// dup2(data->in, STDIN);
+		// dup2(data->out, STDOUT);
+		
 		// status = WEXITSTATUS(status);
+
+		//
 		// if (data->end == 0)
 		// 	data->result = status;
 		// if (data->parent == 0)
@@ -80,10 +102,6 @@ void	launch_minishell(t_data *data)
 		// 	free_and_close_data(data, 8);
 		// 	exit(data->result);
 		// }
-		// data->err_redir = 0;
-		token = iter_token_cmd(token, 1);
-		data->token = token;
-	}
-	data->idx_pid = 0;
-	free(data->pids);
-}
+
+		// avancer dans boucle
+		
