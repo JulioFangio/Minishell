@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 19:49:12 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:39:09 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void	redir(void);
 //	other
 int		start(char *line, t_data *data);
 void	run_shell_loop(t_data *data);
-char	**get_split(char *line);
+char	**get_split(t_data *data, char *line);
 char	*ft_readline(void);
 char	*get_prompt(void);
 

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 21:15:50 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:59:15 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,15 @@ static void	put_fd_in_data(t_data *data)
 {
 	t_token	*tmp;
 
-	
 	tmp = data->token;
-
 	if (is_there_a_pipe(data->token))
-	{
 		data->fd_out = data->pipefd[1];
-	}
 	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->next && tmp->next->str && (tmp->type == OPEN_CHEVRON))
 		{
 			ft_close_fd(data->fd_in);
-			data->fd_in = open(tmp->next->str, O_CREAT, O_RDWR, 0666);
+			data->fd_in = open(tmp->next->str, O_CREAT | O_RDWR, 0777);
 		}
 		else if (tmp->next && tmp->next->str && (tmp->type == CHEVRON
 				|| tmp->type == DOUBLE_CHEVRON))
@@ -37,9 +33,9 @@ static void	put_fd_in_data(t_data *data)
 			// si double chevron changer open
 			ft_close_fd(data->fd_out);
 			if (tmp->type == CHEVRON)
-				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR | O_TRUNC, 0666);
+				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR | O_TRUNC, 0777);
 			else
-				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR |O_APPEND , 0666);
+				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR | O_APPEND, 0777);
 		}
 		tmp = tmp->next;
 	}
@@ -79,14 +75,13 @@ void	exec_command(t_data *data)
 		data->exec = exec_builtin(data, cmd, data->token);
 		return;	
 	}
-
-	
-	
 	pid_t pid =fork();
-	
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (pid == 0)
 	{
 		//close
+		redir();
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
 			exec_bin(cmd, data, data->env);
 		

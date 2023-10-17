@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_elems.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:42:04 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/14 14:17:52 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:28:19 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	fill_elem_tronc(t_data *data, t_token *cmd, char *tab)
 	char	*res;
 
 	if (tab[0] == '"')
-		res = tronc_optn(data, tab, 1);
+		res = ft_strdup(tronc_optn(data, tab, 1));
 	else
-		res = tronc_optn(data, tab, 0);
+		res = ft_strdup(tronc_optn(data, tab, 0));
 	cmd->str = ft_strdup(res);
 	if (!cmd->str)
 		cmd->type = 0;

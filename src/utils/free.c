@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/14 14:40:38 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:03:38 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ void	free_tab(char **tab)
 	int		i;
 
 	i = -1;
-	while (tab[++i])
+	if (tab)
 	{
-		if (tab[i])
+		while (tab[++i])
 		{
-			free(tab[i]);
-			tab[i] = NULL;
+			if (tab[i] != NULL)
+			{
+				ft_memdel(tab[i]);
+			}
 		}
+		ft_memdel(tab);
 	}
-	free(tab);
-	tab = NULL;
 }
 
 void	free_env(t_env *env)

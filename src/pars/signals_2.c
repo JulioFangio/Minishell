@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/11 13:41:44 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:29:08 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,16 @@ void	sigint_handler_hd(int signum)
 
 void	sigquit_handler_hd(int signum)
 {
+	t_data	*data;
+
 	(void)signum;
-	write(STDOUT_FILENO, "\033[2K", 4);
-	rl_replace_line("", 1);
+	data = NULL;
+	data = recuperate_data(data);
+	// write(STDOUT_FILENO, "\033[2K", 4);
+	ft_putendl_fd("^\\Quit (core dumped)", 2);
+	free_and_close_data(data, 7);
+	free_env(data->env);
+	exit (1);
 	// rl_redisplay();
 	// get_prompt_heredoc();
 }
@@ -57,6 +64,3 @@ void	redir_hd(t_data *data)
 	sq.sa_flags = 0;
 	sigaction(SIGQUIT, &sq, NULL);
 }
-
-
-// mettre le tab qui sert au split pour qu il puisse tre free avec free_and_close_data
