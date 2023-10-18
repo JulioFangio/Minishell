@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 19:24:59 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:29:39 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	exec_command(t_data *data)
 		&& token_is_pipe(data->token) == 0)
 	{
 		make_exit(data, cmd);
+		free_env(&data->env);
 		free_tab(cmd);
 		return ;
 	}
@@ -85,7 +86,6 @@ void	exec_command(t_data *data)
 		redir();
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
 			exec_bin(cmd, data, data->env);
-		free_tab(cmd);
 		exit(data->result); //changer
 	}
 	data->pids[data->idx_pid] = pid;

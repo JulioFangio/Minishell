@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 19:26:34 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:28:25 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int	exec_bin(char **arg, t_data *data, t_env *env)
 	bin_cmd = ft_split(env->value, ':');
 	if (!bin_cmd || (!arg[0] && !bin_cmd[0]))
 		return (FAILURE);
-		
 	path = child_dir(bin_cmd[0] + 5, arg[0]);
 	i_dir += 1;
 	while (arg[0] && bin_cmd[i_dir] && !path)
