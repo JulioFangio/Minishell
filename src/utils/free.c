@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 18:37:21 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:40:09 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,9 @@ void	free_and_close_data(t_data *data, int nb)
 		free_tab(data->tab);
 		data->tab = NULL;		
 	}
+	// if (data->pids)
+	// {
+	// 	ft_memdel(data->pids);
+	// }
 }
 

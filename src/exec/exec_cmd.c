@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 19:29:39 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:41:38 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	exec_command(t_data *data)
 		redir();
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
 			exec_bin(cmd, data, data->env);
+		free(data->pids);
 		exit(data->result); //changer
 	}
 	data->pids[data->idx_pid] = pid;
