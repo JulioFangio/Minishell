@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/18 15:18:18 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:36:31 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	run_shell_loop(t_data *data)
 		if (line == NULL)
 		{
 			free_and_close_data(data, 101);
-			free_env(data->env);
+			free_env(&data->env);
 			break ;
 		}
 		if (!start(line, data))
 		{
-			free_env(data->env);
+			free_env(&data->env);
 			break ;
 		}
 	}

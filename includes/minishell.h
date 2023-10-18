@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 15:58:37 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:35:56 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int		check_token(t_token *token, int type);
 int		is_def_type(t_token *token, int type);
 t_token	*iter_token_cmd(t_token *token, int iter);
 // free.c
-void	free_env(t_env *env);
+void	free_env(t_env **env);
 void	free_tab(char **tab);
 void	free_token(t_token *token);
 void	free_and_close_data(t_data *data, int nb);

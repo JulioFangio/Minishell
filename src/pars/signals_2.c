@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/17 16:29:08 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:36:24 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	sigint_handler_hd(int signum)
 	data = NULL;
 	data = recuperate_data(data);
 	free_and_close_data(data, 7);
-	free_env(data->env);
+	free_env(&data->env);
 	exit (1);
 }
 
@@ -43,7 +43,7 @@ void	sigquit_handler_hd(int signum)
 	// write(STDOUT_FILENO, "\033[2K", 4);
 	ft_putendl_fd("^\\Quit (core dumped)", 2);
 	free_and_close_data(data, 7);
-	free_env(data->env);
+	free_env(&data->env);
 	exit (1);
 	// rl_redisplay();
 	// get_prompt_heredoc();

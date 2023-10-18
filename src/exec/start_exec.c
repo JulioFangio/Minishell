@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 19:23:17 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:53:10 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	launch_minishell(t_data *data)
 	t_token *tmp;
 	int i;
 
+	status = 0;
 	tmp = data->token;
 	set_pid_tab(data);
 	data->check = is_there_a_pipe(tmp);
