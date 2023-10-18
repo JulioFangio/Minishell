@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/17 18:58:53 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:10:52 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_readline(void)
 	free(prompt);
 	if (line == NULL)
 	{
-		printf("exit DEBUG\n");
+		printf("exit DEBUG\n"); // ctrl + D ici
 		return (NULL);
 	}
 	add_history(line);

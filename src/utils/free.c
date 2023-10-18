@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 16:11:25 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:11:42 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tab(char **tab)
 				ft_memdel(tab[i]);
 			}
 		}
-		// ft_memdel(tab);
+		ft_memdel(tab);
 	}
 }
 
@@ -34,7 +34,6 @@ void	free_env(t_env *env)
 {
 	t_env	*tmp;
 
-	printf("iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii\n");
 	if (env)
 	{
 		while (env)
@@ -42,10 +41,9 @@ void	free_env(t_env *env)
 			tmp = env->next;
 			if (env->value && env)
 			{
-				printf("lolilolilolilolilo\n");
 				ft_memdel(env->value);
 			}
-			// ft_memdel(env);
+			ft_memdel(env);
 			env = tmp;
 		}
 	}
@@ -62,7 +60,7 @@ void	free_token(t_token *token)
 			tmp = token->next;
 			if (token->str && token)
 				ft_memdel(token->str);
-			// ft_memdel(token);
+			ft_memdel(token);
 			token = tmp;
 		}
 	}
@@ -74,24 +72,22 @@ void	free_and_close_data(t_data *data, int nb)
 	printf("Minishell program freeing in here %d\n", nb);
 	if (data->token)
 		free_token(data->token);
-	// if (data->export)
-	// 	free_env(data->export);
 	if (data->tab)
 		free_tab(data->tab);
 }
 
-void	free_env_unset(t_data *data, t_env *env)
-{
-	if (data->env == env && env->next == NULL)
-	{
-		ft_memdel(data->env->value);
-		data->env->value = NULL;
-		data->env->next = NULL;
-		return ;
-	}
-	ft_memdel(env->value);
-	ft_memdel(env);
-}
+// void	free_env_unset(t_data *data, t_env *env)
+// {
+// 	if (data->env == env && env->next == NULL)
+// 	{
+// 		ft_memdel(data->env->value);
+// 		data->env->value = NULL;
+// 		data->env->next = NULL;
+// 		return ;
+// 	}
+// 	ft_memdel(env->value);
+// 	ft_memdel(env);
+// }
 
 
 // void	free_data(t_data *data)
