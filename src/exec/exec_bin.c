@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 19:26:34 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:23:44 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 		execve(path, arg, env_tab);
 	result = ret_child(env_tab, path, result);
 	clean_child_process(data, env, path, arg);
-	printf("AFTER EXECVE \n");
 
 
 	// data->pid = fork();
