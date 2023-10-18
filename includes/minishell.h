@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 16:39:09 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:35:56 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int		check_token(t_token *token, int type);
 int		is_def_type(t_token *token, int type);
 t_token	*iter_token_cmd(t_token *token, int iter);
 // free.c
-void	free_env(t_env *env);
+void	free_env(t_env **env);
 void	free_tab(char **tab);
 void	free_token(t_token *token);
 void	free_and_close_data(t_data *data, int nb);
@@ -201,7 +201,7 @@ void	redir(void);
 //	other
 int		start(char *line, t_data *data);
 void	run_shell_loop(t_data *data);
-char	**get_split(t_data *data, char *line);
+char	**get_split(char *line);
 char	*ft_readline(void);
 char	*get_prompt(void);
 
@@ -271,5 +271,8 @@ int		is_there_a_pipe(t_token *token);
 
 //split mini
 char	**split_mini(char const *s, char c);
+void	fill_env(t_data *data, t_env *env, char *arg);
+t_env	*ft_env_new(char *arg);
+void	ft_env_add_back(t_env **env, t_env *new);
 
 #endif

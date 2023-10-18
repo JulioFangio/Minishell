@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/17 16:40:58 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:10:52 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_line(char *line)
 	return (1);
 }
 
-char	**get_split(t_data *data, char *line)
+char	**get_split(char *line)
 {
 	char	**tab;
 	char	*nline;
@@ -34,9 +34,7 @@ char	**get_split(t_data *data, char *line)
 	if (!check_line(line))
 	{
 		free (line);
-		free_and_close_data(data, 0);
-		free_env(data->env);
-		exit (1);
+		return ((char **)1);
 	}
 	nline = remake_line(line, n, l);
 	tab = split_mini(nline, ' ');
@@ -55,7 +53,7 @@ char	*ft_readline(void)
 	free(prompt);
 	if (line == NULL)
 	{
-		printf("exit DEBUG\n");
+		printf("exit DEBUG\n"); // ctrl + D ici
 		return (NULL);
 	}
 	add_history(line);

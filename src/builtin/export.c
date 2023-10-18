@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:47:52 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/15 13:56:17 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 15:58:31 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_env	*ft_envlast(t_env *tmp)
 	return (tmp);
 }
 
-static t_env	*ft_env_new(char *arg)
+t_env	*ft_env_new(char *arg)
 {
 	t_env	*new_env;
 
@@ -74,10 +74,12 @@ static t_env	*ft_env_new(char *arg)
 	return (new_env);
 }
 
-static void	ft_env_add_back(t_env **tmp, t_env *new)
+void	ft_env_add_back(t_env **env, t_env *new)
 {
 	t_env	*last;
+	t_env	**tmp;
 
+	tmp = env;
 	if (tmp)
 	{
 		if (*tmp)
@@ -90,7 +92,7 @@ static void	ft_env_add_back(t_env **tmp, t_env *new)
 	}
 }
 
-static void	fill_env(t_data *data, t_env *env, char *arg)
+void	fill_env(t_data *data, t_env *env, char *arg)
 {
 	int		check;
 	t_env	*tmp;

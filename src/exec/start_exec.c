@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 17:03:41 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:53:10 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,27 @@ static void	set_pid_tab(t_data *data)
 
 void	launch_minishell(t_data *data)
 {
-	// int		status;
-	t_token	*token;
+	int		status;
+	t_token *tmp;
+	int i;
 
+	status = 0;
+	tmp = data->token;
 	set_pid_tab(data);
-	data->check = is_there_a_pipe(data->token);
+	data->check = is_there_a_pipe(tmp);
 	data->idx_pid = 0;
-	token = iter_token_cmd(data->token, 0);
-	while (data->exit == 0 && token)
+	tmp = iter_token_cmd(tmp, 0);
+	while (data->exit == 0 && tmp)
 	{
 		data->parent = 1;
 		data->exec = 1;
 		data->end = 1;
 		exec_redir(data);
-		// ft_close_all_fd(data); ->rendre le prompte
-		// reset_to_initial_fd(data);
-		token = iter_token_cmd(token, 1);
-		data->token = token;
-		// data->check = is_there_a_pipe(data->token);
+		tmp = iter_token_cmd(tmp, 1);
 	}
 	ft_close_all_fd(data); 
 	reset_to_initial_fd(data);
-	int i = -1;
-	int status;
+	i = -1;
 	while(++i < data->idx_pid)
 	{
 		waitpid(data->pids[i], &status, 0);

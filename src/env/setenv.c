@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:47 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 18:42:56 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:36:08 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ void	set_env(t_data *data, char **env)
 	t_env	*ptr2_env;
 	int		i;
 
+	if (!env)
+	{
+		data->env = NULL;
+		return ;
+	}
 	ptr1_env = malloc(sizeof(t_env));
 	if (!ptr1_env)
 		return (ft_exit(ERR_MALLOC));
 	ptr1_env->value = ft_strdup(env[0]);
 	if (!ptr1_env->value)
-		return (ft_exit(ERR_DUP));
+		return (free(ptr1_env), ft_exit(ERR_DUP));
 	ptr1_env->next = NULL;
 	data->env = ptr1_env;
 	i = 1;
@@ -66,10 +71,10 @@ void	set_env(t_data *data, char **env)
 	{
 		ptr2_env = malloc(sizeof(t_env));
 		if (!ptr2_env)
-			return (ft_exit(ERR_MALLOC));
+			return (free_env(&data->env), ft_exit(ERR_MALLOC));
 		ptr2_env->value = ft_strdup(env[i++]);
 		if (!ptr2_env->value)
-			return (ft_exit(ERR_DUP));
+			return (free_env(&data->env), free(ptr2_env), ft_exit(ERR_DUP));
 		ptr2_env->next = NULL;
 		ptr1_env->next = ptr2_env;
 		ptr1_env = ptr2_env;

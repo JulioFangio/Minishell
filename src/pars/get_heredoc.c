@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/14 14:07:41 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:36:16 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void    get_out_of_heredoc(t_data *data, t_token *token, char *line)
 		ft_printf(" (wanted `%s')\n", token->next->str);
 	}
 	free_and_close_data(data, 18);
-	free_env(data->env);
+	free_env(&data->env);
 	free(line);
 	exit (1);
 }
@@ -58,7 +58,7 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 	close(fds[0]);
 	close(fds[1]);
 	free_and_close_data(data, 50);
-	free_env(data->env);
+	free_env(&data->env);
 	free(line);
 	exit (1);
 }
