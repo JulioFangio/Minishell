@@ -6,14 +6,14 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 19:28:25 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 14:20:05 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 
-void dup_files(t_data *data)
+void	dup_files(t_data *data)
 {
 	if (data->fd_in > -1)
 	{
@@ -24,7 +24,8 @@ void dup_files(t_data *data)
 	if (data->fd_out > -1)
 	{
 		printf("new out = %d\n", data->fd_out);
-		dup2(data->fd_out, STDOUT_FILENO);
+		if (dup2(data->fd_out, STDOUT_FILENO) == -1)
+			printf("ca marche pas non plus\n");
 		close(data->fd_out);
 		data->fd_out = -1;
 	}
@@ -37,8 +38,6 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 	char	**env_tab;
 
 	result = 0;
-	printf("DATA TOKEN : %s\n", data->token->str);
-	
 	dup_files(data);
 	tmp = env_malloc(env);
 	env_tab = ft_split(tmp, '\n');

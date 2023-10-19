@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:49:58 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/15 13:54:56 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/18 19:47:58 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parse_heredoc(t_token *token)
 		else if ((tmp->type == 7 || tmp->type == 4 || tmp->type == 5
 				|| tmp->type == 6) && !tmp->next)
 		{
-			ft_putstr_fd("minishell: syntax error", STDERR);
+			ft_putstr_fd("minishell: syntax error ", STDERR);
 			ft_putendl_fd("near unexpected token `newline'", STDERR);
 			return (0);
 		}

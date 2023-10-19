@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 19:19:27 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 14:21:06 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,37 +49,36 @@ static void	set_pid_tab(t_data *data)
 	data->pids = ft_calloc(count + 1, sizeof(int));
 }
 
-void	launch_minishell(t_data *data)
+void    launch_minishell(t_data *data)
 {
-	int		status;
-	t_token *tmp;
-	int i;
+    int        status;
+    t_token    *token;
 
-	status = 0;
-	tmp = data->token;
-	set_pid_tab(data);
-	data->check = is_there_a_pipe(tmp);
-	data->idx_pid = 0;
-	tmp = iter_token_cmd(tmp, 0);
-	while (data->exit == 0 && tmp)
-	{
-		data->parent = 1;
-		data->exec = 1;
-		data->end = 1;
-		exec_redir(data);
-		tmp = iter_token_cmd(tmp, 1);
-	}
-	ft_close_all_fd(data); 
-	reset_to_initial_fd(data);
-	i = -1;
-	while(++i < data->idx_pid)
-	{
-		waitpid(data->pids[i], &status, 0);
-		redir();
-	}
-	data->result = WEXITSTATUS(status);
-	data->idx_pid = 0;
-	free(data->pids);
+    status = 0;
+    set_pid_tab(data);
+    data->check = is_there_a_pipe(data->token);
+    data->idx_pid = 0;
+    token = iter_token_cmd(data->token, 0);
+    while (data->exit == 0 && token)
+    {
+        data->parent = 1;
+        data->exec = 1;
+        data->end = 1;
+        exec_redir(data);
+        token = iter_token_cmd(token, 1);
+        data->token = token;
+    }
+    ft_close_all_fd(data); 
+    reset_to_initial_fd(data);
+    int i = -1;
+    while(++i < data->idx_pid)
+    {
+        waitpid(data->pids[i], &status, 0);
+        redir();
+    }
+    data->result = WEXITSTATUS(status);
+    data->idx_pid = 0;
+    free(data->pids);
 }
 
 
