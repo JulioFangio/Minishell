@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/18 17:10:52 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:53:08 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	check_line(char *line)
 {
 	if (!check_quotes(line))
 	{
-		printf("%s: syntax error\n", line);
+		ft_putstr_fd(line, 2);
+		ft_putendl_fd(": syntax error", 2);
 		return (0);
 	}
 	return (1);
@@ -53,7 +54,7 @@ char	*ft_readline(void)
 	free(prompt);
 	if (line == NULL)
 	{
-		printf("exit DEBUG\n"); // ctrl + D ici
+		ft_putendl_fd("exit", 1);
 		return (NULL);
 	}
 	add_history(line);

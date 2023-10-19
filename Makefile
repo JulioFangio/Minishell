@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
+#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/10/17 17:12:35 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/19 16:49:13 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/ele
 		\
 		pars/expansion.c pars/utils.c pars/utils_2.c pars/utils_3.c pars/utils_4.c pars/utils_5.c pars/parse_line.c \
 		\
-		pars/split_mini.c pars/start_shell.c pars/signals_2.c pars/get_heredoc.c pars/parse_line_2.c\
+		pars/split_mini.c pars/start_shell.c pars/signals_2.c pars/get_heredoc.c pars/parse_line_2.c pars/utils_6.c\
 		\
 		utils/token.c utils/fd.c utils/tab.c \
 		utils/free.c utils/error.c \

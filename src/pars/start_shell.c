@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/19 14:36:06 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:23:34 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	start(char *line, t_data *data)
 		free_and_close_data(data, 0);
 		return (1);
 	}
-	data->token_forfree = data->token;
 	launch_minishell(data);
 	free_and_close_data(data, 45);
 	return (1);
@@ -59,6 +58,7 @@ void	run_shell_loop(t_data *data)
 			free_env(&data->env);
 			break ;
 		}
+		free_and_close_data(data, 99);
 	}
 	rl_clear_history();
 }

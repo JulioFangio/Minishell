@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/15 13:53:55 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:51:37 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*keep_spaces(char *line)
 	char	b;
 
 	i = 0;
-	printf("line = %s et lenline = %zu\n", line, ft_strlen(line));
 	res = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 	while (line[i])
 	{

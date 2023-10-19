@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 18:36:37 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:31:28 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	child_error(char *path)
 	}
 	else if (!ft_strchr(path, '/'))
 	{
-		ft_putstr_fd("WHY ARE YOU GOING THERE?\n", 2);
 		ft_putendl_fd(ERR_CMD, STDERR);
 	}
 	if (!ft_strchr(path, '/') || fd == -1)

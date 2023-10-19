@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/18 18:36:16 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:41:14 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ char	*get_prompt_heredoc(void)
 	return (prompt);
 }
 
-static void    get_out_of_heredoc(t_data *data, t_token *token, char *line)
+static void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 {
 	if (line == NULL)
 	{
-		ft_printf("warning: here-document delimited by end-of-file");
-		ft_printf(" (wanted `%s')\n", token->next->str);
+		ft_putstr_fd("warning: here-document delimited", 2);
+		ft_putstr_fd(" by end-of-file (wanted `", 2);
+		ft_putstr_fd(token->next->str, 2);
+		ft_putendl_fd("')", 2);
 	}
 	free_and_close_data(data, 18);
 	free_env(&data->env);

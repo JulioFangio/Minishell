@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/19 14:20:05 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:37:17 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	dup_files(t_data *data)
 	}
 	if (data->fd_out > -1)
 	{
-		printf("new out = %d\n", data->fd_out);
-		if (dup2(data->fd_out, STDOUT_FILENO) == -1)
-			printf("ca marche pas non plus\n");
+		dup2(data->fd_out, STDOUT_FILENO);
 		close(data->fd_out);
 		data->fd_out = -1;
 	}
@@ -48,9 +46,6 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 		execve(path, arg, env_tab);
 	result = ret_child(env_tab, path, result);
 	clean_child_process(data, env, path, arg);
-	printf("AFTER EXECVE \n");
-
-
 	// data->pid = fork();
 	// if (data->pid == 0)
 	// {
@@ -107,7 +102,6 @@ int	exec_bin(char **arg, t_data *data, t_env *env)
 
 	i_dir = 0;
 	ret = 0;
-	
 	//find path
 	while (env && env->value && ft_strncmp(env->value, "PATH=", 5) != 0)
 		env = env->next;

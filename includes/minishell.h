@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 18:35:56 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:48:51 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ char	*extract_var(t_data *data, char *tronc, char *var);
 char	*get_var(char *tronc);
 int		skip_quotes(char *line, size_t i);
 char	*ft_dupquotes(const char *str, char q);
+void	print_err_msg(char c);
 // void	free_tab(char **tab);
 
 //	elems + ext

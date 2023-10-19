@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doenv.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:45:27 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/11 14:49:10 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:36:50 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	display_env(t_env *env, t_env *export)
 	tmp = export;
 	while (tmp && tmp->value != NULL)
 	{
-		printf("declare -x ");
-		printf("%s\n", tmp->value);
+		// printf("declare -x ");
+		// printf("%s\n", tmp->value);
 		tmp = tmp->next;
 	}
 	free_tab(env_tab);

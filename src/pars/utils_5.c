@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/15 12:52:57 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:26:40 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*extract_var(t_data *data, char *tronc, char *var)
 	char	*gvar;
 
 	if (var[0] == '$' && var[1] == '?')
-		gvar = ft_itoa(data->error_code);
+		gvar = ft_itoa(data->result);
 	else
 		gvar = pick_env(data, var);
 	lv = ft_strlen(var);

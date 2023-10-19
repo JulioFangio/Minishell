@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:47:52 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 15:58:31 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:54:03 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ static int	is_exp_arg_valid(char *arg)
 	{
 		if (!ft_isalnum_exp(arg[i]))
 		{
-			printf("not_alnum\n");
 			return (0);
 		}
 	}
 	if (check_eq == 1)
 		return (1);
-	printf("no =\n");
 	return (0);
 }
 

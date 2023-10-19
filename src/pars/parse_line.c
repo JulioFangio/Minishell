@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 22:19:13 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:50:08 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ int	find_intruder(t_token *token, char c)
 int	parse_pipe(t_token *cmd)
 {
 	if (!cmd)
-		return 0;
+		return (0);
 	if (cmd->next && (cmd->type == 3 && cmd->next->type == 3))
 	{
-		ft_putendl_fd("minishell: syntax error near unexpected token lol `|'",
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 			STDERR);
 		return (0);
 	}
 	else if (cmd->type == 3 && ft_strlen(cmd->str) == 1)
 	{
-		ft_putendl_fd("minishell: syntax error near unexpected token zgeg`|'",
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 			STDERR);
 		return (0);
 	}
@@ -63,13 +63,13 @@ int	parse_pipe_while(t_token *cmd)
 		if (tmp->type == 3 && (tmp->str[1] == '|' || !find_intruder(tmp, '<')
 				|| !find_intruder(tmp, '>')))
 		{
-			ft_putendl_fd("minishell: syntax error near unexpected token zboub `|'",
+			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 				STDERR);
 			return (0);
 		}
 		else if (tmp->next && tmp->type == 3 && tmp->next->type == 3)
 		{
-			ft_putendl_fd("minishell: syntax error near unexpected token greu`|'",
+			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 				STDERR);
 			return (0);
 		}
@@ -86,17 +86,16 @@ int	parse_redir(t_token *cmd)
 			&& cmd->str[0] != cmd->str[1]))
 	{
 		c = cmd->str[0];
-		printf("minishell: syntax error near unexpected token lol`%c%c'\n", c, c);
+		print_err_msg(c);
 		return (0);
 	}
 	else if (cmd->next && is_redir(cmd->next->str))
 	{
 		c = cmd->str[0];
 		if (ft_strlen(cmd->str) < 2)
-			printf("minishell: syntax error near unexpected token ok `%c'\n", c);
+			print_err_msg(c);
 		else
-			printf("minishell: syntax error near unexpected token pet `%c%c'\n",
-				c, c);
+			print_err_msg(c);
 		return (0);
 	}
 	return (1);
