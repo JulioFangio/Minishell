@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 21:15:54 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:34:59 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 	t_env	*env;
 	t_env	*export;
 	t_token	*token;
+	t_token	*token_forfree;
 	char	**tab;
 	pid_t	pid;
 	int		check_hdc;

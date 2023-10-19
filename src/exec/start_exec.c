@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/19 14:21:06 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 14:23:32 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void    launch_minishell(t_data *data)
     data->idx_pid = 0;
     free(data->pids);
 }
-
 
 		// attendez l enfant ?
 		// waitpid(-1, &status, 0);

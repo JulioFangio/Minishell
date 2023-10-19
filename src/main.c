@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 18:46:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 14:24:49 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (FAILURE);
 	run_shell_loop(&data);
-	//free_and_close_data(&data, 1);
+	free_and_close_data(&data, 404);
 	return (data.result);
 }
