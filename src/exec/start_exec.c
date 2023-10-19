@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/19 14:23:32 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:28:29 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ static void	set_pid_tab(t_data *data)
 
 void    launch_minishell(t_data *data)
 {
-    int        status;
-    t_token    *token;
+    int			status;
+    t_token		*token;
+	t_token		*forfree;
 
     status = 0;
+	forfree = data->token;
     set_pid_tab(data);
     data->check = is_there_a_pipe(data->token);
     data->idx_pid = 0;
@@ -78,26 +80,7 @@ void    launch_minishell(t_data *data)
     }
     data->result = WEXITSTATUS(status);
     data->idx_pid = 0;
+	free_token(forfree);
     free(data->pids);
 }
-
-		// attendez l enfant ?
-		// waitpid(-1, &status, 0);
-
-		//reset in out
-		// dup2(data->in, STDIN);
-		// dup2(data->out, STDOUT);
-		
-		// status = WEXITSTATUS(status);
-
-		//
-		// if (data->end == 0)
-		// 	data->result = status;
-		// if (data->parent == 0)
-		// {
-		// 	free_and_close_data(data, 8);
-		// 	exit(data->result);
-		// }
-
-		// avancer dans boucle
 		
