@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/20 12:31:37 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:38:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	exec_scenario(t_data *data, t_token *cmd, char *tab, int nb)
 {
-	if (nb == 5)
-		fill_elem_var(data, cmd, tab, 15); //variable
-	else if (nb == 7)
+	// if (nb == 5)
+	// 	fill_elem_var(data, cmd, tab, 15); //variable
+	if (nb == 7)
 		fill_elem_redir(cmd, tab); //redir
 	else if (nb == 8)
 		fill_elem(cmd, tab, 7); //heredoc
