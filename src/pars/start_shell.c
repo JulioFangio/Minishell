@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/19 15:23:34 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:14:11 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	start(char *line, t_data *data)
 {
 	data->tab = get_split(line);
-	if (data->tab == (char **)1)
+	if (data->tab == NULL)
 	{
 		free_and_close_data(data, 96);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:49:58 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/20 12:02:33 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:04:19 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	parse_ls(t_data *data, int check_ls)
 				STDERR);
 			return (0);
 		}
-		else if (tmp->str && tmp->str[0] != '-' && tmp->type == 2 && check_ls == 1)
+		else if (tmp->str && tmp->str[0] != '-' && tmp->type == 2
+			&& check_ls == 1)
 		{
 			ft_putstr_fd("ls: cannot access '", STDERR);
 			ft_putstr_fd(tmp->str, STDERR);

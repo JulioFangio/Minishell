@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/19 16:53:08 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:14:00 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,20 @@ char	**get_split(char *line)
 	char	*nline;
 	int		n;
 	int		l;
+	int		i;
 
-	l = ft_strlen(line);
-	n = whole_count(line);
+	i = -1;
 	if (!check_line(line))
 	{
 		free (line);
-		return ((char **)1);
+		return (NULL);
 	}
+	l = ft_strlen(line);
+	n = whole_count(line);
 	nline = remake_line(line, n, l);
 	tab = split_mini(nline, ' ');
+	while (tab[++i])
+		printf("TAB = %s\n", tab[i]);
 	free(line);
 	free (nline);
 	return (tab);
