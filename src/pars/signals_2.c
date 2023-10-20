@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/19 18:21:36 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 11:09:06 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,3 @@ void	redir_hd(t_data *data)
 	sq.sa_flags = 0;
 	sigaction(SIGQUIT, &sq, NULL);
 }
-
-//lol
