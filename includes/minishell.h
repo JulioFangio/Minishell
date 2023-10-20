@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/19 16:48:51 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:31:53 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ int		ext_bracers(char *tab);
 void	get_token(t_data *data);
 void	fill_list(t_data *data, int check);
 void	fill_elem(t_token *cmd, char *tab, int nb);
-void	fill_elem_tronc(t_data *data, t_token *cmd, char *tab);
+void	fill_elem_tronc(t_data *data, t_token *cmd, char *tab, int nb);
 void	fill_elem_var(t_data *data, t_token *cmd, char *tab, int nb);
 void	fill_elem_redir(t_token *cmd, char *tab);
 int		scenario(char *tab, int check);

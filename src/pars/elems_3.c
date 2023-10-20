@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:51:15 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/14 19:47:47 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:31:37 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	exec_scenario(t_data *data, t_token *cmd, char *tab, int nb)
 		fill_elem(cmd, tab, 7); //heredoc
 	else if (nb == 9)
 		fill_elem(cmd, tab, 3); //pipe
-	else if (nb == 10)
-		fill_elem_tronc(data, cmd, tab); //optn/arg
+	// else if (nb == 10)
+	// 	fill_elem_tronc(data, cmd, tab); //optn/arg
 	else if (nb == 11)
 		fill_elem(cmd, tab, 1); //builtin
 	else if (nb == 12)
-		fill_elem(cmd, tab, 1); //cmd
+		fill_elem_tronc(data, cmd, tab, 1); //cmd
 	else if (nb == 13)
-		fill_elem(cmd, tab, 2); //optn/arg
+		fill_elem_tronc(data, cmd, tab, 2); //optn/arg
 }
 
 int	ft_optn(t_token *cmd, char *tab, int optn)

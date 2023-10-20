@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/05 14:04:41 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:29:27 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	scenario(char *tab, int check)
 		return (8);
 	else if (is_pipe(tab))
 		return (9);
-	else if (is_char(tab))
-		return (10);
+	// else if (is_char(tab))
+	// 	return (10);
 	else if (check == 0 && is_a_builtin(tab))
 		return (11);
 	else if (check == 0)
