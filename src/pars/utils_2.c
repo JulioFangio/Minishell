@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/20 23:45:02 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 17:25:48 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ static char	*join_tronc(t_data *data, t_tronc *tronc)
 		tmp = tmp->next;
 	}
 	free_tronc(tronc);
-	printf("le res est = %s\n", res);
+	// printf("le res est = %s\n", res);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 17:04:20 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:31:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,59 @@ static void check_exit_and_wait(t_data *data)
 	}
 }
 
+// void	exec_command(t_data *data)
+// {
+// 	char	**cmd;
 
-void	exec_command(t_data *data)
+// 	if (data->exec == 0)
+// 		return ;
+// 	put_fd_in_data(data);
+// 	cmd = token_cmd_to_tab(data->token);
+// 	if (!cmd)
+// 		return ;
+// 	if (cmd && ft_strcmp(cmd[0], "exit") == 0
+// 		&& token_is_pipe(data->token) == 0)
+// 	{
+// 		make_exit(data, cmd);
+// 		free_and_close_data(data, 59);
+// 		free_env(&data->env);
+// 		free(data->pids);
+// 		free_tab(cmd);
+// 		exit (1);
+// 	}
+// 	else if (cmd && is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0)
+// 	{
+// 		data->result = exec_builtin(data, cmd, data->token);
+// 		free_tab(cmd);
+// 		return ;
+// 	}
+// 	signal(SIGINT, SIG_IGN);
+// 	signal(SIGQUIT, SIG_IGN);
+// 	pid_t pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		//close
+// 		redir();
+// 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
+// 			exec_bin(cmd, data, data->env);
+// 		free(data->pids);
+// 		exit(data->result); //changer
+// 	}
+// 	data->pids[data->idx_pid] = pid;
+// 	data->idx_pid++;
+// 	if (is_there_a_pipe(data->token))
+// 	{
+// 		ft_close_fd(data->pipefd[1]);
+// 		data->fd_in = data->pipefd[0];
+// 	}
+// 	check_exit_and_wait(data);
+// 	free_tab(cmd);
+// 	return ;
+// }
+
+void    exec_command(t_data *data)
 {
-	char	**cmd;
+	char    **cmd;
 
 	if (data->exec == 0)
 		return ;
@@ -75,9 +124,21 @@ void	exec_command(t_data *data)
 	}
 	else if (cmd && is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0)
 	{
-		data->result = exec_builtin(data, cmd, data->token);
-		free_tab(cmd);
-		return ;
+		if (is_there_a_pipe(data->token))
+		{
+			ft_close_fd(data->pipefd[1]);
+			data->fd_in = data->pipefd[0];
+			data->result = exec_builtin(data, cmd, data->token);
+			free_tab(cmd);
+			return ;
+
+		}
+		else
+		{
+			data->result = exec_builtin(data, cmd, data->token);
+			free_tab(cmd);
+			return ;
+		}
 	}
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -87,7 +148,7 @@ void	exec_command(t_data *data)
 		//close
 		redir();
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
-			exec_bin(cmd, data, data->env);
+			data->result = exec_bin(cmd, data, data->env);
 		free(data->pids);
 		exit(data->result); //changer
 	}
@@ -102,5 +163,3 @@ void	exec_command(t_data *data)
 	free_tab(cmd);
 	return ;
 }
-
-
