@@ -1,3 +1,4 @@
 */*.a
 minishell
 objs
+.vscode
