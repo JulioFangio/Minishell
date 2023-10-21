@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:21:55 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/16 21:15:44 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:30:00 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	reset_to_initial_fd(t_data *data)
 {
 	data->fd_in = -1;
 	data->fd_out = -1;
-	// data->pipe_in = -1;
-	// data->pipe_out = -1;
+	// data->pipefd[0] = -1;
+	// data->pipefd[1] = -1;
 }

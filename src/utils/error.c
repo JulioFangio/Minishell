@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:43:49 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:42:06 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_exit(char *error)
 	exit(EXIT_FAILURE);
 }
 
-void    error_cd(char **args)
+void	error_cd(char **args)
 {
 	ft_putstr_fd("cd: ", STDERR);
 	ft_putstr_fd(args[1], STDERR);
@@ -34,6 +34,7 @@ void    error_cd(char **args)
 	}
 }
 
+// n'y vas pas quand pas une cmd mais /
 int	child_error(char *path)
 {
 	struct stat	path_stat;
@@ -54,10 +55,8 @@ int	child_error(char *path)
 		else if (fd != -1)
 			ft_putendl_fd(ERR_PERM, STDERR);
 	}
-	else if (!ft_strchr(path, '/'))
-	{
+	if (!ft_strchr(path, '/'))
 		ft_putendl_fd(ERR_CMD, STDERR);
-	}
 	if (!ft_strchr(path, '/') || fd == -1)
 		data->result = 127;
 	else

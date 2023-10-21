@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 15:37:20 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:35:10 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	is_there_a_pipe(t_token *token)
 
 void	exec_redir(t_data *data)
 {
-	
 	do_pipe(data);
 	exec_command(data);
 }
@@ -66,18 +65,16 @@ void    launch_minishell(t_data *data)
         data->parent = 1;
         data->exec = 1;
         data->end = 1;
+		if (!is_there_a_pipe(data->token) && is_builtin(data->token->str))
+	    	reset_to_initial_fd(data);
         exec_redir(data);
         token = iter_token_cmd(token, 1);
         data->token = token;
     }
-    ft_close_all_fd(data); 
-    reset_to_initial_fd(data);
+	ft_close_all_fd(data); 
     int i = -1;
     while(++i < data->idx_pid)
-    {
         waitpid(data->pids[i], &status, 0);
-        // redir();
-    }
     data->result = WEXITSTATUS(status);
     data->idx_pid = 0;
 	free_token(forfree);
