@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:44:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:38:28 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ int		ret_child(char **env_tab, char *path, int result);
 char	*strjoin_path(const char *s1, const char *s2);
 // error.c
 void	ft_exit(char *error);
-void    error_cd(char **args);
+void	error_cd(char **args);
 int		child_error(char *path);
 // tab.c
 char	**token_to_tab(t_token *token, char **tab);
@@ -197,6 +197,12 @@ void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
 void	sigquit_handler_hd(int signum);
 void	sigint_handler_hd(int signum);
+// void    sigint_handler_child(int signum);
+// void    sigquit_handler_child(int signum);
+// void    sigint_handler_cmd(int signum);
+// void    sigquit_handler_cmd(int signum);
+// void    redir_cmd(t_data *data);
+// void    redir_child(t_data *data);
 void	redir_hd(t_data *data);
 void	redir(void);
 

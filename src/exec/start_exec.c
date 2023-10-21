@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 15:37:20 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:43:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void    launch_minishell(t_data *data)
     while(++i < data->idx_pid)
     {
         waitpid(data->pids[i], &status, 0);
-        // redir();
+        redir();
     }
     data->result = WEXITSTATUS(status);
     data->idx_pid = 0;
