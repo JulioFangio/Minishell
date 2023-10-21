@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 19:45:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:14:03 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void    exec_command(t_data *data)
 		exit(data->result); //changer?
 	}
 	data->check_child = 0;
+	redir(data);
 	data->pids[data->idx_pid] = pid;
 	data->idx_pid++;
 	if (is_there_a_pipe(data->token))

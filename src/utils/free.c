@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 15:30:01 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 21:04:00 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	free_token(t_token *token)
 
 void	free_and_close_data(t_data *data, int nb)
 {
-	(void)nb;
-	// printf("Minishell program freeing in here %d\n", nb);
+	// (void)nb;
+	printf("Minishell program freeing in here %d\n", nb);
 	if (data->tab)
 	{
 		free_tab(data->tab);

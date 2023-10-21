@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 15:03:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:53:27 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ char	*get_prompt_heredoc(void)
 
 static void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 {
-	if (line == NULL)
-	{
-		ft_putstr_fd("warning: here-document delimited", 2);
-		ft_putstr_fd(" by end-of-file (wanted `", 2);
-		ft_putstr_fd(token->next->str, 2);
-		ft_putendl_fd("')", 2);
-	}
+	// if (line == NULL)
+	// {
+	// 	ft_putstr_fd("warning: here-document delimited", 2);
+	// 	ft_putstr_fd(" by end-of-file (wanted `", 2);
+	// 	ft_putstr_fd(token->next->str, 2);
+	// 	ft_putendl_fd("')", 2);
+	// }
+	(void)token;
 	free_and_close_data(data, 18);
 	free_env(&data->env);
 	free(line);
@@ -74,6 +75,8 @@ void	fork_heredoc(t_data *data, t_token *token)
 	if (pipe(fds) < 0)
 		return (perror("pipe error on heredoc"));
 	child = fork();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (child == 0)
 	{
 		redir_hd(data);
@@ -82,6 +85,7 @@ void	fork_heredoc(t_data *data, t_token *token)
 	close(fds[0]);
 	close(fds[1]);
 	waitpid(child, &status, 0);
+	redir(data);
 }
 
 void	check_heredoc(t_data *data)

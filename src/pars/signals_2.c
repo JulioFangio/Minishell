@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 19:47:31 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:40:15 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	sigint_handler_hd(int signum)
 	data->result = 130;
 	free_and_close_data(data, 7);
 	free_env(&data->env);
+	// rl_on_new_line();
+	// rl_replace_line("", 0);
+	rl_redisplay();
 	exit (1);
 }
 
