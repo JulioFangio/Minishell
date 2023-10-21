@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 14:57:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:43:27 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	run_shell_loop(t_data *data)
 	char	*line;
 
 	using_history();
-	redir();
+	redir(data);
 	while (data->exit == 0)
 	{
 		line = ft_readline();

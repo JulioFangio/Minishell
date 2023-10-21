@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 19:16:26 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:45:16 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ static void	put_fd_in_data(t_data *data)
 	}
 }
 
-static void check_exit_and_wait(t_data *data)
+static void	check_exit_and_wait(t_data *data)
 {
-	int i = -1;
+	int	i;
+
+	i = -1;
 	if (!is_there_a_pipe(data->token))
 	{
 		data->end = 0;
@@ -95,12 +97,14 @@ void    exec_command(t_data *data)
 	if (pid == 0)
 	{
 		//ft_close_fd?
-		redir();
+		data->check_child = 1;
+		redir(data);
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
 			data->result = exec_bin(cmd, data, data->env);
 		free(data->pids);
 		exit(data->result); //changer?
 	}
+	data->check_child = 0;
 	data->pids[data->idx_pid] = pid;
 	data->idx_pid++;
 	if (is_there_a_pipe(data->token))

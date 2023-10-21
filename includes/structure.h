@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:13:43 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:45:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_data
 	int		result;
 	int		in;
 	int		out;
-	int		error_code;
+	int		check_child;
 	int		fd_in;
 	int		fd_out;
 	int		exec;

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 15:29:00 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:47:31 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,16 @@ void	sigquit_handler_hd(int signum)
 void	redir_hd(t_data *data)
 {
 	struct sigaction	si;
-	struct sigaction	sq;
+	// struct sigaction	sq;
 
 	(void)data;
 	si.sa_handler = sigint_handler_hd;
 	sigemptyset(&si.sa_mask);
 	si.sa_flags = 0;
 	sigaction(SIGINT, &si, NULL);
-	sq.sa_handler = sigquit_handler_hd;
-	sigemptyset(&sq.sa_mask);
-	sq.sa_flags = 0;
-	sigaction(SIGQUIT, &sq, NULL);
+	// sq.sa_handler = sigquit_handler_hd;
+	// sigemptyset(&sq.sa_mask);
+	// sq.sa_flags = 0;
+	// sigaction(SIGQUIT, &sq, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }

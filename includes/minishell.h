@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:44:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:44:21 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ void	sigquit_handler(int signum);
 void	sigquit_handler_hd(int signum);
 void	sigint_handler_hd(int signum);
 void	redir_hd(t_data *data);
-void	redir(void);
+void	redir(t_data *data);
 
 //	other
 int		start(char *line, t_data *data);
