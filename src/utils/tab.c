@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: axlamber <axlamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:41:07 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:18:17 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:00:56 by axlamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ static void	fill_others(t_token *token, char **tab)
 
 	i = 1;
 	tmp = token;
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->str && tmp->str[0] == '-' && tmp->type == 2)
-		{
-			tab[i] = ft_strdup(tmp->str);
-			i++;
-		}
-		tmp = tmp->next;
-	}
+	// while (tmp && tmp->type != PIPE)
+	// {
+	// 	if (tmp->str && tmp->str[0] == '-' && tmp->type == 2)
+	// 	{
+	// 		tab[i] = ft_strdup(tmp->str);
+	// 		i++;
+	// 	}
+	// 	tmp = tmp->next;
+	// }
 	tmp = token;
 	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->str && tmp->str[0] != '-' && tmp->type == 2)
+		if (tmp->str && tmp->type == 2)
 		{
 			tab[i] = ft_strdup(tmp->str);
 			i++;
