@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 12:12:51 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:40:11 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	if (env[0] == NULL)
 		return (FAILURE);
-	data.error_code = 0;
 	ft_bzero(&data, sizeof(t_data));
 	data.in = dup(STDIN);
 	data.out = dup(STDOUT);

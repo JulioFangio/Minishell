@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:41:07 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 15:40:13 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 14:18:17 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,6 @@ char	**token_cmd_to_tab(t_token *token)
 			i++;
 		tmp = tmp->next;
 	}
-	printf("i = %d", i);
-	tmp = token;
 	tab = fill_tctt(token, tab, i);
-	i = -1;
-	while (tab[++i])
-	{
-		printf("taaaab === %s\n", tab[i]);
-		i++;
-	}
 	return (tab);
 }

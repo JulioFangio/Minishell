@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/17 15:24:56 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:43:45 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,12 @@ int	handle_echo_options(char **arg, int *cur_pos, int flags)
 int	make_echo(t_data *data, char **arg)
 {
 	int	i;
-	int	fd;
 	int	flags;
 
 	i = 1;
 	flags = 0;
 	if (data->fd_out == -1)
-		fd = 1;
-	else
-		fd = data->fd_out;
+		data->fd_out = 1;
 	if (write(data->fd_out, "\0", 1) == -1)
 		if (errno == ENOSPC)
 			return (ft_putendl_fd(
@@ -78,13 +75,13 @@ int	make_echo(t_data *data, char **arg)
 		flags = handle_echo_options(arg, &i, flags);
 		while (arg[i])
 		{
-			ft_putstr_fd(arg[i], fd);
+			ft_putstr_fd(arg[i], data->fd_out);
 			if (arg[i + 1] && arg[i][0] != '\0')
-				ft_putchar_fd(' ', fd);
+				ft_putchar_fd(' ', data->fd_out);
 			i++;
 		}
 	}
 	if (flags == 0)
-		ft_putchar_fd('\n', fd);
+		ft_putchar_fd('\n', data->fd_out);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 18:57:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 14:13:43 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ typedef struct s_token
 typedef struct s_data
 {
 	t_env	*env;
-	t_env	*export;
 	t_token	*token;
-	char	**tab;
 	pid_t	pid;
+	char	**tab;
 	int		check_hdc;
 	int		parent;
 	int		result;
 	int		in;
 	int		out;
-	// int		pipe_in;
-	// int		pipe_out;
 	int		error_code;
 	int		fd_in;
 	int		fd_out;
@@ -60,7 +57,6 @@ typedef struct s_data
 	int		*pids;
 	int		idx_pid;
 	int		check;
-	int		err_redir;
 	int		exit;
 	int		end;
 	int		pipefd[2];

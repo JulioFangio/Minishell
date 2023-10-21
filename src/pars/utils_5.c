@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/20 23:15:52 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 14:19:31 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*check_for_var(t_data *data, char *tronc, int nb)
 	i = -1;
 	var = NULL;
 	res = NULL;
-	if (nb == 0 || !data->env)
+	if (nb == 0 || !data->env || !tronc)
 		return (tronc);
 	while (tronc[++i])
 	{

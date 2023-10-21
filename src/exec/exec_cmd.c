@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 15:40:49 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:09:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	put_fd_in_data(t_data *data)
 		else if (tmp->next && tmp->next->str && (tmp->type == CHEVRON
 				|| tmp->type == DOUBLE_CHEVRON))
 		{
-			// if (data->fd_out != 1)
+			if (data->fd_out != 1)
 			// si double chevron changer open
 			ft_close_fd(data->fd_out);
 			if (tmp->type == CHEVRON)
@@ -75,13 +75,13 @@ void	exec_command(t_data *data)
 	}
 	else if (cmd && is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0)
 	{
-		data->exec = exec_builtin(data, cmd, data->token);
+		data->result = exec_builtin(data, cmd, data->token);
 		free_tab(cmd);
 		return ;
 	}
-	pid_t pid =fork();
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	pid_t pid = fork();
 	if (pid == 0)
 	{
 		//close

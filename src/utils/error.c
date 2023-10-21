@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 14:24:23 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 14:43:49 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@ void	ft_exit(char *error)
 	if (error)
 		ft_putstr_fd(error, 2);
 	exit(EXIT_FAILURE);
+}
+
+void    error_cd(char **args)
+{
+	ft_putstr_fd("cd: ", STDERR);
+	ft_putstr_fd(args[1], STDERR);
+	if (args[2])
+	{
+		ft_putendl_fd(": string not in pwd", STDERR);
+	}
+	else
+	{
+		ft_putendl_fd("", STDERR);
+		perror("");
+	}
 }
 
 int	child_error(char *path)

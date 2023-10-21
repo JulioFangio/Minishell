@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/20 11:09:06 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/21 15:29:00 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	sigint_handler_hd(int signum)
 	(void)signum;
 	data = NULL;
 	data = recuperate_data(data);
+	data->result = 130;
 	free_and_close_data(data, 7);
 	free_env(&data->env);
 	exit (1);
@@ -35,19 +36,22 @@ void	sigint_handler_hd(int signum)
 
 void	sigquit_handler_hd(int signum)
 {
-	t_data	*data;
-
 	(void)signum;
-	data = NULL;
-	data = recuperate_data(data);
-	// write(STDOUT_FILENO, "\033[2K", 4);
-	ft_putendl_fd("^\\Quit (core dumped)", 2);
-	free_and_close_data(data, 7);
-	free_env(&data->env);
-	exit (1);
-	// rl_redisplay();
-	// get_prompt_heredoc();
+	signal(SIGQUIT, SIG_IGN);
+	write(STDOUT_FILENO, "\033[2K", 4);
+	rl_replace_line("", 1);
 }
+
+	// t_data	*data;
+
+	// (void)signum;
+	// data = NULL;
+	// data = recuperate_data(data);
+	// // write(STDOUT_FILENO, "\033[2K", 4);
+	// ft_putendl_fd("^\\Quit (core dumped)", 2);
+	// free_and_close_data(data, 7);
+	// free_env(&data->env);
+	// exit (1);
 
 void	redir_hd(t_data *data)
 {
