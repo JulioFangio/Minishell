@@ -1,0 +1,9 @@
+Makefile
+includes
+libft
+minishell
+objs
+readline.supp
+src
+test.txt
+valgrind.sh

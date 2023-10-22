@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 19:45:16 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 15:38:12 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ void    exec_command(t_data *data)
 
 	if (data->exec == 0)
 		return ;
-	// ft_putstr_fd(data->token->str, 2);
-	// ft_putnbr_fd(data->fd_out, 2);
-	// ft_putstr_fd("\n", 2);
 	put_fd_in_data(data);
 	cmd = token_cmd_to_tab(data->token);
 	if (!cmd)
@@ -85,9 +82,8 @@ void    exec_command(t_data *data)
 			ft_close_fd(data->pipefd[1]);
 			data->fd_in = data->pipefd[0];
 		}
-		else{
+		else
 			data->result = exec_builtin(data, cmd, data->token);
-		}
 		free_tab(cmd);
 		return ;
 	}
@@ -105,6 +101,7 @@ void    exec_command(t_data *data)
 		exit(data->result); //changer?
 	}
 	data->check_child = 0;
+	redir(data);
 	data->pids[data->idx_pid] = pid;
 	data->idx_pid++;
 	if (is_there_a_pipe(data->token))

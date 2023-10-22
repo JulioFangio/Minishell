@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:34:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 17:25:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 16:08:12 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,15 @@ static int	get_tmp_len(char *str)
 	char	b;
 
 	i = 0;
-	if (str[i] && str[i] != '"' && str[i] != '\'')
+	if (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$')
 	{
-		while (str[i] && str[i] != '"' && str[i] != '\'')
+		while (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$')
+			i++;
+	}
+	else if (str[i] && str[i] == '$')
+	{
+		i++;
+		while (str[i] && str[i] != '"' && str[i] != '\'' && str[i] != '$')
 			i++;
 	}
 	else if (str[i] && (str[i] == '"' || str[i] == '\''))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 15:30:01 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/22 15:20:52 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,6 @@ void	free_and_close_data(t_data *data, int nb)
 {
 	(void)nb;
 	// printf("Minishell program freeing in here %d\n", nb);
-	if (data->tab)
-	{
-		free_tab(data->tab);
-		data->tab = NULL;		
-	}
 	if (data->token)
 	{
 		free_token(data->token);

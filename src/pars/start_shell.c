@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 19:43:27 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 15:33:15 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	start(char *line, t_data *data)
 		return (1);
 	}
 	get_token(data);
+	free_tab(data->tab);
 	if (!parse_line(data))
 	{
 		data->result = 2;
@@ -29,13 +30,8 @@ int	start(char *line, t_data *data)
 	}
 	recuperate_data(data);
 	check_heredoc(data);
-	if (!parse_ls(data, 0))
-	{
-		free_and_close_data(data, 0);
-		return (1);
-	}
 	launch_minishell(data);
-	free_and_close_data(data, 45);
+	//free_and_close_data(data, 45);
 	return (1);
 }
 
@@ -59,7 +55,7 @@ void	run_shell_loop(t_data *data)
 			free_env(&data->env);
 			break ;
 		}
-		free_and_close_data(data, 99);
+		//free_and_close_data(data, 99);
 	}
 	rl_clear_history();
 }
