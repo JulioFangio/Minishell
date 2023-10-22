@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 19:45:44 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:51:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 			write(fds[1], "\n", 1);
 		}
 	}
-	printf("THIS IS THE FD%d\n", fds[0]);
-	printf("THIS IS THE FD%d\n", fds[1]);
-	// free_and_close_data(data, 50);
-	// free_env(&data->env);
-	// free(line);
-	exit (1);
 }
 
 void    fork_heredoc(t_data *data, t_token *token)

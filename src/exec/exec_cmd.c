@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 15:38:12 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:54:51 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	check_exit_and_wait(t_data *data)
 	i = -1;
 	if (!is_there_a_pipe(data->token))
 	{
-		data->end = 0;
+		// data->end = 0;
 		while (++i < data->idx_pid -1)
 			waitpid(data->pids[i], NULL, 0);
 	}
@@ -111,5 +111,6 @@ void    exec_command(t_data *data)
 	}
 	check_exit_and_wait(data);
 	free_tab(cmd);
+	data->exec = 0;
 	return ;
 }
