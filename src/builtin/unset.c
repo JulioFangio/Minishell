@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/15 13:56:43 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/22 19:36:00 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	delete_t_env(t_env *env, char *del, int check)
 	incr2 = NULL;
 	while (tmp)
 	{
-		if (tmp->next && !ft_strncmp(tmp->next->value, del, check))
+		if (tmp->next && tmp->next->value
+			&& ft_strncmp(tmp->next->value, del, check) == 0)
 		{
 			if (tmp->next->next)
 				incr = tmp->next->next;
