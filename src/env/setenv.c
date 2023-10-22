@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:47 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/18 18:36:08 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/22 20:35:45 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,50 +79,4 @@ void	set_env(t_data *data, char **env)
 		ptr1_env->next = ptr2_env;
 		ptr1_env = ptr2_env;
 	}
-}
-
-/*create and initialize a new t_env structure
-representing an environment variable to be exported.
-It's used to manage exported env variables in a mini-shell context*/
-t_env	*export_env(char *value)
-{
-	t_env	*export;
-
-	export = malloc(sizeof(t_env));
-	if (!export)
-		return (ft_exit(ERR_MALLOC), NULL);
-	if (value == NULL)
-		export->value = NULL;
-	else
-	{
-		export->value = ft_strdup(value);
-		if (!export->value)
-			return (ft_exit(ERR_DUP), NULL);
-	}
-	export->next = NULL;
-	return (export);
-}
-
-/*replaces all non-ASCII characters in a line string with the '$' character
-It returns a new modified string*/
-char	*clean_env(char *to_find)
-{
-	char	*replace;
-	int		i;
-
-	replace = malloc(sizeof(char) + (ft_strlen(to_find) + 1));
-	if (!replace)
-		return (ft_exit(ERR_MALLOC), NULL);
-	i = 0;
-	while (to_find[i])
-	{
-		if (!ft_isascii(to_find[i]))
-			replace[i] = '$';
-		else
-			replace[i] = to_find[i];
-		i++;
-	}
-	replace[i] = '\0';
-	free(to_find);
-	return (replace);
 }
