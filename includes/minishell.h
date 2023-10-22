@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 19:44:21 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:45:27 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
 t_data	*recuperate_data(t_data *data);
 void	check_heredoc(t_data *data);
-char	*get_prompt_heredoc(void);
+void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds);
 int		is_there_a_pipe(t_token *token);
 
 //split mini
