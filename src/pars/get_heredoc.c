@@ -6,13 +6,13 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 15:03:48 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:20:38 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_prompt_heredoc(void)
+char	*_heredoc(void)
 {
 	char	*prompt;
 
@@ -65,23 +65,26 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 	exit (1);
 }
 
-void	fork_heredoc(t_data *data, t_token *token)
+void    fork_heredoc(t_data *data, t_token *token)
 {
-	int		fds[2];
-	int		status;
-	pid_t	child;
+    int        fds[2];
+    int        status;
+    pid_t    child;
 
-	if (pipe(fds) < 0)
-		return (perror("pipe error on heredoc"));
-	child = fork();
-	if (child == 0)
-	{
-		redir_hd(data);
-		create_heredoc(data, token, fds);
-	}
-	close(fds[0]);
-	close(fds[1]);
-	waitpid(child, &status, 0);
+    if (pipe(fds) < 0)
+        return (perror("pipe error on heredoc"));
+    child = fork();
+    signal(SIGINT, SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
+    if (child == 0)
+    {
+        redir_hd(data);
+        create_heredoc(data, token, fds);
+    }
+    close(fds[0]);
+    close(fds[1]);
+    waitpid(child, &status, 0);
+    redir(data);
 }
 
 void	check_heredoc(t_data *data)
