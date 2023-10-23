@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 20:29:17 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:42:41 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void    redir(t_data *data)
 	struct sigaction    si;
 	struct sigaction    sq;
 
+	// printf("je passe la\n");
 	si.sa_handler = sigint_handler;
 	sigemptyset(&si.sa_mask);
 	si.sa_flags = 0;
@@ -50,6 +51,7 @@ void    redir(t_data *data)
 		signal(SIGQUIT, SIG_IGN);
 	else
 	{
+		// printf("HERE BABY\n");
 		sq.sa_handler = sigquit_handler;
 		sigemptyset(&sq.sa_mask);
 		sq.sa_flags = 0;

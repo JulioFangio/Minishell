@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:41:07 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:44:21 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,15 @@ int		make_exit(t_data *data, char **cmd);
 // env.c
 int		make_env(t_data *data, t_env *env);
 // unset.c
+// int		unset_export(char **arg, t_data *data, int i);
+// int		unset_env(char **arg, t_data *data, int i);
 int		make_unset(t_data *data, char **cmd);
+// unset_utils.c
+int		len_to_equal(char *env);
+char	*ft_strchr_minishell(const char *str, char c);
+int		comp_len_val(char *arg, char *value);
+void	free_export(t_data *data, t_env *export);
+int		remove_export(t_data *data, char **arg, int i);
 // export.c
 int		make_export(t_data *data, char **cmd);
 
@@ -106,6 +114,7 @@ int		make_export(t_data *data, char **cmd);
 int		is_env(char *env);
 int		len_var_env(char *env);
 char	*extract_env_value(char *env);
+char	*get_env_value(char *arg, t_env *env);
 int		config_env_char_name(int c);
 // getenv_bis.c
 int		update_env(char *arg, t_env *env);
@@ -114,7 +123,13 @@ char	*extract_name_env(char *dest, char *src);
 size_t	env_len(t_env *env);
 char	*env_malloc(t_env *env);
 void	set_env(t_data *data, char **env);
+t_env	*export_env(char *value);
+char	*clean_env(char *to_find);
 // doenv.c
+void	bubble_sort_env(char **env_tab, int env_len);
+void	putstr_env(char **env);
+void	display_env(t_env *env, t_env *export);
+//char	*dup_env(char *ptr_env, t_env *env);
 char	*dup_env(t_env *env);
 int		env_add_value_to_list(char *value, t_env *env);
 
@@ -254,7 +269,7 @@ int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
 t_data	*recuperate_data(t_data *data);
 void	check_heredoc(t_data *data);
-void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds);
+char	*get_prompt_heredoc(void);
 int		is_there_a_pipe(t_token *token);
 
 //split mini

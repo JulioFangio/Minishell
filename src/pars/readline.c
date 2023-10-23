@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:13:43 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 19:20:23 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/20 20:02:46 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,18 @@ char	*ft_readline(void)
 	return (line);
 }
 
-char    *get_prompt(void)
+char	*get_prompt(void)
 {
-    char    *prompt;
+	char	*dir;
+	char	*prompt;
 
-    prompt = ft_strjoin("", "Minishell$ ");
-    return (prompt);
+	dir = getcwd(NULL, 0);
+	if (dir)
+	{
+		prompt = ft_strjoin(dir, "$ ");
+		free(dir);
+		return (prompt);
+	}
+	else
+		return (NULL);
 }

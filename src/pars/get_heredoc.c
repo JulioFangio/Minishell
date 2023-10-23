@@ -6,13 +6,13 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 19:51:04 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:03:48 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*_heredoc(void)
+char	*get_prompt_heredoc(void)
 {
 	char	*prompt;
 
@@ -20,7 +20,7 @@ char	*_heredoc(void)
 	return (prompt);
 }
 
-void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds)
+static void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 {
 	if (line == NULL)
 	{
@@ -29,10 +29,6 @@ void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds)
 		ft_putstr_fd(token->next->str, 2);
 		ft_putendl_fd("')", 2);
 	}
-	data->check_hdc = 1;
-	data->fd_in = fds[1];
-	close(fds[0]);
-	close(fds[1]);
 	free_and_close_data(data, 18);
 	free_env(&data->env);
 	free(line);
@@ -51,7 +47,7 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 		line = readline("> ");
 		if (line == NULL
 			|| !ft_strcmp(line, token->next->str))
-			get_out_of_heredoc(data, token, line, fds);
+			get_out_of_heredoc(data, token, line);
 		else
 		{
 			line = check_for_var(data, line, 1);
@@ -59,19 +55,25 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 			write(fds[1], "\n", 1);
 		}
 	}
+	data->check_hdc = 1;
+	data->fd_in = fds[1];
+	close(fds[0]);
+	close(fds[1]);
+	free_and_close_data(data, 50);
+	free_env(&data->env);
+	free(line);
+	exit (1);
 }
 
-void    fork_heredoc(t_data *data, t_token *token)
+void	fork_heredoc(t_data *data, t_token *token)
 {
-	int        fds[2];
-	int        status;
-	pid_t    child;
+	int		fds[2];
+	int		status;
+	pid_t	child;
 
 	if (pipe(fds) < 0)
 		return (perror("pipe error on heredoc"));
 	child = fork();
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 	if (child == 0)
 	{
 		redir_hd(data);
@@ -80,7 +82,6 @@ void    fork_heredoc(t_data *data, t_token *token)
 	close(fds[0]);
 	close(fds[1]);
 	waitpid(child, &status, 0);
-	redir(data);
 }
 
 void	check_heredoc(t_data *data)

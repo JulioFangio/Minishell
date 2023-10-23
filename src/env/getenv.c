@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:57 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:36:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:32:30 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,40 @@ char	*extract_env_value(char *env)
 		env_value[j++] = env[i++];
 	env_value[j] = '\0';
 	return (env_value);
+}
+
+/*
+searches for the value of a specific env variable in the chained list 
+of env variables (env) and returns this value*/
+char	*get_env_value(char *arg, t_env *env)
+{
+	char	env_name_value[B_SIZE];
+	char	*env_value;
+
+	env_value = ft_strdup("");
+	if (!env_value)
+		return (ft_exit(ERR_DUP), NULL);
+	while (env && env->value)
+	{
+		extract_name_env(env_name_value, env->value);
+		if (ft_strcmp(arg, env_name_value) == 0)
+		{
+			free(env_value);
+			env_value = NULL;
+			env_value = extract_env_value(env->value);
+			return (env_value);
+		}
+		env = env->next;
+	}
+	return (env_value);
+}
+
+/*env_char
+Checks whether a given character is allowed in the name of an env variable
+Valid characters are alphanumeric and '_' */
+int	config_env_char_name(int c)
+{
+	if (isalnum(c) == 1 || c == '_')
+		return (1);
+	return (0);
 }
