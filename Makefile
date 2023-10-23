@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
+#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/10/22 20:42:09 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/23 12:35:40 by juduval          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ_DIRS := $(addprefix $(OBJ_DIR), $(OBJ_DIRS))
 
 SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/elems_2.c pars/elems_3.c pars/fill_elems.c \
 		\
-		pars/expansion.c pars/utils.c pars/utils_2.c pars/utils_3.c pars/utils_4.c pars/utils_5.c pars/parse_line.c \
+		pars/utils_7.c pars/utils.c pars/utils_2.c pars/utils_3.c pars/utils_4.c pars/utils_5.c pars/parse_line.c \
 		\
 		pars/split_mini.c pars/start_shell.c pars/signals_2.c pars/get_heredoc.c pars/parse_line_2.c pars/utils_6.c\
 		\
@@ -51,7 +51,7 @@ SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/ele
 		exec/exec_cmd.c \
 		exec/exec_bin.c \
 		\
-
+		
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIB_FLAGS) $(LIBFT) $(READLINE_FLAGS) -o $(NAME)
 

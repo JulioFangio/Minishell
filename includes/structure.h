@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/23 11:07:45 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 11:19:13 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ typedef struct s_data
 	int		check_hdc;
 	int		parent;
 	int		result;
-	int		in;
-	int		out;
 	int		check_child;
 	int		fd_in;
 	int		fd_out;

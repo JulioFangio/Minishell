@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:53:31 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/13 15:37:49 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 11:39:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,58 +75,3 @@ char	*make_spaces(char *line, char *res, size_t i, int j)
 	}
 	return (res);
 }
-
-//faire en sorte que make spaces ne fasse pas les spaces dans les quotes et les doules quotes;
-//modifier aussi le comtage a whole_count
-//tester avec la commande -> echo "cat lol.c | cat>lol.c"
-
-int	shorten(char *line)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == '$' && line[i + 1] == '(')
-		{
-			while (line[i] && line[i] != ')')
-			{
-				if (line[i] == 32 || (line[i] >= 9 && line[i] <= 13))
-					count++;
-				i++;
-			}
-		}
-		i++;
-	}
-	return (count);
-}
-
-char	*remove_spaces(char *line, int i, int j)
-{
-	char	*res;
-	int		check;
-
-	check = 0;
-	res = ft_calloc((ft_strlen(line) - shorten(line)) + 1, sizeof(char));
-	if (!res)
-		return (NULL);
-	while (line[i])
-	{
-		if (line[i] == '$' && line[i + 1] == '(')
-			check = 1;
-		else if (line[i] == ')')
-			check = 0;
-		if ((line[i] == 32 || (line[i] >= 9 && line[i] <= 13)) && check == 1)
-		{
-			i++;
-			continue ;
-		}
-		res[j] = line[i];
-		i++;
-		j++;
-	}
-	return (res);
-}
-

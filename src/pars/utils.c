@@ -49,16 +49,6 @@ t_token	*ft_tokennew(void)
 	return (elem);
 }
 
-int	ft_lentab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
 t_token	*make_cmd(char **tab)
 {
 	t_token	*cmd;
@@ -74,67 +64,12 @@ t_token	*make_cmd(char **tab)
 	return (cmd);
 }
 
-/* void	init_prev(t_token *token)
+int	ft_lentab(char **tab)
 {
-	t_token	*tmp;
+	int	i;
 
-	tmp = token;
-	res = token;
-	if (token)
-		token = token->next;
-	while (token && token->code < PIPE)
-	{
-		token = token->prev;
-	}
-	return (token);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
- */
-// t_token	*make_cmd(char **tab)
-// {
-// 	t_token	*cmd;
-// 	int		i;
-
-// 	cmd = NULL;
-// 	i = -1;
-// 	while (tab[++i])
-// 	{
-// 		ft_tokenadd_back(&cmd, ft_tokennew());
-// 	}
-// 	return (cmd);
-// }
-
-
-// void	is_name(t_token *cmd, char *tab)
-// {
-// 	cmd->type = ft_strdup("name");
-// 	cmd->elem = ft_strdup(tab);
-// 	return ;
-// }
-
-// t_token	*make_cmd(char **tab)
-// {
-// 	t_token	*cmd;
-// 	int		i;
-// 	int		check;
-// 	int		opt;
-
-// 	cmd = NULL;
-// 	i = 0;
-// 	check = 0;
-// 	opt = 0;
-// 	while (tab[i])
-// 	{
-// 		ft_tokenadd_back(&cmd, ft_tokennew());
-// 		if (check == 3)
-// 			is_name(cmd, tab[i]);
-
-// 		check = (is_exp(cmd, tab[i]) + is_elem(cmd, tab[i])
-// 				+ is_corb(cmd, tab[i]));
-// 		if (check == 0)
-// 		{
-
-// 		}
-// 		i++;
-// 	}
-// 	return (cmd);
-// }

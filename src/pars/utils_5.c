@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:54:50 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 14:19:31 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:42:07 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	get_new_line(char *res, char *tronc, char *gvar, int lv)
 			j++;
 		}
 	}
-	// return (res);
 }
 
 char	*check_for_var(t_data *data, char *tronc, int nb)

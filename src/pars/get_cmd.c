@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_token.c                                          :+:      :+:    :+:   */
+/*   get_token.c                                          :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,7 +47,6 @@ void	fill_list(t_data *data, int check)
 	tmp = data->token;
 	fill_it(data, tmp, check, optn);
 }
-// ## + prototype
 
 void	get_token(t_data *data)
 {
@@ -56,9 +55,4 @@ void	get_token(t_data *data)
 	data->token = make_cmd(data->tab);
 	fill_list(data, 0);
 	tmp = data->token;
-	// while (tmp)
-	// {
-	// 	printf(" str = %s / type = %d\n", tmp->str, tmp->type);
-	// 	tmp = tmp->next;
-	// }
 }

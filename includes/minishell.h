@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/23 11:11:02 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 12:36:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@
 # endif
 
 
-						/// -- EXEC_MINISHELL -- /// 
-		/// BUILT_IN
+		/// -- EXEC_MINISHELL -- ///
+
+/// BUILT_IN
 // cd.c
 int		new_oldpath(t_env *env);
 int		new_path(t_env *env);
@@ -100,6 +101,9 @@ int		make_env(t_data *data, t_env *env);
 int		make_unset(t_data *data, char **cmd);
 // export.c
 int		make_export(t_data *data, char **cmd);
+void	fill_env(t_data *data, t_env *env, char *arg);
+t_env	*ft_env_new(char *arg);
+void	ft_env_add_back(t_env **env, t_env *new);
 
 		/// ENV
 // getenv.c
@@ -124,9 +128,6 @@ int		is_builtin(char *cmd);
 int		exec_builtin(t_data *data, char **cmd, t_token *token);
 // exec_pipe.c
 void	do_pipe(t_data *data);
-// exec_redir
-void	do_redir(t_data *data);
-void	redir_chev(t_data *dat, t_token *token);
 // exec_heredoc.c
 char	*strcpy_heredoc(char *dest, const char *src);
 char	*strjoin_heredoc(char *s1, char *s2);
@@ -153,6 +154,7 @@ t_token	*iter_token_cmd(t_token *token, int iter);
 // free.c
 void	free_env(t_env **env);
 void	free_tab(char **tab);
+void	free_tronc(t_tronc *tronc);
 // void	free_tab_2(char **tab, t_token *token);
 void	free_token(t_token *token);
 void	free_and_close_data(t_data *data, int nb);
@@ -164,7 +166,7 @@ int		ret_child(char **env_tab, char *path, int result);
 char	*strjoin_path(const char *s1, const char *s2);
 // error.c
 void	ft_exit(char *error);
-void    error_cd(char **args);
+void	error_cd(char **args);
 int		child_error(char *path);
 // tab.c
 char	**token_to_tab(t_token *token, char **tab);
@@ -175,9 +177,9 @@ void	ft_close_fd(int fd);
 void	ft_close_all_fd(t_data *data);
 void	reset_to_initial_fd(t_data *data);
 
-						/// -- PARSING_MINISHELL -- ///
+		/// -- PARSING_MINISHELL -- ///
 
-//	signals
+//Signals
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
 void	sigquit_handler_hd(int signum);
@@ -185,52 +187,49 @@ void	sigint_handler_hd(int signum);
 void	redir_hd(t_data *data);
 void	redir(t_data *data);
 
-//	other
-int		start(char *line, t_data *data);
-void	run_shell_loop(t_data *data);
-char	**get_split(char *line);
-char	*ft_readline(void);
-char	*get_prompt(void);
-
-//	utils
+//Token
 t_token	*ft_tokennew(void);
 t_token	*make_cmd(char **tab);
 t_token	*ft_tokenlast(t_token *cmd);
 void	ft_tokenadd_back(t_token **cmd, t_token *new);
-int		ft_lentab(char **tab);
+
+//Troncate and expand
+t_tronc	*ft_trclast(t_tronc *tmp);
+t_tronc	*ft_troncnew(char *str);
+void	ft_trc_add_back(t_tronc **tronc, t_tronc *new);
 char	*tronc_optn(t_data *data, char *tab, int nb);
+char	*troncate(char *str);
+char	*check_for_var(t_data *data, char *tronc, int nb);
+char	*extract_var(t_data *data, char *tronc, char *var);
+char	*get_var(char *tronc);
+void	get_new_line(char *res, char *tronc, char *gvar, int lv);
+char	*pick_env(t_data *data, char *tab);
+
+//Parse
+int		ft_lentab(char **tab);
 int		check_quotes(char *line);
 int		check_line(char *line);
 int		how_long(char *line, char c, int count, size_t i);
 char	*remake_line(char *line, int n, int l);
-char	*remove_spaces(char *line, int i, int j);
-char	*keep_spaces(char *line);
-int		shorten(char *line);
 char	*make_spaces(char *line, char *res, size_t i, int j);
 int		check_end(char *line, int i, char c);
-char	*pick_env(t_data *data, char *tab);
-char	*check_for_var(t_data *data, char *tronc, int nb);
-void	get_new_line(char *res, char *tronc, char *gvar, int lv);
-char	*extract_var(t_data *data, char *tronc, char *var);
-char	*get_var(char *tronc);
 int		skip_quotes(char *line, size_t i);
-char	*ft_dupquotes(const char *str, char q);
 void	print_err_msg(char c);
-// void	free_tab(char **tab);
+int		whole_count(char *line);
 
-//	elems + ext
+//Elems
 int		is_redir(char *tab);
 int		is_pipe(char *tab);
 int		is_char(char *tab);
 int		is_a_builtin(char *tab);
 int		is_heredoc(char *tab);
-int		whole_count(char *line);
-int		ext_filename(char *tab);
-int		ext_dollar(char *tab);
-int		ext_tilde(char *tab);
-int		ext_bracers(char *tab);
 
-// cmd
+//Command
+int		start(char *line, t_data *data);
+void	run_shell_loop(t_data *data);
+char	**get_split(char *line);
+char	*ft_readline(void);
+char	*get_prompt(void);
 void	get_token(t_data *data);
 void	fill_list(t_data *data, int check);
 void	fill_elem(t_token *cmd, char *tab, int nb);
@@ -243,25 +242,23 @@ int		ft_optn(t_token *cmd, char *tab, int optn);
 int		check_built(char *s1, const char *s2);
 int		built_cmp(char *tab);
 
-//parse_line
+//Parse_line
+t_data	*recuperate_data(t_data *data);
 int		parse_line(t_data *data);
-int		parse_ls(t_data *data, int check_ls);
 int		parse_first_token(t_token *token);
 int		find_intruder(t_token *token, char c);
 int		parse_heredoc(t_token *token);
 int		parse_pipe(t_token *cmd);
 int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
-t_data	*recuperate_data(t_data *data);
 void	check_heredoc(t_data *data);
 void	create_heredoc(t_data *data, t_token *token);
 void	get_out_of_heredoc(t_data *data, t_token *token, char *line);
 int		is_there_a_pipe(t_token *token);
 
-//split mini
+//Split mini
+int		ft_isseparator(char c, char sep);
+int		ft_countwords(const char *str, char sep, int i, int count);
 char	**split_mini(char const *s, char c);
-void	fill_env(t_data *data, t_env *env, char *arg);
-t_env	*ft_env_new(char *arg);
-void	ft_env_add_back(t_env **env, t_env *new);
 
 #endif

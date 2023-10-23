@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:44:07 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/20 12:37:38 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 11:19:41 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,15 @@ int	built_cmp(char *tab)
 
 int	scenario(char *tab, int check)
 {
-	// if (ext_dollar(tab))
-	// 	return (5);
 	if (is_redir(tab))
 		return (7);
 	else if (is_heredoc(tab))
 		return (8);
 	else if (is_pipe(tab))
 		return (9);
-	// else if (is_char(tab))
-	// 	return (10);
 	else if (check == 0 && is_a_builtin(tab))
 		return (11);
 	else if (check == 0)
 		return (12);
 	return (13);
 }
-
-// int	is_builtin(t_token *cmd, char *tab)
-// {
-// 	if (built_cmp(tab))
-// 	{
-// 		cmd->type = ft_strdup("builtin");
-// 		cmd->elem = ft_strdup(tab);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-

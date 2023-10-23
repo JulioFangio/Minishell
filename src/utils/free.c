@@ -3,51 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 15:20:52 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:36:34 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-
-// static	int	len_tokens(t_token *token)
-// {
-// 	int		len;
-// 	t_token	*tmp;
-
-// 	len = 1;
-// 	tmp = token;
-// 	while (tmp)
-// 	{
-// 		len++;
-// 		tmp = tmp->next;
-// 	}
-// 	return (len);
-// }
-
-// void	free_tab_2(char **tab, t_token *token)
-// {
-// 	int		i;
-// 	// int		len
-// 	t_token	*tmp;
-
-// 	// len = len_tokens(token);
-// 	i = 0;
-// 	tmp = token;
-// 	while (tmp)
-// 	{
-// 		if (tab[i])
-// 		{
-// 			tab[i] = ft_memdel(tab[i]);
-// 		}
-// 		i++;
-// 		tmp = tmp->next;
-// 	}
-// 	tab = ft_memdel(tab);
-// }
 
 void	free_tab(char **tab)
 {
@@ -119,3 +82,18 @@ void	free_and_close_data(t_data *data, int nb)
 	}
 }
 
+void	free_tronc(t_tronc *tronc)
+{
+	t_tronc	*tmp;
+
+	while (tronc)
+	{
+		tmp = tronc->next;
+		if (!tronc->str)
+		{
+			tronc->str = ft_memdel(tronc->str);
+		}
+		tronc = ft_memdel(tronc);
+		tronc = tmp;
+	}
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_elems.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:42:04 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 16:05:03 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:22:20 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	fill_elem(t_token *cmd, char *tab, int nb)
 	cmd->type = nb;
 	return ;
 }
-
-// static int	is_there_a_quote(char *str)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (str[++i])
-// 	{
-// 		if(str[i] == '"' || str[i] == '\'')
-// 			return (1);
-// 	}
-// 	return (0);
-// }
 
 void	fill_elem_tronc(t_data *data, t_token *cmd, char *tab, int nb)
 {

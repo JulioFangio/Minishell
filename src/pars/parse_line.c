@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/19 16:50:08 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 11:25:04 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int	parse_redir(t_token *cmd)
 	}
 	return (1);
 }
-// ##
 
 int	parse_line(t_data *data)
 {
@@ -125,8 +124,3 @@ int	parse_line(t_data *data)
 	}
 	return (1);
 }
-// ## + parse_line_2.c parse heredoc
-
-
-		// || ((is_redir(cmd->str) || is_heredoc(cmd->str))
-		// 	&& (cmd->next && cmd->next->str[0] == '|')))

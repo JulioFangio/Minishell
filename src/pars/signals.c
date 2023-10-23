@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/21 20:29:17 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:27:01 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    sigint_handler(int signum)
+void	sigint_handler(int signum)
 {
 	(void)signum;
 	ft_putchar_fd('\n', 1);
@@ -22,9 +22,9 @@ void    sigint_handler(int signum)
 	rl_redisplay();
 }
 
-void    sigquit_handler(int signum)
+void	sigquit_handler(int signum)
 {
-	t_data    *data;
+	t_data	*data;
 
 	(void)signum;
 	data = NULL;
@@ -37,10 +37,10 @@ void    sigquit_handler(int signum)
 	exit (1);
 }
 
-void    redir(t_data *data)
+void	redir(t_data *data)
 {
-	struct sigaction    si;
-	struct sigaction    sq;
+	struct sigaction	si;
+	struct sigaction	sq;
 
 	si.sa_handler = sigint_handler;
 	sigemptyset(&si.sa_mask);
