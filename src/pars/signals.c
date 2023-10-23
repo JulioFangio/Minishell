@@ -6,19 +6,19 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 17:28:17 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:50:36 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    sigint_handler(int signum)
+void	sigint_handler(int signum)
 {
-    (void)signum;
-    ft_putchar_fd('\n', 1);
-    rl_replace_line("", 1);
-    rl_on_new_line();
-    rl_redisplay();
+	(void)signum;
+	ft_putchar_fd('\n', 1);
+	rl_replace_line("", 1);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	sigquit_handler(int signum)
@@ -30,7 +30,6 @@ void	sigquit_handler(int signum)
 	data = recuperate_data(data);
 	ft_putchar_fd('\n', 1);
 	ft_putendl_fd("^\\Quit (core dumped)", 1);
-	printf("Ta soeur\n");
 	free_and_close_data(data, 7);
 	free_env(&data->env);
 	exit (1);
@@ -49,6 +48,7 @@ void	redir(t_data *data)
 		signal(SIGQUIT, SIG_IGN);
 	else
 	{
+		printf("jepasse par le \n");
 		sq.sa_handler = sigquit_handler;
 		sigemptyset(&sq.sa_mask);
 		sq.sa_flags = 0;

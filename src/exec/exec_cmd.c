@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/23 17:22:43 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:50:44 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void    exec_command(t_data *data)
 		//ft_close_fd?
 		data->check_child = 1;
 		redir(data);
-		
 		// dprintf(2, "%s dfgdfg\n", cmd[0]);
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
 			data->result = exec_bin(cmd, data, data->env);
