@@ -3,48 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   utils_7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:31:39 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:37:40 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 18:11:53 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_strcmp_env(const char *s1, const char *s2)
+char    *pick_env(t_data *data, char *tab)
 {
-	int	i;
-	int	j;
+    t_env    *tmp;
+    char    *ntab;
+    char    *res;
 
-	i = 0;
-	j = 1;
-	while (s2[i] != '=' && s1[j] && s2[i] && s1[j] == s2[i])
-	{
-		i++;
-		j++;
-	}
-	if (s2[i] == '=')
-		return (0);
-	return (1);
-}
-
-char	*pick_env(t_data *data, char *tab)
-{
-	t_env	*tmp;
-	char	*res;
-
-	tmp = data->env;
-	while (tmp)
-	{
-		if (!ft_strcmp_env(tab, tmp->value))
-		{
-			res = extract_env_value(tmp->value);
-			return (res);
-		}
-		tmp = tmp->next;
-	}
-	return (tab);
+    tmp = data->env;
+    ntab = ft_strjoin(tab, "=");
+    while (tmp)
+    {
+        if (!ft_strncmp(ntab + 1, tmp->value, ft_strlen(ntab + 1)))
+        {
+            res = extract_env_value(tmp->value);
+            free(ntab);
+            return (res);
+        }
+        tmp = tmp->next;
+    }
+    free(ntab);
+    return (tab);
 }
 
 t_tronc	*ft_trclast(t_tronc *tmp)

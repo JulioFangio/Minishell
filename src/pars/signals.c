@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:01:21 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:27:01 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:28:17 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	sigint_handler(int signum)
+void    sigint_handler(int signum)
 {
-	(void)signum;
-	ft_putchar_fd('\n', 1);
-	ft_putstr_fd(get_prompt(), 1);
-	// rl_on_new_line();
-	// rl_replace_line("", 0);
-	rl_redisplay();
+    (void)signum;
+    ft_putchar_fd('\n', 1);
+    rl_replace_line("", 1);
+    rl_on_new_line();
+    rl_redisplay();
 }
 
 void	sigquit_handler(int signum)

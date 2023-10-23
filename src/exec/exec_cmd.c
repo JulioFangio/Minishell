@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/23 14:31:35 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:22:43 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,14 @@ void    exec_command(t_data *data)
 	{
 		if (is_there_a_pipe(data->token))
 		{
+			// dprintf(1, "Went there\n");
 			data->result = exec_builtin(data, cmd, data->token);
-			ft_close_fd(data->pipefd[1]);
+			ft_close_fd(data->fd_out);
+			if (data->fd_in > 0)
+			{
+				close(data->fd_in);
+				data->fd_in = -1;
+			}
 			data->fd_in = data->pipefd[0];
 		}
 		else
@@ -95,18 +101,27 @@ void    exec_command(t_data *data)
 		//ft_close_fd?
 		data->check_child = 1;
 		redir(data);
+		
+		// dprintf(2, "%s dfgdfg\n", cmd[0]);
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
 			data->result = exec_bin(cmd, data, data->env);
 		free(data->pids);
 		exit(data->result); //changer?
 	}
+	// dprintf(2, "%u\n", getpid());
 	data->check_child = 0;
 	redir(data);
 	data->pids[data->idx_pid] = pid;
 	data->idx_pid++;
+	if (data->fd_in > 0)
+	{
+		close(data->fd_in);
+		data->fd_in = -1;
+	}
 	if (is_there_a_pipe(data->token))
 	{
 		ft_close_fd(data->pipefd[1]);
+		
 		data->fd_in = data->pipefd[0];
 	}
 	check_exit_and_wait(data);

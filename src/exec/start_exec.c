@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:43:02 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:17:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void    launch_minishell(t_data *data)
     while (++i < data->idx_pid)
 	{
         waitpid(data->pids[i], &status, 0);
+        // wait(NULL);
 	}
 	status = WEXITSTATUS(status);
 	if (data->end == 0)
