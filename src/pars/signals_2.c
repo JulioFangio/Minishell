@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 19:23:13 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:13:11 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	sigint_handler_hd(int signum)
 	data = NULL;
 	data = recuperate_data(data);
 	data->result = 130;
+	close(data->hdcfd[0]);
+	close(data->hdcfd[1]);
 	free_and_close_data(data, 7);
 	free_env(&data->env);
 	rl_redisplay();

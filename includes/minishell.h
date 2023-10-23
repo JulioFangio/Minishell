@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:41:07 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:11:02 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,8 @@ int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
 t_data	*recuperate_data(t_data *data);
 void	check_heredoc(t_data *data);
-void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds);
+void	create_heredoc(t_data *data, t_token *token);
+void	get_out_of_heredoc(t_data *data, t_token *token, char *line);
 int		is_there_a_pipe(t_token *token);
 
 //split mini

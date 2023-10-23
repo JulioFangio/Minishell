@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 19:51:04 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:12:27 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*_heredoc(void)
 	return (prompt);
 }
 
-void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds)
+void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 {
 	if (line == NULL)
 	{
@@ -30,16 +30,16 @@ void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int *fds)
 		ft_putendl_fd("')", 2);
 	}
 	data->check_hdc = 1;
-	data->fd_in = fds[1];
-	close(fds[0]);
-	close(fds[1]);
+	data->fd_in = data->hdcfd[1];
+	close(data->hdcfd[0]);
+	close(data->hdcfd[1]);
 	free_and_close_data(data, 18);
 	free_env(&data->env);
 	free(line);
 	exit (1);
 }
 
-void	create_heredoc(t_data *data, t_token *token, int *fds)
+void	create_heredoc(t_data *data, t_token *token)
 {
 	char	*line;
 
@@ -51,23 +51,22 @@ void	create_heredoc(t_data *data, t_token *token, int *fds)
 		line = readline("> ");
 		if (line == NULL
 			|| !ft_strcmp(line, token->next->str))
-			get_out_of_heredoc(data, token, line, fds);
+			get_out_of_heredoc(data, token, line);
 		else
 		{
 			line = check_for_var(data, line, 1);
-			write(fds[1], &line, ft_strlen(line));
-			write(fds[1], "\n", 1);
+			write(data->hdcfd[1], &line, ft_strlen(line));
+			write(data->hdcfd[1], "\n", 1);
 		}
 	}
 }
 
-void    fork_heredoc(t_data *data, t_token *token)
+void	fork_heredoc(t_data *data, t_token *token)
 {
-	int        fds[2];
-	int        status;
-	pid_t    child;
+	int			status;
+	pid_t		child;
 
-	if (pipe(fds) < 0)
+	if (pipe(data->hdcfd) < 0)
 		return (perror("pipe error on heredoc"));
 	child = fork();
 	signal(SIGINT, SIG_IGN);
@@ -75,10 +74,10 @@ void    fork_heredoc(t_data *data, t_token *token)
 	if (child == 0)
 	{
 		redir_hd(data);
-		create_heredoc(data, token, fds);
+		create_heredoc(data, token);
 	}
-	close(fds[0]);
-	close(fds[1]);
+	close(data->hdcfd[0]);
+	close(data->hdcfd[1]);
 	waitpid(child, &status, 0);
 	redir(data);
 }

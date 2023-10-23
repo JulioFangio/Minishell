@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/22 15:33:15 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:14:54 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	run_shell_loop(t_data *data)
 		line = ft_readline();
 		if (line == NULL)
 		{
-			free_and_close_data(data, 101);
 			free_env(&data->env);
 			break ;
 		}
@@ -55,7 +54,6 @@ void	run_shell_loop(t_data *data)
 			free_env(&data->env);
 			break ;
 		}
-		//free_and_close_data(data, 99);
 	}
 	rl_clear_history();
 }
