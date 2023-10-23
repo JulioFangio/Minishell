@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:32:18 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:31:35 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	put_fd_in_data(t_data *data)
 				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR
 						| O_TRUNC, 0777);
 			else
-				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR 
+				data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR
 						| O_APPEND, 0777);
 		}
 		tmp = tmp->next;
