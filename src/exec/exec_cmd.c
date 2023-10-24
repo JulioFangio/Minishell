@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 20:16:35 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 20:32:37 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	exit_function(t_data *data, char **cmd)
 {
 	make_exit(data, cmd);
-	free_and_close_data(data, 59);
+	free_token(data->free_token);
 	free_env(&data->env);
 	free(data->pids);
 	free_tab(cmd);
@@ -40,7 +40,7 @@ static void	bin_function(t_data *data, char **cmd)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	if (cmd && ft_strcmp(cmd[0], "exit") == 0)
+	if (cmd && ft_strcmp(cmd[0], "exit") == 0 && data->err_redir == 0)
 		exit_function(data, cmd);
 	if (cmd && ft_strcmp(cmd[0], "exit") != 0 && data->err_redir == 0)
 		data->result = exec_bin(cmd, data, data->env);
