@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:59:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:45:37 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:28:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	new_path(t_env *env)
 
 /*handles directory change operations to the HOME directory
 or the previous directory depending on the value of directory
-0 is HOME and 1 is previous directory*/
+0 is HOME and 1 is previous     directory*/
 int	handle_directory_change(int directory, t_env *env)
 {
 	int		res;
@@ -80,33 +80,34 @@ int	handle_directory_change(int directory, t_env *env)
 	path = NULL;
 	return (res);
 }
+
 /*handles the "cd" command according to the arguments supplied.
 It can be used to change directories to the HOME directory,
 the previous directory, a specific directory or to display an appropriate
 error if the wrong argument is given.
 It also updates the "OLDPWD" and "PWD" environment variables accordingly.*/
-int    make_cd(t_data *data, char **arg, t_env *env)
+int	make_cd(t_data *data, char **arg, t_env *env)
 {
-    int    res;
+	int	res;
 
-    if (!arg[1])
-        return (handle_directory_change(0, env));
-    if (ft_strcmp(arg[1], ".") == 0)
-        return (ft_putendl_fd(ERR_ARG, STDERR_FILENO), FAILURE);
-    else if (ft_strcmp(arg[1], "-") == 0)
-    {
-        res = handle_directory_change(1, env);
-        make_pwd(data, env);
-    }
-    else
-    {
-        new_oldpath(env);
-        res = chdir(arg[1]);
-        new_path(env);
-        if (res < 0)
-            res *= -1;
-        if (res != 0)
-            error_cd(arg);
-    }
-    return (res);
+	if (!arg[1])
+		return (handle_directory_change(0, env));
+	if (ft_strcmp(arg[1], ".") == 0)
+		return (ft_putendl_fd(ERR_ARG, STDERR_FILENO), FAILURE);
+	else if (ft_strcmp(arg[1], "-") == 0)
+	{
+		res = handle_directory_change(1, env);
+		make_pwd(data, env);
+	}
+	else
+	{
+		new_oldpath(env);
+		res = chdir(arg[1]);
+		new_path(env);
+		if (res < 0)
+			res *= -1;
+		if (res != 0)
+			error_cd(arg);
+	}
+	return (res);
 }
