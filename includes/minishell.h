@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/23 12:36:41 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 12:47:39 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,14 @@ int		make_unset(t_data *data, char **cmd);
 // export.c
 int		make_export(t_data *data, char **cmd);
 void	fill_env(t_data *data, t_env *env, char *arg);
-t_env	*ft_env_new(char *arg);
 void	ft_env_add_back(t_env **env, t_env *new);
-
+// export_utils.c
+int		ft_isalnum_exp(int c);
+int		ft_isalpha_exp(int c);
+int		is_exp_arg_valid(char *arg);
+t_env	*ft_env_new(char *arg);
+t_env	*ft_envlast(t_env *tmp);
+t_env	*ft_env_new(char *arg);
 		/// ENV
 // getenv.c
 int		is_env(char *env);
