@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 12:04:50 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:57:07 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ int	make_echo(t_data *data, char **arg)
 	}
 	if (flags == 0)
 		ft_putchar_fd('\n', data->fd_out);
+	if (data->fd_out)
+		data->fd_out = -1;
 	return (SUCCESS);
 }

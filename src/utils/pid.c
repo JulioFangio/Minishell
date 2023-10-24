@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipe.c                                        :+:      :+:    :+:   */
+/*   pid.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 15:41:51 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 18:10:13 by jaristil         ###   ########.fr       */
+/*   Created: 2023/10/24 17:30:16 by jaristil          #+#    #+#             */
+/*   Updated: 2023/10/24 17:51:45 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	is_there_a_pipe(t_token *token)
+void	set_pid_tab(t_data *data)
 {
+	int		count;
 	t_token	*tmp;
 
-	tmp = token;
+	count = 0;
+	tmp = data->token;
 	while (tmp)
 	{
 		if (tmp->type == PIPE)
-			return (1);
+			count++;
 		tmp = tmp->next;
 	}
-	return (0);
+	data->pids = ft_calloc(count + 1, sizeof(int));
 }
 
-void	do_pipe(t_data *data)
+void	check_exit_and_wait(t_data *data)
 {
-	if (is_there_a_pipe(data->token))
+	int	i;
+
+	i = -1;
+	if (!is_there_a_pipe(data->token))
 	{
-		if (pipe(data->pipefd) < 0)
-			perror("pipe");
-	}
-	else
-	{
-		// ft_close_fd(data->pipefd[0]);
-		data->pipefd[0] = -1;
-		// ft_close_fd(data->pipefd[1]);
-		data->pipefd[1] = -1;
+		while (++i < data->idx_pid -1)
+			waitpid(data->pids[i], NULL, 0);
 	}
 }

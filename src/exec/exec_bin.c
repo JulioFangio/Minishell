@@ -6,12 +6,11 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 15:07:19 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:13:45 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	dup_files(t_data *data)
 {

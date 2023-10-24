@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 15:07:41 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:55:42 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	child_error(char *path)
 	data = NULL;
 	fd = -1;
 	data = recuperate_data(data);
-	if (path)
-		fd = open(path, O_WRONLY);
+	// if (path)
+	// 	fd = open(path, O_WRONLY);
 	if (!ft_strchr(path, '/'))
 		ft_putendl_fd(ERR_CMD, STDERR);
 	if (!ft_strchr(path, '/') || fd == -1)

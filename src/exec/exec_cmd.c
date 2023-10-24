@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 17:03:59 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:07:37 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	bin_function(t_data *data, char **cmd)
 	if (cmd && ft_strcmp(cmd[0], "exit") != 0 && data->err_redir == 0)
 		data->result = exec_bin(cmd, data, data->env);
 	free(data->pids);
-	// exit(data->result);	
+	exit(data->result);
 }
 
 static void	end_exec_command(t_data *data, pid_t pid)

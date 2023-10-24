@@ -6,46 +6,16 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 15:17:06 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:19:12 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	is_there_a_pipe(t_token *token)
-{
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->type == PIPE)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 void	exec_redir(t_data *data)
 {
 	do_pipe(data);
 	exec_command(data);
-}
-
-static void	set_pid_tab(t_data *data)
-{
-	int		count;
-	t_token	*tmp;
-
-	count = 0;
-	tmp = data->token;
-	while (tmp)
-	{
-		if (tmp->type == PIPE)
-			count++;
-		tmp = tmp->next;
-	}
-	data->pids = ft_calloc(count + 1, sizeof(int));
 }
 
 void    launch_minishell(t_data *data)
@@ -63,7 +33,6 @@ void    launch_minishell(t_data *data)
     while (data->exit == 0 && token)
     {
         data->exec = 1;
-        data->end = 1;
 		data->err_redir = 0;
 		if (!is_there_a_pipe(data->token) && is_builtin(data->token->str))
 	    	reset_to_initial_fd(data);

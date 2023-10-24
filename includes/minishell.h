@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 12:47:39 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:32:04 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void	free_data(t_data *data);
 void	clean_child_process(t_data *data, t_env *env, char *path, char **arg);
 int		ret_child(char **env_tab, char *path, int result);
 char	*strjoin_path(const char *s1, const char *s2);
+void	check_exit_and_wait(t_data *data);
 // error.c
 void	ft_exit(char *error);
 void	error_cd(char **args);
@@ -179,8 +180,12 @@ char	**token_cmd_to_tab(t_token *token);
 size_t	tab_size(char **tab);
 // fd.c
 void	ft_close_fd(int fd);
+void	put_fd_in_data(t_data *data);
 void	ft_close_all_fd(t_data *data);
 void	reset_to_initial_fd(t_data *data);
+// pid.c
+void	set_pid_tab(t_data *data);
+void	check_exit_and_wait(t_data *data);
 
 		/// -- PARSING_MINISHELL -- ///
 

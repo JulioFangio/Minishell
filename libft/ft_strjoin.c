@@ -3,23 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:36:50 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 23:43:05 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:46:06 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static void	fill_join(char *join, const char *s1, const char *s2)
 {
-	char	*join;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
+	while (s1[i])
+	{
+		join[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		join[i++] = s2[j];
+		j++;
+	}
+
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*join;
+
 	if (!s1)
 		return (ft_strdup(s2));
 	if (!s2)
@@ -28,18 +44,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!(join))
 		return (NULL);
 	if ((ft_strlen(s1) + ft_strlen(s2) > 0))
-	{
-		while (s1[i])
-		{
-			join[i] = s1[i];
-			i++;
-		}
-		while (s2[j])
-		{
-			join[i++] = s2[j];
-			j++;
-		}
-	}
+		fill_join(join, s1, s2);
 	return (join);
 }
 
