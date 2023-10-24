@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 12:23:42 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:59:09 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	put_fd_in_data(t_data *data)
 {
 	t_token	*tmp;
-
 	tmp = data->token;
 	if (is_there_a_pipe(data->token))
 		data->fd_out = data->pipefd[1];

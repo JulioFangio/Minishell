@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:37:48 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/20 14:38:34 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 13:09:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 int	ret_child(char **env_tab, char *path, int result)
 {
@@ -58,4 +57,3 @@ void	clean_child_process(t_data *data, t_env *env, char *path, char **arg)
 		arg = NULL;
 	}
 }
-
