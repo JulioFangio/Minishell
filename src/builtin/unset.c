@@ -6,13 +6,13 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:48:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 19:36:00 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:07:44 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	delete_t_env(t_env *env, char *del, int check)
+static void	delete_t_env(t_env *env, char *del)
 {
 	t_env	*tmp;
 	t_env	*incr;
@@ -24,7 +24,7 @@ static void	delete_t_env(t_env *env, char *del, int check)
 	while (tmp)
 	{
 		if (tmp->next && tmp->next->value
-			&& ft_strncmp(tmp->next->value, del, check) == 0)
+			&& ft_strncmp(tmp->next->value, del, ft_strlen(del)) == 0)
 		{
 			if (tmp->next->next)
 				incr = tmp->next->next;
@@ -41,24 +41,43 @@ static void	delete_t_env(t_env *env, char *del, int check)
 	}
 }
 
-static int	something_to_unset(t_data *data, char *arg)
+static void	delete_first_env(t_data *data, char *narg)
 {
-	int		check;
 	t_env	*tmp;
 
-	check = 0;
 	tmp = data->env;
-	while (arg[check] && arg[check] != '=')
-		check++;
+	data->env = data->env->next;
+	free(tmp->value);
+	free(narg);
+	free(tmp);
+}
+
+static int	something_to_unset(t_data *data, char *arg)
+{
+	t_env	*tmp;
+	char	*narg;
+	int		i;
+
+	i = 0;
+	tmp = data->env;
+	narg = ft_strjoin(arg, "=");
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->value, arg, check))
+		if (!ft_strncmp(tmp->value, narg, ft_strlen(narg)) && i == 0)
 		{
-			delete_t_env(data->env, tmp->value, check);
+			delete_first_env(data, narg);
+			return (1);
+		}
+		else if (!ft_strncmp(tmp->value, narg, ft_strlen(narg)) && i > 0)
+		{
+			delete_t_env(data->env, narg);
+			free(narg);
 			return (1);
 		}
 		tmp = tmp->next;
+		i++;
 	}
+	free(narg);
 	return (1);
 }
 
