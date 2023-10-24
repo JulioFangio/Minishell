@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juduval <juduval@student.42.fr>            +#+  +:+       +#+         #
+#    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 13:31:55 by jaristil          #+#    #+#              #
-#    Updated: 2023/10/10 13:25:45 by juduval          ###   ########.fr        #
+#    Updated: 2023/10/24 13:03:25 by jaristil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 	ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_memdel.c \
 	ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
 	ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
-	ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
+	ft_strlcat.c ft_strlcpy.c ft_strcpy.c ft_strlen.c ft_strmapi.c \
 	ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
 	ft_substr.c ft_tolower.c ft_toupper.c \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \

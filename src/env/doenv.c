@@ -6,26 +6,19 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:45:27 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:39:43 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:01:32 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*
-copies the values of environment variables stored in a linked list
-into a string, adding a line feed between each value*/
-//char	*dup_env(char *ptr_env, t_env *env)
-char	*dup_env(t_env *env)
+static int	get_size_env(t_env *env)
 {
 	int		size;
 	t_env	*current;
-	char	*ptr_env;
-	int		i;
 
-	size = 0;
-	i = 0;
 	current = env;
+	size = 0;
 	while (current && current->next)
 	{
 		if (current->value)
@@ -34,6 +27,22 @@ char	*dup_env(t_env *env)
 			size++;
 		current = current->next;
 	}
+	return (size);
+}
+
+/*
+copies the values of environment variables stored in a linked list
+into a string, adding a line feed between each value*/
+char	*dup_env(t_env *env)
+{
+	int		size;
+	char	*ptr_env;
+	t_env	*current;
+	int		i;
+
+	size = get_size_env(env);
+	i = 0;
+	current = env;
 	ptr_env = ft_calloc(sizeof(char), (size + 1));
 	if (!ptr_env)
 		return (NULL);
@@ -42,8 +51,8 @@ char	*dup_env(t_env *env)
 	{
 		if (current->value)
 		{
-			strcpy(ptr_env + i, current->value);
-			i += strlen(current->value);
+			ft_strcpy(ptr_env + i, current->value);
+			i += ft_strlen(current->value);
 		}
 		if (current->next->next)
 			ptr_env[i++] = '\n';

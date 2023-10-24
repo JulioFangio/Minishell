@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:47 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:35:45 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:05:06 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,11 @@ char	*env_malloc(t_env *env)
 	return (ptr_env);
 }
 
-/*set all environment variables from the env array,
-allowing mini-shell to access and manage
-these env variables for command execution*/
-void	set_env(t_data *data, char **env)
+static void	prepare_env(t_data *data, t_env *ptr1_env,
+	t_env *ptr2_env, char **env)
 {
-	t_env	*ptr1_env;
-	t_env	*ptr2_env;
 	int		i;
 
-	if (!env)
-	{
-		data->env = NULL;
-		return ;
-	}
-	ptr1_env = malloc(sizeof(t_env));
-	if (!ptr1_env)
-		return (ft_exit(ERR_MALLOC));
-	ptr1_env->value = ft_strdup(env[0]);
-	if (!ptr1_env->value)
-		return (free(ptr1_env), ft_exit(ERR_DUP));
-	ptr1_env->next = NULL;
-	data->env = ptr1_env;
 	i = 1;
 	while (env && env[i])
 	{
@@ -79,4 +62,29 @@ void	set_env(t_data *data, char **env)
 		ptr1_env->next = ptr2_env;
 		ptr1_env = ptr2_env;
 	}
+}
+
+/*set all environment variables from the env array,
+allowing mini-shell to access and manage
+these env variables for command execution*/
+void	set_env(t_data *data, char **env)
+{
+	t_env	*ptr1_env;
+	t_env	*ptr2_env;
+
+	if (!env)
+	{
+		data->env = NULL;
+		return ;
+	}
+	ptr2_env = NULL;
+	ptr1_env = malloc(sizeof(t_env));
+	if (!ptr1_env)
+		return (ft_exit(ERR_MALLOC));
+	ptr1_env->value = ft_strdup(env[0]);
+	if (!ptr1_env->value)
+		return (free(ptr1_env), ft_exit(ERR_DUP));
+	ptr1_env->next = NULL;
+	data->env = ptr1_env;
+	prepare_env(data, ptr1_env, ptr2_env, env);
 }
