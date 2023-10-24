@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 18:57:50 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 21:23:54 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	child_error(char *path)
 	data = NULL;
 	fd = -1;
 	data = recuperate_data(data);
-	if (!ft_strchr(path, '/'))
-		ft_putendl_fd(ERR_CMD, STDERR);
+	fd = open(path, O_WRONLY);
+	ft_putendl_fd(ERR_CMD, STDERR);
 	if (!ft_strchr(path, '/') || fd == -1)
 		data->result = 127;
 	else
