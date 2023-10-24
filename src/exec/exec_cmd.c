@@ -6,21 +6,21 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 19:24:36 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 19:58:25 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	exit_function(t_data *data, char **cmd)
-{
-	make_exit(data, cmd);
-	free_and_close_data(data, 59);
-	free_env(&data->env);
-	free(data->pids);
-	free_tab(cmd);
-	exit (1);
-}
+// static void	exit_function(t_data *data, char **cmd)
+// {
+// 	make_exit(data, cmd);
+// 	free_and_close_data(data, 59);
+// 	free_env(&data->env);
+// 	free(data->pids);
+// 	free_tab(cmd);
+// 	exit (data->result);
+// }
 
 static void	builtin_function(t_data *data, char **cmd)
 {
@@ -81,10 +81,10 @@ void	exec_command(t_data *data)
 	cmd = token_cmd_to_tab(data->token);
 	if (!cmd)
 		return ;
-	if (cmd && ft_strcmp(cmd[0], "exit") == 0
-		&& token_is_pipe(data->token) == 0 && data->err_redir == 0)
-		exit_function(data, cmd);
-	else if (cmd && is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0
+	// if (cmd && ft_strcmp(cmd[0], "exit") == 0
+	// 	&& token_is_pipe(data->token) == 0 && data->err_redir == 0)
+	// 	exit_function(data, cmd);
+	if (cmd && is_builtin(cmd[0]) && ft_strcmp(cmd[0], "exit") != 0
 		&& data->err_redir == 0)
 	{
 		builtin_function(data, cmd);
