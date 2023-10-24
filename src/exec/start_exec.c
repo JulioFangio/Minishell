@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 20:43:02 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:17:06 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void    launch_minishell(t_data *data)
     {
         data->exec = 1;
         data->end = 1;
+		data->err_redir = 0;
 		if (!is_there_a_pipe(data->token) && is_builtin(data->token->str))
 	    	reset_to_initial_fd(data);
         exec_redir(data);

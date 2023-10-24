@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:37:38 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 15:04:01 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:16:46 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_data
 	int		idx_pid;
 	int		check;
 	int		exit;
+	int		err_redir;
 	int		end;
 	int		hdcfd[2];
 	int		pipefd[2];
