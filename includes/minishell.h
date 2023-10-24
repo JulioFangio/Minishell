@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 17:32:04 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:14:38 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@
 # ifndef MAX_PATH
 #  define MAX_PATH 1024
 # endif
-
 
 		/// -- EXEC_MINISHELL -- ///
 
@@ -183,6 +182,7 @@ void	ft_close_fd(int fd);
 void	put_fd_in_data(t_data *data);
 void	ft_close_all_fd(t_data *data);
 void	reset_to_initial_fd(t_data *data);
+void	secure_fds(void);
 // pid.c
 void	set_pid_tab(t_data *data);
 void	check_exit_and_wait(t_data *data);

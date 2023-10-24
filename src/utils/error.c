@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 17:55:42 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:57:50 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	error_cd(char **args)
 	}
 }
 
-// fonction to change because didnt go inside the stat(path)
 int	child_error(char *path)
 {
 	int			fd;
@@ -43,8 +42,6 @@ int	child_error(char *path)
 	data = NULL;
 	fd = -1;
 	data = recuperate_data(data);
-	// if (path)
-	// 	fd = open(path, O_WRONLY);
 	if (!ft_strchr(path, '/'))
 		ft_putendl_fd(ERR_CMD, STDERR);
 	if (!ft_strchr(path, '/') || fd == -1)

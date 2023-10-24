@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:36:50 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 17:46:06 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:57:24 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	fill_join(char *join, const char *s1, const char *s2)
 		join[i++] = s2[j];
 		j++;
 	}
-
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

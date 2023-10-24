@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 18:07:37 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:24:36 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,23 @@ static void	builtin_function(t_data *data, char **cmd)
 
 static void	bin_function(t_data *data, char **cmd)
 {
-	data->check_child = 1;
-	redir(data);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (cmd && ft_strcmp(cmd[0], "exit") != 0 && data->err_redir == 0)
 		data->result = exec_bin(cmd, data, data->env);
+	if (data->err_redir == 1)
+	{
+		free_tab(cmd);
+		free_token(data->free_token);
+		free_env(&data->env);
+		free(data->pids);
+	}
 	free(data->pids);
 	exit(data->result);
 }
 
 static void	end_exec_command(t_data *data, pid_t pid)
 {
-	data->check_child = 0;
-	redir(data);
 	data->pids[data->idx_pid] = pid;
 	data->idx_pid++;
 	if (data->fd_in > 0)

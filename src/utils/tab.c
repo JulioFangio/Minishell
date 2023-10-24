@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:41:07 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 14:18:17 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:02:07 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,7 @@ static void	fill_others(t_token *token, char **tab)
 	tmp = token;
 	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->str && tmp->str[0] == '-' && tmp->type == 2)
-		{
-			tab[i] = ft_strdup(tmp->str);
-			i++;
-		}
-		tmp = tmp->next;
-	}
-	tmp = token;
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->str && tmp->str[0] != '-' && tmp->type == 2)
+		if (tmp->str && tmp->type == 2)
 		{
 			tab[i] = ft_strdup(tmp->str);
 			i++;

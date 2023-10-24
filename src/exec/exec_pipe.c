@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:41:51 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 18:10:13 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:58:46 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	do_pipe(t_data *data)
 	}
 	else
 	{
-		// ft_close_fd(data->pipefd[0]);
 		data->pipefd[0] = -1;
-		// ft_close_fd(data->pipefd[1]);
 		data->pipefd[1] = -1;
 	}
 }
