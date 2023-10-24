@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:46:31 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/21 19:13:54 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:04:50 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,8 @@ int	make_echo(t_data *data, char **arg)
 
 	i = 1;
 	flags = 0;
-	// ft_putstr_fd("What is my fd?", 2);
-	// ft_putnbr_fd(data->fd_out, 2);
-	// ft_putstr_fd("\n", 2);
 	if (data->fd_out == -1)
 		data->fd_out = 1;
-	if (write(data->fd_out, "\0", 1) == -1)
-		if (errno == ENOSPC)
-			return (ft_putendl_fd(
-					"echo: write error: No space left on device", 2), 1);
 	if (tab_size(arg) > 1)
 	{
 		flags = handle_echo_options(arg, &i, flags);
