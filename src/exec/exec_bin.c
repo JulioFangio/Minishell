@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/22 15:12:18 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:24:19 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	dup_files(t_data *data)
 		close(data->fd_out);
 		data->fd_out = -1;
 	}
+	ft_close_fd(data->pipefd[0]);
 }
 
 int	child_process(char *path, char **arg, t_data *data, t_env *env)

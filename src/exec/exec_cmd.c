@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/23 14:31:35 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/24 12:23:42 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	check_exit_and_wait(t_data *data)
 	i = -1;
 	if (!is_there_a_pipe(data->token))
 	{
-		// data->end = 0;
+		data->end = 0;
 		while (++i < data->idx_pid -1)
 			waitpid(data->pids[i], NULL, 0);
 	}
@@ -56,7 +56,8 @@ static void	check_exit_and_wait(t_data *data)
 
 void    exec_command(t_data *data)
 {
-	char    **cmd;
+	char	**cmd;
+	pid_t	pid;
 
 	if (data->exec == 0)
 		return ;
@@ -79,7 +80,9 @@ void    exec_command(t_data *data)
 		if (is_there_a_pipe(data->token))
 		{
 			data->result = exec_builtin(data, cmd, data->token);
-			ft_close_fd(data->pipefd[1]);
+			ft_close_fd(data->fd_out);
+			ft_close_fd(data->fd_in);
+			data->fd_in = -1;
 			data->fd_in = data->pipefd[0];
 		}
 		else
@@ -89,10 +92,9 @@ void    exec_command(t_data *data)
 	}
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	pid_t pid = fork();
+	pid = fork();
 	if (pid == 0)
 	{
-		//ft_close_fd?
 		data->check_child = 1;
 		redir(data);
 		if (cmd && ft_strcmp(cmd[0], "exit") != 0)
@@ -104,6 +106,11 @@ void    exec_command(t_data *data)
 	redir(data);
 	data->pids[data->idx_pid] = pid;
 	data->idx_pid++;
+	if (data->fd_in > 0)
+	{
+		close(data->fd_in);
+		data->fd_in = -1;
+	}
 	if (is_there_a_pipe(data->token))
 	{
 		ft_close_fd(data->pipefd[1]);
