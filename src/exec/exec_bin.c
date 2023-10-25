@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 14:56:59 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:01:41 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 	if (!env_tab)
 		return (ft_exit(ERR_MALLOC), FAILURE);
 	ft_memdel(tmp);
-	// if (ft_strchr(path, '/'))
 	execve(path, arg, env_tab);
 	result = ret_child(env_tab, path, result);
 	clean_child_process(data, env, path, arg);
-	// result = WEXITSTATUS(result);
 	data->result = result;
 	return (data->result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 19:14:38 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 15:42:50 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ char	*strjoin_heredoc(char *s1, char *s2);
 char	*get_input_heredoc(char *limiter);
 void	open_heredoc(t_data *data);
 void	redir_heredoc(t_data *data, t_token *token);
+// exec_redir.c
+void	put_fd_in_data(t_data *data);
 // exec_cmd.c
 void	exec_command(t_data *data);
 // exec_bin.c
@@ -179,7 +181,6 @@ char	**token_cmd_to_tab(t_token *token);
 size_t	tab_size(char **tab);
 // fd.c
 void	ft_close_fd(int fd);
-void	put_fd_in_data(t_data *data);
 void	ft_close_all_fd(t_data *data);
 void	reset_to_initial_fd(t_data *data);
 void	secure_fds(void);

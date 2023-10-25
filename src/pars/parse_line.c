@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/25 15:17:13 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:37:10 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	parse_redir(t_token *cmd)
 		print_err_msg(c);
 		return (0);
 	}
-	else if ((cmd->next && is_redir(cmd->next->str))
-		|| is_heredoc(cmd->next->str))
+	else if (cmd->next && (is_redir(cmd->next->str)
+			|| is_heredoc(cmd->next->str) || is_pipe(cmd->next->str)))
 	{
 		c = cmd->str[0];
 		if (ft_strlen(cmd->str) < 2)
