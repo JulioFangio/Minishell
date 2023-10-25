@@ -6,7 +6,7 @@
 #    By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 15:17:00 by juduval           #+#    #+#              #
-#    Updated: 2023/10/24 17:32:42 by jaristil         ###   ########.fr        #
+#    Updated: 2023/10/25 15:10:10 by jaristil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ SRC = main.c pars/readline.c pars/signals.c pars/get_cmd.c pars/elems.c pars/ele
 		\
 		exec/exec_builtin.c \
 		exec/exec_pipe.c \
-		exec/exec_redir.c \
 		exec/start_exec.c \
 		exec/exec_cmd.c \
 		exec/exec_bin.c \

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 20:58:53 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:56:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 	execve(path, arg, env_tab);
 	result = ret_child(env_tab, path, result);
 	clean_child_process(data, env, path, arg);
-	result = WEXITSTATUS(result);
+	// result = WEXITSTATUS(result);
 	data->result = result;
-	return (result);
+	return (data->result);
 }
 
 char	*child_dir(char *bin_cmd, char *cmd)

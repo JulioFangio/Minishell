@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:49:58 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:24:39 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 14:54:59 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	parse_first_token(t_token *token)
 	if (!token->next && (!ft_strcmp(token->str, "!")
 			|| !ft_strcmp(token->str, ":")))
 		return (0);
-	else if (token->str && !token->next && token->str[0] == '/')
+	else if (token->str && !token->next && (token->str[0] == '/'
+			&& ((!token->str[1]) || token->str[1] == '.'
+				|| token->str[1] == '/')))
 	{
 		ft_putstr_fd(token->str, STDERR);
 		ft_putendl_fd(" : is a directory", STDERR);
