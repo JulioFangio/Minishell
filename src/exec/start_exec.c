@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:26:36 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 18:58:19 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 20:48:02 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,4 @@ void    launch_minishell(t_data *data)
 	free_token(forfree);
     free(data->pids);
 }
+

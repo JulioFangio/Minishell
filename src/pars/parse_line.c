@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:25:04 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 20:39:54 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int	parse_redir(t_token *cmd)
 		print_err_msg(c);
 		return (0);
 	}
-	else if (cmd->next && is_redir(cmd->next->str))
+	else if (cmd->next && (is_redir(cmd->next->str)
+			|| is_heredoc(cmd->next->str) || is_pipe(cmd->next->str)))
 	{
 		c = cmd->str[0];
 		if (ft_strlen(cmd->str) < 2)
@@ -106,11 +107,9 @@ int	parse_line(t_data *data)
 	t_token	*tmp;
 
 	tmp = data->token;
+	if (!check_first_token_for_each_pipe(data))
+		return (0);
 	if (!parse_pipe(data->token))
-		return (0);
-	else if (!parse_heredoc(data->token))
-		return (0);
-	else if (!parse_first_token(data->token))
 		return (0);
 	while (tmp)
 	{
@@ -122,5 +121,7 @@ int	parse_line(t_data *data)
 		}
 		tmp = tmp->next;
 	}
+	if (!parse_heredoc(data->token))
+		return (0);
 	return (1);
 }

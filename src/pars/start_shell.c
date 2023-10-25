@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/24 15:04:23 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:30:10 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ int	start(char *line, t_data *data)
 {
 	data->tab = get_split(line);
 	if (data->tab == NULL)
-	{
-		free_and_close_data(data, 96);
 		return (1);
-	}
 	get_token(data);
 	data->free_token = data->token;
 	free_tab(data->tab);
