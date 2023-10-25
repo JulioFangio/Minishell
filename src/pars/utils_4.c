@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/25 17:59:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:39:30 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ int	check_first_token_for_each_pipe(t_data *data)
 	{
 		if (!parse_first_token(tmp))
 			return (0);
-		else if (!strcmp(tmp->str, "ls") && !tmp->next->str)
-		{
-			ft_putendl_fd("ls: cannot access '': No such file or directory",
-				STDERR);
-			data->result = 2;
-			return (0);
-		}
 		while (tmp->type != 3)
 			tmp = tmp->next;
 		tmp = tmp->next;

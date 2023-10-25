@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:12:27 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 19:11:55 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 		ft_putendl_fd("')", 2);
 	}
 	data->check_hdc = 1;
-	data->fd_in = data->hdcfd[1];
 	close(data->hdcfd[0]);
 	close(data->hdcfd[1]);
 	free_and_close_data(data, 18);
@@ -76,6 +75,7 @@ void	fork_heredoc(t_data *data, t_token *token)
 		redir_hd(data);
 		create_heredoc(data, token);
 	}
+	data->fd_in = data->hdcfd[1];
 	close(data->hdcfd[0]);
 	close(data->hdcfd[1]);
 	waitpid(child, &status, 0);
