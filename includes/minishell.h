@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 15:42:50 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:25:37 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ int		built_cmp(char *tab);
 //Parse_line
 t_data	*recuperate_data(t_data *data);
 int		parse_line(t_data *data);
+int		check_first_token_for_each_pipe(t_data *data);
 int		parse_first_token(t_token *token);
 int		find_intruder(t_token *token, char c);
 int		parse_heredoc(t_token *token);

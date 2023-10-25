@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:59:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 12:28:04 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:02:26 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ int	make_cd(t_data *data, char **arg, t_env *env)
 {
 	int	res;
 
+	res = 0;
+	if (data->check == 1)
+		return (res);
 	if (!arg[1])
 		return (handle_directory_change(0, env));
 	if (ft_strcmp(arg[1], ".") == 0)

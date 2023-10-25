@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/25 15:37:10 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:26:23 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,9 @@ int	parse_line(t_data *data)
 	t_token	*tmp;
 
 	tmp = data->token;
+	if (!check_first_token_for_each_pipe(data))
+		return (0);
 	if (!parse_pipe(data->token))
-		return (0);
-	else if (!parse_heredoc(data->token))
-		return (0);
-	else if (!parse_first_token(data->token))
 		return (0);
 	while (tmp)
 	{
@@ -123,5 +121,7 @@ int	parse_line(t_data *data)
 		}
 		tmp = tmp->next;
 	}
+	if (!parse_heredoc(data->token))
+		return (0);
 	return (1);
 }

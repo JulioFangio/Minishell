@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:01:59 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/24 15:04:23 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:30:34 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	start(char *line, t_data *data)
 	data->tab = get_split(line);
 	if (data->tab == NULL)
 	{
-		free_and_close_data(data, 96);
+		data->result = 2;
 		return (1);
 	}
 	get_token(data);

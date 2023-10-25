@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:49:58 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/25 16:06:56 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:33:18 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	only_slash(char *str)
 
 	i = 0;
 	check = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != '/')
@@ -54,24 +56,55 @@ static int	only_slash(char *str)
 	return (1);
 }
 
+static int	check_for_usrbin(char *str, int i, int check_usr, int check_bin)
+{
+	while (str[i])
+	{
+		if (!strncmp(str + i, "usr", 3))
+		{
+			check_usr = 1;
+			i += 3;
+		}
+		else if (!strncmp(str + i, "bin", 3))
+		{
+			check_bin = 1;
+			i += 3;
+		}
+		i++;
+	}
+	if (check_usr == 1 && check_bin == 0)
+		return (0);
+	else if (check_usr == 0 && check_bin == 1)
+		return (1);
+	else if (check_usr == 1 && check_bin == 1)
+		return (1);
+	return (0);
+}
+
 int	parse_first_token(t_token *token)
 {
-	if (!token->next && (!ft_strcmp(token->str, "!")
+
+	if (token && !token->next && (!ft_strcmp(token->str, "!")
 			|| !ft_strcmp(token->str, ":")))
 		return (0);
-	else if (token->str && token->str[0] == '/'
-		&& token->str[1] && token->str[1] != '/')
+	else if (token && only_slash(token->str))
 	{
 		ft_putstr_fd(token->str, STDERR);
 		ft_putendl_fd(" : is a directory", STDERR);
 		return (0);
 	}
-	else if (token->str && !token->next && (token->str[0] == '/'
-			&& only_slash(token->str) && ((!token->str[1])
-				|| token->str[1] == '.' || token->str[1] == '/')))
+	else if (token && token->str && (token->str[0] == '/' && ((!token->str[1])
+				|| token->str[1] == '.')))
 	{
 		ft_putstr_fd(token->str, STDERR);
 		ft_putendl_fd(" : is a directory", STDERR);
+		return (0);
+	}
+	else if (token && token->str && token->str[0] == '/'
+		&& !check_for_usrbin(token->str, 0, 0, 0))
+	{
+		ft_putstr_fd(token->str, STDERR);
+		ft_putendl_fd(" : no such file or directory", STDERR);
 		return (0);
 	}
 	return (1);

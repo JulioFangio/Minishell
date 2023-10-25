@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:10:14 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:41:47 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 17:59:40 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,31 @@ int	check_end(char *line, int i, char c)
 	while (line[i] && line[i] == c)
 		i++;
 	return (i);
+}
+
+int	check_first_token_for_each_pipe(t_data *data)
+{
+	t_token	*tmp;
+
+	tmp = data->token;
+	if (!is_there_a_pipe(data->token))
+		return (parse_first_token(data->token));
+	while (is_there_a_pipe(tmp))
+	{
+		if (!parse_first_token(tmp))
+			return (0);
+		else if (!strcmp(tmp->str, "ls") && !tmp->next->str)
+		{
+			ft_putendl_fd("ls: cannot access '': No such file or directory",
+				STDERR);
+			data->result = 2;
+			return (0);
+		}
+		while (tmp->type != 3)
+			tmp = tmp->next;
+		tmp = tmp->next;
+	}
+	return (parse_first_token(tmp));
 }
 
 char	*remake_line(char *line, int n, int l)

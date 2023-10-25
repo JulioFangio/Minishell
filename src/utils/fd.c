@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:21:55 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 15:41:41 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:48:02 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_close_all_fd(t_data *data)
 		ft_close_fd(data->fd_in);
 	if (data->fd_out > 2)
 		ft_close_fd(data->fd_out);
-	if (data->pipefd[0] > 0)
+	if (data->pipefd[0] > 2)
 		ft_close_fd(data->pipefd[0]);
-	if (data->pipefd[1] > 0)
+	if (data->pipefd[1] > 2)
 		ft_close_fd(data->pipefd[1]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:03:23 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 15:04:52 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:49:31 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	secure_fds(void)
 	i = 3;
 	while (i < 1025)
 	{
-		close(i);
+		ft_close_fd(i);
 		i++;
 	}
 }
