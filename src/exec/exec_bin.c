@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:03:26 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 21:12:24 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 21:57:25 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	child_process(char *path, char **arg, t_data *data, t_env *env)
 	char	**env_tab;
 
 	result = 0;
+	// printf("fd dans la cmd = %d et le out = %d\n", data->fd_in, data->fd_out);
 	dup_files(data);
 	tmp = env_malloc(env);
 	env_tab = ft_split(tmp, '\n');

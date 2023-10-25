@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:11:25 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 20:42:47 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 21:58:06 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@ static void	redir_openchevron(t_data *data, t_token *tmp)
 {
 	ft_close_fd(data->fd_in);
 	data->fd_in = open(tmp->next->str, O_CREAT | O_RDWR, 0777);
+	if (data->fd_in < 0)
+	{
+		ft_putstr_fd(ERR_OPEN, 2);
+		data->result = 1;
+		data->err_redir = 1;
+	}
+}
+
+static void	redir_heredoc(t_data *data, t_token *tmp)
+{
+	ft_close_fd(data->fd_in);
+	data->fd_in = open(tmp->next->str, O_CREAT | O_RDWR, 0777);
+	// printf("fd juuuuuuuuuuuuuuuuuuuuuuuuuuste apres la redir = %d et fdp de str = %s\n", data->fd_in, tmp->next->str);
 	if (data->fd_in < 0)
 	{
 		ft_putstr_fd(ERR_OPEN, 2);
@@ -57,8 +70,14 @@ void	put_fd_in_data(t_data *data)
 		data->fd_out = data->pipefd[1];
 	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->next && tmp->next->str && (tmp->type == OPEN_CHEVRON))
-			redir_openchevron(data, tmp);
+		if (tmp->next && tmp->next->str && (tmp->type == OPEN_CHEVRON
+				|| tmp->type == HERE_DOC))
+		{
+			if (tmp->type == OPEN_CHEVRON)
+				redir_openchevron(data, tmp);
+			else
+				redir_heredoc(data, tmp);
+		}
 		else if (tmp->next && tmp->next->str && (tmp->type == CHEVRON
 				|| tmp->type == DOUBLE_CHEVRON))
 		{
@@ -70,4 +89,5 @@ void	put_fd_in_data(t_data *data)
 		}
 		tmp = tmp->next;
 	}
+	// printf("fd dans le redirs = %d\n", data->fd_in);
 }

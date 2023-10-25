@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 20:35:28 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 21:33:05 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,11 @@ int		exec_builtin(t_data *data, char **cmd, t_token *token);
 // exec_pipe.c
 void	do_pipe(t_data *data);
 // exec_heredoc.c
-char	*strcpy_heredoc(char *dest, const char *src);
-char	*strjoin_heredoc(char *s1, char *s2);
-char	*get_input_heredoc(char *limiter);
-void	open_heredoc(t_data *data);
-void	redir_heredoc(t_data *data, t_token *token);
+// char	*strcpy_heredoc(char *dest, const char *src);
+// char	*strjoin_heredoc(char *s1, char *s2);
+// char	*get_input_heredoc(char *limiter);
+// void	open_heredoc(t_data *data);
+// void	redir_heredoc(t_data *data, t_token *token);
 // exec_cmd.c
 void	exec_command(t_data *data);
 // exec_bin.c
@@ -264,7 +264,7 @@ int		parse_pipe_while(t_token *cmd);
 int		parse_redir(t_token *cmd);
 void	check_heredoc(t_data *data);
 void	create_heredoc(t_data *data, t_token *token);
-void	get_out_of_heredoc(t_data *data, t_token *token, char *line);
+void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int fd);
 int		is_there_a_pipe(t_token *token);
 
 //Split mini

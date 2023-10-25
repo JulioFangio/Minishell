@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:26:15 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 21:53:56 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sigint_handler_hd(int signum)
 	data = NULL;
 	data = recuperate_data(data);
 	data->result = 130;
-	close(data->hdcfd[0]);
-	close(data->hdcfd[1]);
+	// close(data->hdcfd[0]);
+	// close(data->hdcfd[1]);
 	free_and_close_data(data, 7);
 	free_env(&data->env);
 	rl_redisplay();

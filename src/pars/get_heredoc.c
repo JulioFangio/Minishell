@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/25 20:53:09 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 22:00:58 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*_heredoc(void)
 	return (prompt);
 }
 
-void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
+void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int fd)
 {
 	if (line == NULL)
 	{
@@ -30,8 +30,9 @@ void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 		ft_putendl_fd("')", 2);
 	}
 	data->check_hdc = 1;
-	close(data->hdcfd[0]);
-	close(data->hdcfd[1]);
+	close(fd);
+	// close(data->hdcfd[0]);
+	// close(data->hdcfd[1]);
 	free_and_close_data(data, 18);
 	free_env(&data->env);
 	free(line);
@@ -41,8 +42,12 @@ void	get_out_of_heredoc(t_data *data, t_token *token, char *line)
 void	create_heredoc(t_data *data, t_token *token)
 {
 	char	*line;
+	int		fd;
 
 	line = NULL;
+	fd = open(token->next->str, O_CREAT | O_RDWR | O_TRUNC, 0777);
+	data->hdcfd = fd;
+	// printf("fd dans hdc = %d\n", fd);
 	while (ft_strcmp(line, token->next->str))
 	{
 		if (line)
@@ -50,12 +55,12 @@ void	create_heredoc(t_data *data, t_token *token)
 		line = readline("> ");
 		if (line == NULL
 			|| !ft_strcmp(line, token->next->str))
-			get_out_of_heredoc(data, token, line);
+			get_out_of_heredoc(data, token, line, fd);
 		else
 		{
 			line = check_for_var(data, line, 1);
-			write(data->hdcfd[1], &line, ft_strlen(line));
-			write(data->hdcfd[1], "\n", 1);
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
 		}
 	}
 }
@@ -65,8 +70,8 @@ void	fork_heredoc(t_data *data, t_token *token)
 	int			status;
 	pid_t		child;
 
-	if (pipe(data->hdcfd) < 0)
-		return (perror("pipe error on heredoc"));
+	// if (pipe(data->hdcfd) < 0)
+	// 	return (perror("pipe error on heredoc"));
 	child = fork();
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -75,9 +80,10 @@ void	fork_heredoc(t_data *data, t_token *token)
 		redir_hd(data);
 		create_heredoc(data, token);
 	}
-	data->fd_in = data->hdcfd[1];
-	close(data->hdcfd[0]);
-	close(data->hdcfd[1]);
+	// printf("data hdcfd = %d", data->hdcfd);
+	// data->fd_in = data->hdcfd[1];
+	// close(data->hdcfd[0]);
+	// close(data->hdcfd[1]);
 	waitpid(child, &status, 0);
 	redir(data);
 }
