@@ -6,7 +6,7 @@
 /*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:15:22 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 20:48:57 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 21:19:11 by juduval          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@ int	child_error(char *path)
 	data = NULL;
 	fd = -1;
 	data = recuperate_data(data);
-	fd = open(path, O_WRONLY);
-	ft_putstr_fd(path, STDERR);
-	ft_putstr_fd(" : ", 2);
+	if (path)
+	{
+		fd = open(path, O_WRONLY);
+		ft_putstr_fd(path, STDERR);
+		ft_putstr_fd(" : ", 2);
+	}
 	ft_putstr_fd(ERR_CMD, STDERR);
-	if (!ft_strchr(path, '/') || fd == -1)
+	if ((path && !ft_strchr(path, '/')) || fd == -1)
 		data->result = 127;
 	else
 		data->result = 126;
