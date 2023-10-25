@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:54:41 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/23 11:25:04 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/25 15:17:13 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int	parse_redir(t_token *cmd)
 		print_err_msg(c);
 		return (0);
 	}
-	else if (cmd->next && is_redir(cmd->next->str))
+	else if ((cmd->next && is_redir(cmd->next->str))
+		|| is_heredoc(cmd->next->str))
 	{
 		c = cmd->str[0];
 		if (ft_strlen(cmd->str) < 2)
