@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/26 15:25:40 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:32:01 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	bin_function(t_data *data, char **cmd)
 		free_tab(cmd);
 		free_token(data->free_token);
 		free_env(&data->env);
-		free(data->pids);
 	}
 	free(data->pids);
 	exit(data->result);

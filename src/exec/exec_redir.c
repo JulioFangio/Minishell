@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:11:25 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/26 14:08:50 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:15:30 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	redir_openchevron(t_data *data, t_token *tmp)
 {
 	ft_close_fd(data->fd_in);
-	data->fd_in = open(tmp->next->str, O_CREAT | O_RDWR, 0777);
+	data->fd_in = open(tmp->next->str, O_RDWR, 0777);
 	if (data->fd_in < 0)
 	{
 		ft_putstr_fd(ERR_OPEN, 2);
@@ -39,7 +39,7 @@ static void	redir_heredoc(t_data *data, t_token *tmp)
 static void	redir_chevron(t_data *data, t_token *tmp)
 {
 	data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR
-			| O_TRUNC, 0777);
+			| O_TRUNC, 0644);
 	if (data->fd_out < 0)
 	{
 		ft_putstr_fd(ERR_OPEN, 2);
@@ -51,7 +51,7 @@ static void	redir_chevron(t_data *data, t_token *tmp)
 static void	redir_doublechevron(t_data *data, t_token *tmp)
 {
 	data->fd_out = open(tmp->next->str, O_CREAT | O_RDWR
-			| O_APPEND, 0777);
+			| O_APPEND, 0644);
 	if (data->fd_out < 0)
 	{
 		ft_putstr_fd(ERR_OPEN, 2);

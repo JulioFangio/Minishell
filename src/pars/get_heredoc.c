@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 16:32:13 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/26 14:42:07 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:34:26 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_out_of_heredoc(t_data *data, t_token *token, char *line, int fd)
 	data->check_hdc = 1;
 	close(fd);
 	free(data->hdcdoc);
-	free_and_close_data(data, 18);
+	free_and_close_data(data);
 	free_env(&data->env);
 	free(line);
 	exit (1);

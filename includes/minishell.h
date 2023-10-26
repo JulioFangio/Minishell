@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:38:32 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/25 21:33:05 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:41:24 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ t_env	*ft_env_new(char *arg);
 int		is_env(char *env);
 int		len_var_env(char *env);
 char	*extract_env_value(char *env);
-int		config_env_char_name(int c);
 // getenv_bis.c
 int		update_env(char *arg, t_env *env);
 char	*extract_name_env(char *dest, char *src);
@@ -159,11 +158,8 @@ t_token	*iter_token_cmd(t_token *token, int iter);
 void	free_env(t_env **env);
 void	free_tab(char **tab);
 void	free_tronc(t_tronc *tronc);
-// void	free_tab_2(char **tab, t_token *token);
 void	free_token(t_token *token);
-void	free_and_close_data(t_data *data, int nb);
-void	free_env_unset(t_data *data, t_env *env);
-void	free_data(t_data *data);
+void	free_and_close_data(t_data *data);
 // child.c
 void	clean_child_process(t_data *data, t_env *env, char *path, char **arg);
 int		ret_child(char **env_tab, char *path, int result);
@@ -190,8 +186,6 @@ void	check_exit_and_wait(t_data *data);
 		/// -- PARSING_MINISHELL -- ///
 
 //Signals
-void	sigint_handler(int signum);
-void	sigquit_handler(int signum);
 void	sigquit_handler_hd(int signum);
 void	sigint_handler_hd(int signum);
 void	redir_hd(t_data *data);

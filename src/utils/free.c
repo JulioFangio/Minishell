@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:31:56 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/24 14:15:50 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:34:48 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ void	free_token(t_token *token)
 }
 
 // printf("Minishell program freeing in here %d\n", nb);
-void	free_and_close_data(t_data *data, int nb)
+void	free_and_close_data(t_data *data)
 {
-	(void)nb;
 	if (data->token)
 	{
 		free_token(data->token);

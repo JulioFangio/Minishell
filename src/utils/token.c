@@ -12,26 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-t_token	*get_prev_token(t_token *token, int prev)
-{
-	if (token && prev)
-		token = token->prev;
-	while (token && token->type < PIPE)
-		token = token->prev;
-	return (token);
-}
-
-int	token_is_pipe(t_token *token)
-{
-	while (token)
-	{
-		if (check_token(token, PIPE) == 1)
-			return (1);
-		token = token->next;
-	}
-	return (0);
-}
-
 int	check_token(t_token *token, int type)
 {
 	if (token && token->type == type)

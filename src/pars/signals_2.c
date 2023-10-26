@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juduval <juduval@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:46:22 by juduval           #+#    #+#             */
-/*   Updated: 2023/10/26 14:43:51 by juduval          ###   ########.fr       */
+/*   Updated: 2023/10/26 16:34:32 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sigint_handler_hd(int signum)
 	write(fd, "", 0);
 	close(fd);
 	free(data->hdcdoc);
-	free_and_close_data(data, 7);
+	free_and_close_data(data);
 	free_env(&data->env);
 	rl_redisplay();
 	exit (1);
