@@ -6,7 +6,7 @@
 /*   By: jaristil <jaristil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:36:37 by jaristil          #+#    #+#             */
-/*   Updated: 2023/10/26 15:16:36 by jaristil         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:25:40 by jaristil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static void	builtin_function(t_data *data, char **cmd)
 		data->fd_in = data->pipefd[0];
 	}
 	else
+	{
 		data->result = exec_builtin(data, cmd, data->token);
-	secure_fds();
+		secure_fds();
+	}
 }
 
 static void	bin_function(t_data *data, char **cmd)
